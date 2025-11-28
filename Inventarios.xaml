@@ -15,10 +15,13 @@
                    HorizontalAlignment="Center" 
                    Foreground="#333" 
                    Margin="0,0,0,20"/>
+       
+
 
         <!-- Buscador -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-            <TextBox Width="300" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+            <TextBox x:Name="BuscarTextBox"
+                 Width="300" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
             <Button Content="Buscar" Width="100" Height="30" 
                     Background="#6CA0DC" Foreground="White" 
                     BorderBrush="#4A7EBB" Margin="10,0,0,0" Click="Buscar_Click"/>

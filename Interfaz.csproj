@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Notificaciones.xaml.cs">
+      <DependentUpon>Notificaciones.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RecuperarCont.xaml.cs">
       <DependentUpon>RecuperarCont.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MenuWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Notificaciones.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -82,17 +82,37 @@ namespace Interfaz
 
         private void Buscar_Click(object sender, RoutedEventArgs e)
         {
+            string criterio = BuscarTextBox.Text.ToLower();
 
+            // Filtrar cartón
+            var productosCarton = ((List<Producto>)CartonDataGrid.ItemsSource)
+                .Where(p => p.Nombre.ToLower().Contains(criterio) || p.Id.ToLower().Contains(criterio))
+                .ToList();
+            CartonDataGrid.ItemsSource = productosCarton;
+
+            // Filtrar vehículos
+            var productosVehiculos = ((List<Producto>)VehiculosDataGrid.ItemsSource)
+                .Where(p => p.Nombre.ToLower().Contains(criterio) || p.Id.ToLower().Contains(criterio))
+                .ToList();
+            VehiculosDataGrid.ItemsSource = productosVehiculos;
+
+            // Filtrar plásticos
+            var productosPlasticos = ((List<Producto>)PlasticosDataGrid.ItemsSource)
+                .Where(p => p.Nombre.ToLower().Contains(criterio) || p.Id.ToLower().Contains(criterio))
+                .ToList();
+            PlasticosDataGrid.ItemsSource = productosPlasticos;
         }
 
         private void ActInve_Click(object sender, RoutedEventArgs e)
         {
-
+            ActualizarInv actualizarInv = new ActualizarInv();
+            actualizarInv.Show();
         }
 
         private void ContacProv_Click(object sender, RoutedEventArgs e)
         {
-
+            ContactarProv contactarProv = new ContactarProv();
+            contactarProv.Show();
         }
 
         private void Menu_Click(object sender, RoutedEventArgs e)
@@ -100,5 +120,6 @@ namespace Interfaz
             MenuWindow menu = new MenuWindow();
             menu.Show();
         }
+
     }
 }
