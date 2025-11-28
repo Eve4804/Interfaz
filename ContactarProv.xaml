@@ -1,0 +1,116 @@
+﻿<Window x:Class="Interfaz.ContactarProv"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Contactar a proveedores"
+        Width="700"
+        Height="600"
+        Background="White"
+        WindowStartupLocation="CenterScreen">
+
+    <StackPanel Margin="20" HorizontalAlignment="Center">
+        <!-- Título -->
+        <TextBlock Text="Contactar a proveedores" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Foreground="#333" 
+                   Margin="0,0,0,20"/>
+
+        <!-- Grid para formulario -->
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="250"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Tipo de proveedor -->
+            <TextBlock Text="Tipo de proveedor" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+            <ComboBox Grid.Row="0" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" SelectedIndex="0">
+                <ComboBoxItem Content="Cartón"/>
+                <ComboBoxItem Content="Plásticos"/>
+                <ComboBoxItem Content="Vehículos"/>
+            </ComboBox>
+
+            <!-- Id Solicitud -->
+            <TextBlock Text="Id Solicitud" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+            <TextBox x:Name="txtId" Grid.Row="1" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" Text="SOL001"/>
+
+            <!-- Id Producto -->
+            <TextBlock Text="Id Producto" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+            <TextBox x:Name="txtNombre" Grid.Row="2" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" Text="C001"/>
+
+            <!-- Nombre del producto/servicio -->
+            <TextBlock Text="Nombre del producto/servicio" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Foreground="#555" Margin="0,5"/>
+            <TextBox x:Name="txtDescripcion" Grid.Row="3" Grid.Column="1" Width="250" Height="60" 
+                     Background="#F9F9F9" BorderBrush="#CCC" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5"
+                     Text="Caja pequeña de cartón para envíos de productos frágiles."/>
+
+            <!-- Cantidad solicitada -->
+            <TextBlock Text="Cantidad solicitada" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+            <TextBox x:Name="txtPrecio" Grid.Row="4" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" Text="100 unidades"/>
+
+            <!-- Fecha de solicitud -->
+            <TextBlock Text="Fecha de solicitud" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#000000" Margin="0,5"/>
+
+            <!-- Día -->
+            <TextBlock Text="Día" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+            <ComboBox Grid.Row="6" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" SelectedIndex="2">
+                <ComboBoxItem Content="1"/>
+                <ComboBoxItem Content="2"/>
+                <ComboBoxItem Content="3"/>
+                <ComboBoxItem Content="31"/>
+            </ComboBox>
+
+            <!-- Mes -->
+            <TextBlock Text="Mes" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+            <ComboBox Grid.Row="7" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" SelectedIndex="10">
+                <ComboBoxItem Content="Enero"/>
+                <ComboBoxItem Content="Febrero"/>
+                <ComboBoxItem Content="Marzo"/>
+                <ComboBoxItem Content="Abril"/>
+                <ComboBoxItem Content="Mayo"/>
+                <ComboBoxItem Content="Junio"/>
+                <ComboBoxItem Content="Julio"/>
+                <ComboBoxItem Content="Agosto"/>
+                <ComboBoxItem Content="Septiembre"/>
+                <ComboBoxItem Content="Octubre"/>
+                <ComboBoxItem Content="Noviembre"/>
+                <ComboBoxItem Content="Diciembre"/>
+            </ComboBox>
+
+            <!-- Año -->
+            <TextBlock Text="Año" Grid.Row="8" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+            <ComboBox Grid.Row="8" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" SelectedIndex="2">
+                <ComboBoxItem Content="2023"/>
+                <ComboBoxItem Content="2024"/>
+                <ComboBoxItem Content="2025"/>
+                <ComboBoxItem Content="2026"/>
+                <ComboBoxItem Content="2027"/>
+            </ComboBox>
+
+            <!-- Botones -->
+            <StackPanel Grid.Row="9" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalAlignment="Center" Margin="0,20,0,0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                    <Button Content="Enviar solicitud" Width="150" Background="#4CAF50" Foreground="White" BorderBrush="#A97458" Margin="0,0,15,0"/>
+                    <Button Content="Ir a app" Width="150" Background="#D5E8D4" Foreground="#333" BorderBrush="#526685"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Content="Cancelar" Width="150" Background="#F44336" Foreground="#333" BorderBrush="#000000" Margin="0,0,15,0"/>
+                    <Button Content="Ir a Menú" Width="150" Background="#6CA0DC" Foreground="#333" BorderBrush="#000000"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</Window>

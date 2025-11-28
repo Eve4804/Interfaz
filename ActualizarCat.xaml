@@ -1,0 +1,70 @@
+﻿<Window x:Class="Interfaz.ActualizarCat"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Actualizar Catálogo"
+        Width="450"
+        Height="550"
+        Background="White"
+        WindowStartupLocation="CenterScreen">
+
+    <StackPanel Margin="20" HorizontalAlignment="Center">
+        <!-- Título -->
+        <TextBlock Text="Actualizar Producto o Nuevo Producto" 
+                   FontSize="22" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   Foreground="#333" 
+                   Margin="0,0,0,20"/>
+
+        <!-- Grid para formulario -->
+        <Grid HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="220"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Id Producto -->
+            <TextBlock Text="Id Producto" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+            <TextBox x:Name="txtId" Grid.Row="0" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="C006"/>
+
+            <!-- Nombre -->
+            <TextBlock Text="Nombre" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+            <TextBox x:Name="txtNombre" Grid.Row="1" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="Caja organizadora"/>
+
+            <!-- Descripción -->
+            <TextBlock Text="Descripción" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Foreground="#555"/>
+            <TextBox x:Name="txtDescripcion" Grid.Row="2" Grid.Column="1" Width="220" Height="60" AcceptsReturn="True" Background="#F9F9F9" BorderBrush="#CCC" Text="Caja de cartón con divisiones internas para organizar documentos o artículos pequeños."/>
+
+            <!-- Precio -->
+            <TextBlock Text="Precio" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+            <TextBox x:Name="txtPrecio" Grid.Row="3" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="$6.25"/>
+
+            <!-- Categoría -->
+            <TextBlock Text="Categoría" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+            <ComboBox x:Name="cmbCategoria" Grid.Row="4" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" SelectedIndex="0">
+                <ComboBoxItem Content="Cartón"/>
+                <ComboBoxItem Content="Plásticos"/>
+                <ComboBoxItem Content="Vehículos"/>
+            </ComboBox>
+
+            <!-- Imagen -->
+            <TextBlock Text="Imagen (URL)" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+            <TextBox x:Name="txtImagen" Grid.Row="5" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="https://ejemplo.com/imagenes/caja-organizadora.jpg"/>
+        </Grid>
+
+        <!-- Botones -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+            <Button Content="Guardar" Width="120" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0"/>
+            <Button Content="Cancelar" Width="120" Background="#F44336" Foreground="White" BorderBrush="#F44336"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
+
