@@ -8,6 +8,8 @@
         WindowStartupLocation="CenterScreen">
 
     <StackPanel Margin="20" HorizontalAlignment="Center">
+
+        <!-- TÍTULO -->
         <TextBlock Text="Sistema de Clientes"
                    FontSize="22"
                    FontWeight="Bold"
@@ -18,20 +20,41 @@
         <Border Background="#F0F0F0" CornerRadius="10" Padding="15">
             <StackPanel>
 
-                <!-- Buscar cliente -->
+                <!-- BUSCAR CLIENTE -->
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
-                    <TextBlock Text="Buscar cliente:" VerticalAlignment="Center" Foreground="#555" Margin="0,0,10,0"/>
-                    <TextBox Width="300" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
-                    <Button Content="Buscar" Width="100" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="10,0,0,0"/>
+                    <TextBlock Text="Buscar cliente:"
+                               VerticalAlignment="Center"
+                               Foreground="#555"
+                               Margin="0,0,10,0"/>
+
+                    <TextBox x:Name="txtBuscar"
+                             Width="300"
+                             Height="30"
+                             Background="#F9F9F9"
+                             BorderBrush="#CCC"/>
+
+                    <Button x:Name="btnBuscar"
+                            Content="Buscar"
+                            Width="100"
+                            Background="#4CAF50"
+                            Foreground="White"
+                            BorderBrush="#4CAF50"
+                            Margin="10,0,0,0"
+                            Click="btnBuscar_Click"/>
                 </StackPanel>
 
-                <!-- Datos del cliente -->
-                <TextBlock Text="Datos del Cliente" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                <!-- DATOS DEL CLIENTE -->
+                <TextBlock Text="Datos del Cliente"
+                           FontWeight="Bold"
+                           Foreground="#333"
+                           Margin="0,0,0,10"/>
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -41,57 +64,107 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="ID Cliente:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="ID Cliente:" Grid.Row="0" Grid.Column="0" Foreground="#555"/>
+                    <TextBox x:Name="txtIdCliente" Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="RFC:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="RFC:" Grid.Row="1" Grid.Column="0" Foreground="#555"/>
+                    <TextBox x:Name="txtRFC" Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="Nombre:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Nombre:" Grid.Row="2" Grid.Column="0" Foreground="#555"/>
+                    <TextBox x:Name="txtNombre" Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="Tipo:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <ComboBox Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC">
+                    <TextBlock Text="Tipo:" Grid.Row="3" Grid.Column="0" Foreground="#555"/>
+                    <ComboBox x:Name="cmbTipo" Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC">
                         <ComboBoxItem Content="Persona Física"/>
                         <ComboBoxItem Content="Persona Moral"/>
                     </ComboBox>
 
-                    <TextBlock Text="Email:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Email:" Grid.Row="4" Grid.Column="0" Foreground="#555"/>
+                    <TextBox x:Name="txtEmail" Grid.Row="4" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="Teléfono:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Teléfono:" Grid.Row="5" Grid.Column="0" Foreground="#555"/>
+                    <TextBox x:Name="txtTelefono" Grid.Row="5" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
                 </Grid>
 
-                <!-- Direcciones -->
-                <TextBlock Text="Direcciones" FontWeight="Bold" Foreground="#333" Margin="20,20,0,10"/>
+                <!-- DIRECCIONES -->
+                <TextBlock Text="Direcciones"
+                           FontWeight="Bold"
+                           Foreground="#333"
+                           Margin="20,20,0,10"/>
+
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="200"/>
                         <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
+
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Text="Dirección Fiscal:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Dirección Fiscal:" Grid.Row="0" Grid.Column="0" Foreground="#555"/>
+                    <TextBox x:Name="txtDireccionFiscal"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             Height="30"
+                             Background="#F9F9F9"
+                             BorderBrush="#CCC"/>
 
-                    <TextBlock Text="Dirección Envío:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Dirección Envío:" Grid.Row="1" Grid.Column="0" Foreground="#555"/>
+                    <TextBox x:Name="txtDireccionEnvio"
+                             Grid.Row="1"
+                             Grid.Column="1"
+                             Height="30"
+                             Background="#F9F9F9"
+                             BorderBrush="#CCC"/>
                 </Grid>
 
-                <!-- Botones -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="20,30,0,0">
-                    <Button Content="Activar Cliente" Width="130" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="5"/>
-                    <Button Content="Desactivar Cliente" Width="130" Background="#F44336" Foreground="White" BorderBrush="#F44336" Margin="5"/>
-                    <Button Content="Generar Reporte" Width="130" Background="#2196F3" Foreground="White" BorderBrush="#2196F3" Margin="5"/>
-                    <Button Content="Limpiar" Width="130" Background="#9E9E9E" Foreground="White" BorderBrush="#9E9E9E" Margin="5"/>
+                <!-- BOTONES -->
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="20,30,0,0">
+
+                    <Button x:Name="btnActivar"
+                            Content="Activar Cliente"
+                            Width="130"
+                            Background="#4CAF50"
+                            Foreground="White"
+                            BorderBrush="#4CAF50"
+                            Margin="5"
+                            Click="btnActivar_Click"/>
+
+                    <Button x:Name="btnDesactivar"
+                            Content="Desactivar Cliente"
+                            Width="130"
+                            Background="#F44336"
+                            Foreground="White"
+                            BorderBrush="#F44336"
+                            Margin="5"
+                            Click="btnDesactivar_Click"/>
+
+                    <Button x:Name="btnReporte"
+                            Content="Generar Reporte"
+                            Width="130"
+                            Background="#2196F3"
+                            Foreground="White"
+                            BorderBrush="#2196F3"
+                            Margin="5"
+                            Click="btnGenerarReporte_Click"/>
+
+                    <Button x:Name="btnLimpiar"
+                            Content="Limpiar"
+                            Width="130"
+                            Background="#9E9E9E"
+                            Foreground="White"
+                            BorderBrush="#9E9E9E"
+                            Margin="5"
+                            Click="btnLimpiar_Click"/>
                 </StackPanel>
 
             </StackPanel>
         </Border>
     </StackPanel>
+
 </Window>
 

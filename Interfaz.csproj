@@ -55,6 +55,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FakeDatabase.cs" />
+    <Compile Include="Models.cs" />
     <Compile Include="RecuperarCont.xaml.cs">
       <DependentUpon>RecuperarCont.xaml</DependentUpon>
     </Compile>

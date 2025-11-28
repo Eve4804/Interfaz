@@ -34,31 +34,44 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="Fecha Desde:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <DatePicker Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <DatePicker x:Name="dpDesde" Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
                         <TextBlock Text="Fecha Hasta:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <DatePicker Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <DatePicker x:Name="dpHasta" Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
                         <TextBlock Text="Cliente:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <TextBox x:Name="txtCliente" Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
                         <TextBlock Text="Producto:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <TextBox x:Name="txtProducto" Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
                     </Grid>
 
-                    <Button Content="Buscar" Width="120" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" HorizontalAlignment="Center" Margin="0,0,0,20"/>
+                    <Button x:Name="btnBuscar"
+                            Content="Buscar"
+                            Width="120"
+                            Background="#4CAF50"
+                            Foreground="White"
+                            BorderBrush="#4CAF50"
+                            HorizontalAlignment="Center"
+                            Margin="0,0,0,20"
+                            Click="btnBuscar_Click"/>
 
                     <!-- Tabla de ventas -->
                     <TextBlock Text="Ventas Registradas" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
-                    <DataGrid AutoGenerateColumns="False" Height="200" Margin="0,0,0,20" Background="White" BorderBrush="#CCC">
+                    <DataGrid x:Name="dgVentas"
+                              AutoGenerateColumns="False"
+                              Height="200"
+                              Margin="0,0,0,20"
+                              Background="White"
+                              BorderBrush="#CCC"
+                              SelectionChanged="dgVentas_SelectionChanged"
+                              IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID Venta" Binding="{Binding IdVenta}"/>
-                            <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}"/>
-                            <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}"/>
-                            <DataGridTextColumn Header="Producto" Binding="{Binding Producto}"/>
-                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
-                            <DataGridTextColumn Header="Total" Binding="{Binding Total}"/>
-                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}"/>
+                            <DataGridTextColumn Header="ID Venta" Binding="{Binding IdVenta}" Width="80"/>
+                            <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="150"/>
+                            <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="*"/>
+                            <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="100"/>
+                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="120"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -78,29 +91,34 @@
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="ID Venta:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <TextBox x:Name="txtIdVenta" Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
 
                         <TextBlock Text="Fecha:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <TextBox x:Name="txtFecha" Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
 
                         <TextBlock Text="Cliente:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <TextBox x:Name="txtClienteDetalle" Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
 
                         <TextBlock Text="Estado:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <TextBox x:Name="txtEstado" Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
 
                         <TextBlock Text="Método de Pago:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox Grid.Row="4" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <TextBox x:Name="txtMetodoPago" Grid.Row="4" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
                     </Grid>
 
                     <!-- Productos de la venta -->
                     <TextBlock Text="Productos de la Venta" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
-                    <DataGrid AutoGenerateColumns="False" Height="150" Background="White" BorderBrush="#CCC">
+                    <DataGrid x:Name="dgItems"
+                              AutoGenerateColumns="False"
+                              Height="150"
+                              Background="White"
+                              BorderBrush="#CCC"
+                              IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Producto" Binding="{Binding Producto}"/>
-                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
-                            <DataGridTextColumn Header="Precio" Binding="{Binding Precio}"/>
-                            <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal}"/>
+                            <DataGridTextColumn Header="Producto" Binding="{Binding Producto}" Width="*"/>
+                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="80"/>
+                            <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="100"/>
+                            <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal}" Width="100"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
