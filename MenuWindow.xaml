@@ -3,11 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Menú Principal"
         Width="400"
-        Height="501"
+        Height="629"
         Background="White"
         WindowStartupLocation="CenterScreen">
 
-    <StackPanel Margin="20" HorizontalAlignment="Center">
+    <StackPanel Margin="0,20,0,8" HorizontalAlignment="Center">
         <!-- Título -->
         <TextBlock Text="Menú Principal" 
                    FontSize="22" 
@@ -15,6 +15,7 @@
                    HorizontalAlignment="Center" 
                    Foreground="#333" 
                    Margin="0,0,0,20"/>
+<<<<<<< HEAD
 
         <!-- Panel gris que contiene los botones -->
         <Border Background="#F0F0F0" Padding="15" CornerRadius="10">
@@ -26,7 +27,23 @@
                 <Button Content="Inventarios" Width="220" Height="40" Background="#FFFACD" Foreground="#333" BorderBrush="#000000" Margin="0,0,0,10" Click="Inventarios"/>
                 <Button Content="Gestión de ventas" Width="220" Height="40" Background="#FADADD" Foreground="#333" BorderBrush="#000000" Margin="0,0,0,10" Click="GestiVenta_Click"/>
                 <Button Content="Cerrar sesión" Width="220" Height="40" Background="#a95858" Foreground="White" BorderBrush="#000000" Click="CerrarSe_Click"/>
+=======
+        <Border Background="#F0F0F0" Padding="15" CornerRadius="10" Height="534">
+            <StackPanel HorizontalAlignment="Center" Margin="0,0,0,4">
+                <Button Content="Inventarios" Width="220" Height="40" Background="#C8B89E" Foreground="White" BorderBrush="#000000" Margin="0,0,0,10" Click="Inventarios_Click"/>
+                <Button Content="Compras" Width="220" Height="40" Background="#D5E8D4" Foreground="#333" BorderBrush="#000000" Margin="0,0,0,10" Click="Compras_Click"/>
+                <Button Content="Pagos" Width="220" Height="40" Background="#D0E6F6" Foreground="#333" BorderBrush="#000000" Margin="0,0,0,10" Click="Pagos_Click"/>
+                <Button Content="Productos" Width="220" Height="40" Background="#E6E6FA" Foreground="#333" BorderBrush="#000000" Margin="0,0,0,10" Click="Productos_Click"/>
+                <Button Content="Usuarios" Width="220" Height="40" Background="#FFFACD" Foreground="#333" BorderBrush="#000000" Margin="0,0,0,10" Click="Usuarios_Click"/>
+                <Button Content="Gestión de Ventas" Width="220" Height="40" Background="#FADADD" Foreground="#333" BorderBrush="#000000" Margin="0,0,0,10" Click="Ventas_Click"/>
+                <Button Content="Fechas de entrega" Width="220" Height="45" Background="#a95858" Foreground="White" BorderBrush="#000000" Click="Entregas_Click"/>
+                <Button Content="Reportes" Width="220" Height="45" Background="#D3D3D3" Foreground="#333" BorderBrush="#000000" Margin="0,10,0,0"/>
+                <Button Content="Cerrar Sesión" Width="220" Height="40" Background="#8B0000" Foreground="White" BorderBrush="#000000" Margin="0,10,0,0" Click="Cerrar_Click"/>
+                
+>>>>>>> be9a1330c0521c48b534f48da0ffdb03a2a7dd04
             </StackPanel>
         </Border>
+
+        <!-- Panel gris que contiene los botones -->
     </StackPanel>
 </Window>

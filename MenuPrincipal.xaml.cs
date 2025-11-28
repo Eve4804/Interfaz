@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Interfaz
 {
     /// <summary>
-    /// Lógica de interacción para Pagos_1_.xaml
+    /// Lógica de interacción para MenuPrincipal.xaml
     /// </summary>
-    public partial class Pagos_1_ : Window
+    public partial class MenuPrincipal : Window
     {
-        public Pagos_1_()
+        public MenuPrincipal()
         {
             InitializeComponent();
         }

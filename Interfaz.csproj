@@ -55,8 +55,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+<<<<<<< HEAD
     <Compile Include="Notificaciones.xaml.cs">
       <DependentUpon>Notificaciones.xaml</DependentUpon>
+=======
+    <Compile Include="Pagos.xaml.cs">
+      <DependentUpon>Pagos.xaml</DependentUpon>
+>>>>>>> be9a1330c0521c48b534f48da0ffdb03a2a7dd04
     </Compile>
     <Compile Include="RecuperarCont.xaml.cs">
       <DependentUpon>RecuperarCont.xaml</DependentUpon>
@@ -156,9 +161,6 @@
   <ItemGroup>
     <Compile Include="MenuWindow.xaml.cs">
       <DependentUpon>MenuWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pagos.xaml.cs">
-      <DependentUpon>Pagos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
