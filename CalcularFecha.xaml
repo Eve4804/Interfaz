@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Calcular Fecha de Entrega"
         Width="700"
-        Height="428"
+        Height="518"
         Background="White"
         WindowStartupLocation="CenterScreen">
 
@@ -34,35 +34,156 @@
                     </Grid.RowDefinitions>
 
                     <!-- Campos alineados -->
-                    <TextBlock Text="ID Pedido" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Width="250" Height="35" VerticalContentAlignment="Center" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="ID Pedido" 
+                               Grid.Row="0" 
+                               Grid.Column="0" 
+                               VerticalAlignment="Center" 
+                               Foreground="#555"
+                               Margin="0,5"/>
+                    <TextBox x:Name="TxtIdPedido"
+                             Grid.Row="0" 
+                             Grid.Column="1" 
+                             Width="250" 
+                             Height="35" 
+                             VerticalContentAlignment="Center" 
+                             Background="#F9F9F9" 
+                             BorderBrush="#CCC"
+                             Margin="0,5"/>
 
-                    <TextBlock Text="ID Cliente" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Width="250" Height="35" VerticalContentAlignment="Center" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="ID Cliente" 
+                               Grid.Row="1" 
+                               Grid.Column="0" 
+                               VerticalAlignment="Center" 
+                               Foreground="#555"
+                               Margin="0,5"/>
+                    <TextBox x:Name="TxtIdCliente"
+                             Grid.Row="1" 
+                             Grid.Column="1" 
+                             Width="250" 
+                             Height="35" 
+                             VerticalContentAlignment="Center" 
+                             Background="#F9F9F9" 
+                             BorderBrush="#CCC"
+                             Margin="0,5"/>
 
-                    <TextBlock Text="Cliente que lo solicita" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Width="250" Height="35" VerticalContentAlignment="Center" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Cliente que lo solicita" 
+                               Grid.Row="2" 
+                               Grid.Column="0" 
+                               VerticalAlignment="Center" 
+                               Foreground="#555"
+                               Margin="0,5"/>
+                    <TextBox x:Name="TxtClienteSolicita"
+                             Grid.Row="2" 
+                             Grid.Column="1" 
+                             Width="250" 
+                             Height="35" 
+                             VerticalContentAlignment="Center" 
+                             Background="#F9F9F9" 
+                             BorderBrush="#CCC"
+                             Margin="0,5"/>
 
-                    <TextBlock Text="Producto o servicio" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Width="250" Height="35" VerticalContentAlignment="Center" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Producto o servicio" 
+                               Grid.Row="3" 
+                               Grid.Column="0" 
+                               VerticalAlignment="Center" 
+                               Foreground="#555"
+                               Margin="0,5"/>
+                    <TextBox x:Name="TxtProducto"
+                             Grid.Row="3" 
+                             Grid.Column="1" 
+                             Width="250" 
+                             Height="35" 
+                             VerticalContentAlignment="Center" 
+                             Background="#F9F9F9" 
+                             BorderBrush="#CCC"
+                             Margin="0,5"/>
 
-                    <TextBlock Text="Cantidad" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="4" Grid.Column="1" Width="250" Height="35" VerticalContentAlignment="Center" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Cantidad" 
+                               Grid.Row="4" 
+                               Grid.Column="0" 
+                               VerticalAlignment="Center" 
+                               Foreground="#555"
+                               Margin="0,5"/>
+                    <TextBox x:Name="TxtCantidad"
+                             Grid.Row="4" 
+                             Grid.Column="1" 
+                             Width="250" 
+                             Height="35" 
+                             VerticalContentAlignment="Center" 
+                             Background="#F9F9F9" 
+                             BorderBrush="#CCC"
+                             PreviewTextInput="TxtCantidad_PreviewTextInput"
+                             Margin="0,5"/>
 
-                    <TextBlock Text="Total a pagar" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <TextBox Grid.Row="5" Grid.Column="1" Width="250" Height="35" VerticalContentAlignment="Center" Background="#F9F9F9" BorderBrush="#CCC"/>
+                    <TextBlock Text="Total a pagar" 
+                               Grid.Row="5" 
+                               Grid.Column="0" 
+                               VerticalAlignment="Center" 
+                               Foreground="#555"
+                               Margin="0,5"/>
+                    <TextBox x:Name="TxtTotal"
+                             Grid.Row="5" 
+                             Grid.Column="1" 
+                             Width="250" 
+                             Height="35" 
+                             VerticalContentAlignment="Center" 
+                             Background="#F9F9F9" 
+                             BorderBrush="#CCC"
+                             PreviewTextInput="TxtTotal_PreviewTextInput"
+                             Margin="0,5"/>
 
-                    <TextBlock Text="Disponibilidad" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                    <ComboBox Grid.Row="6" Grid.Column="1" Width="250" Height="35" Background="#F9F9F9" BorderBrush="#CCC" Padding="5">
+                    <TextBlock Text="Disponibilidad" 
+                               Grid.Row="6" 
+                               Grid.Column="0" 
+                               VerticalAlignment="Center" 
+                               Foreground="#555"
+                               Margin="0,5"/>
+                    <ComboBox x:Name="CmbDisponibilidad"
+                              Grid.Row="6" 
+                              Grid.Column="1" 
+                              Width="250" 
+                              Height="35" 
+                              Background="#F9F9F9" 
+                              BorderBrush="#CCC" 
+                              Padding="5"
+                              SelectionChanged="CmbDisponibilidad_SelectionChanged"
+                              Margin="0,5">
                         <ComboBoxItem Content="En inventario"/>
                         <ComboBoxItem Content="Contactar proveedor"/>
                     </ComboBox>
 
                     <!-- Botones -->
-                    <StackPanel Grid.Row="7" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,10,10,0">
-                        <Button Content="Notificar a proveedor" Width="130" Background="#FF9800" Foreground="White" BorderBrush="#FF9800" Height="21"/>
-                        <Button Content="Enviar pedido" Width="180" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,10,0"/>
-                        <Button Content="Ir a menú" Width="180" Background="#6CA0DC" Foreground="White" BorderBrush="#D0E6F6"/>
+                    <StackPanel Grid.Row="7" 
+                                Grid.ColumnSpan="2" 
+                                Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="10,15,10,0">
+                        <Button Content="Notificar a proveedor" 
+                                Width="150" 
+                                Height="35"
+                                Background="#FF9800" 
+                                Foreground="White" 
+                                BorderBrush="#FF9800"
+                                Click="BtnNotificarProveedor_Click"
+                                Cursor="Hand"
+                                Margin="0,0,10,0"/>
+                        <Button Content="Enviar pedido" 
+                                Width="150" 
+                                Height="35"
+                                Background="#4CAF50" 
+                                Foreground="White" 
+                                BorderBrush="#4CAF50"
+                                Click="BtnEnviarPedido_Click"
+                                Cursor="Hand"
+                                Margin="0,0,10,0"/>
+                        <Button Content="Ir a menú" 
+                                Width="150" 
+                                Height="35"
+                                Background="#6CA0DC" 
+                                Foreground="White" 
+                                BorderBrush="#4A7EBB"
+                                Click="BtnIrMenu_Click"
+                                Cursor="Hand"/>
                     </StackPanel>
                 </Grid>
             </StackPanel>

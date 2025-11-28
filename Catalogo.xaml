@@ -18,14 +18,15 @@
 
         <!-- Buscador -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-            <TextBox Width="300" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+            <TextBox x:Name="TxtBuscar" Width="300" Height="30" Background="#F9F9F9" BorderBrush="#CCC" KeyDown="TxtBuscar_KeyDown"/>
             <Button Content="Buscar" Width="100" Height="30" 
                     Background="#6CA0DC" Foreground="White" 
-                    BorderBrush="#4A7EBB" Margin="10,0,0,0"/>
+                    BorderBrush="#4A7EBB" Margin="10,0,0,0" Click="BtnBuscar_Click"/>
+            
         </StackPanel>
 
         <!-- Pestañas -->
-        <TabControl Background="White" Margin="0,10,0,0">
+        <TabControl x:Name="TabControlCategorias" Background="White" Margin="0,10,0,0" SelectionChanged="TabControl_SelectionChanged">
             <!-- Cartón -->
             <TabItem Header="Cartón">
                 <StackPanel Margin="10">
@@ -96,7 +97,10 @@
             <TabItem Header="Plásticos">
                 <StackPanel Margin="10">
                     <TextBlock Text="Productos de Plásticos" FontSize="16" FontWeight="Bold" Foreground="#555"/>
-                    <!-- Puedes agregar contenido aquí -->
+                    <TextBlock Text="(Próximamente se agregarán productos)" 
+                               Margin="0,20,0,0" 
+                               Foreground="#999"
+                               FontStyle="Italic"/>
                 </StackPanel>
             </TabItem>
 
@@ -104,15 +108,20 @@
             <TabItem Header="Vehículos">
                 <StackPanel Margin="10">
                     <TextBlock Text="Productos de Vehículos" FontSize="16" FontWeight="Bold" Foreground="#555"/>
-                    <!-- Puedes agregar contenido aquí -->
+                    <TextBlock Text="(Próximamente se agregarán productos)" 
+                               Margin="0,20,0,0" 
+                               Foreground="#999"
+                               FontStyle="Italic"/>
                 </StackPanel>
             </TabItem>
         </TabControl>
 
         <!-- Botones -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Button Content="Actualizar Catálogo" Width="180" Height="40" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0"/>
-            <Button Content="Ir a Menú" Width="180" Height="40" Background="#6CA0DC" Foreground="White" BorderBrush="#4A7EBB"/>
+            <Button Content="Actualizar Catálogo" Width="180" Height="40" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0" Click="BtnActualizarCatalogo_Click"
+                    Cursor="Hand"/>
+            <Button Content="Ir a Menú" Width="180" Height="40" Background="#6CA0DC" Foreground="White" BorderBrush="#4A7EBB" Click="BtnIrMenu_Click"
+                    Cursor="Hand"/>
         </StackPanel>
     </StackPanel>
 </Window>
