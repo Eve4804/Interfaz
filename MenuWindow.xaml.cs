@@ -22,6 +22,54 @@ namespace Interfaz
         public MenuWindow()
         {
             InitializeComponent();
+        
+        
+        }
+        private void Inventarios_Click(object sender, RoutedEventArgs e)
+        {
+            Inventarios win = new Inventarios();
+            win.Show();
+        }
+
+        private void Compras_Click(object sender, RoutedEventArgs e)
+        {
+            HisVentas win = new HisVentas();
+            win.Show();
+        }
+
+        private void Pagos_Click(object sender, RoutedEventArgs e)
+        {
+            Pagos win = new Pagos();
+            win.Show();
+        }
+
+        private void Productos_Click(object sender, RoutedEventArgs e)
+        {
+            Catalogo win = new Catalogo();
+            win.Show();
+        }
+
+        private void Usuarios_Click(object sender, RoutedEventArgs e)
+        {
+            Frm_clientes win = new Frm_clientes();
+            win.Show();
+        }
+
+        private void Ventas_Click(object sender, RoutedEventArgs e)
+        {
+            GestionVentas win = new GestionVentas();
+            win.Show();
+        }
+
+        private void Entregas_Click(object sender, RoutedEventArgs e)
+        {
+            CalcularFecha win = new CalcularFecha();
+            win.Show();
+        }
+
+        private void Cerrar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Pagos.xaml.cs">
+      <DependentUpon>Pagos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RecuperarCont.xaml.cs">
       <DependentUpon>RecuperarCont.xaml</DependentUpon>
     </Compile>
@@ -149,9 +152,6 @@
   <ItemGroup>
     <Compile Include="MenuWindow.xaml.cs">
       <DependentUpon>MenuWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pagos.xaml.cs">
-      <DependentUpon>Pagos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
