@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Actualizar Inventarios"
         Width="500"
-        Height="461"
+        Height="380"
         Background="White"
         WindowStartupLocation="CenterScreen">
 
@@ -24,44 +24,51 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
+                <!-- Id -->
                 <RowDefinition Height="Auto"/>
+                <!-- Nombre -->
                 <RowDefinition Height="Auto"/>
+                <!-- Descripción -->
                 <RowDefinition Height="Auto"/>
+                <!-- Estado -->
                 <RowDefinition Height="Auto"/>
+                <!-- Categoría -->
+                <RowDefinition Height="Auto"/>
+                <!-- Precio -->
             </Grid.RowDefinitions>
 
             <!-- Id Producto -->
             <TextBlock Text="Id Producto" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <TextBox x:Name="txtId" Grid.Row="0" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="C007"/>
+            <TextBox x:Name="txtId" Grid.Row="0" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC"/>
 
             <!-- Nombre -->
             <TextBlock Text="Nombre" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <TextBox x:Name="txtNombre" Grid.Row="1" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="Archivador de cartón"/>
-
-            <!-- Producto disponible -->
-            <TextBlock Text="Producto disponible" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Foreground="#555"/>
-            <TextBox x:Name="txtDescripcion" Grid.Row="2" Grid.Column="1" Width="220" Height="60" AcceptsReturn="True" Background="#F9F9F9" BorderBrush="#CCC" Text="50 unidades en almacén principal"/>
+            <TextBox x:Name="txtNombre" Grid.Row="1" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC"/>
 
             <!-- Estado -->
             <TextBlock Text="Estado" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <ComboBox x:Name="cmbEstado" Grid.Row="3" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" SelectedIndex="0">
+            <ComboBox x:Name="cmbEstado" Grid.Row="3" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC">
                 <ComboBoxItem Content="Suficiente"/>
                 <ComboBoxItem Content="Insuficiente"/>
             </ComboBox>
 
             <!-- Categoría -->
             <TextBlock Text="Categoría" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <ComboBox x:Name="cmbCategoria" Grid.Row="4" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" SelectedIndex="0">
+            <ComboBox x:Name="cmbCategoria" Grid.Row="4" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC">
                 <ComboBoxItem Content="Cartón"/>
                 <ComboBoxItem Content="Plásticos"/>
                 <ComboBoxItem Content="Vehículos"/>
             </ComboBox>
+
+            <!-- Precio -->
+            <TextBlock Text="Precio" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+            <TextBox x:Name="txtPrecio" Grid.Row="5" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC"/>
         </Grid>
 
         <!-- Botones -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Button Content="Guardar" Width="120" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0"/>
-            <Button Content="Cancelar" Width="120" Background="#F44336" Foreground="White" BorderBrush="#F44336"/>
+            <Button Content="Guardar" Width="120" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0" Click="Guardar_Click"/>
+            <Button Content="Cancelar" Width="120" Background="#F44336" Foreground="White" BorderBrush="#F44336" Click="Cancelar_Click_1"/>
         </StackPanel>
     </StackPanel>
 </Window>

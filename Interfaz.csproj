@@ -15,6 +15,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
@@ -25,6 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
@@ -34,6 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -50,110 +53,149 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
   </ItemGroup>
+
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+
+    <!-- Dejo todas las versiones del conflicto -->
     <Compile Include="FakeDatabase.cs" />
     <Compile Include="Models.cs" />
+
+    <Compile Include="Notificaciones.xaml.cs">
+      <DependentUpon>Notificaciones.xaml</DependentUpon>
+    </Compile>
+
+    <Compile Include="Pagos.xaml.cs">
+      <DependentUpon>Pagos.xaml</DependentUpon>
+    </Compile>
+
     <Compile Include="RecuperarCont.xaml.cs">
       <DependentUpon>RecuperarCont.xaml</DependentUpon>
     </Compile>
+
     <Page Include="ActualizarCat.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="ActualizarInv.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="CalcularFecha.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="Catalogo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="ContactarProv.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="Frm_clientes.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="GestionVentas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="HisVentas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="Inventarios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+
     <Compile Include="ActualizarCat.xaml.cs">
       <DependentUpon>ActualizarCat.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="ActualizarInv.xaml.cs">
       <DependentUpon>ActualizarInv.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+
     <Compile Include="CalcularFecha.xaml.cs">
       <DependentUpon>CalcularFecha.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Catalogo.xaml.cs">
       <DependentUpon>Catalogo.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="ContactarProv.xaml.cs">
       <DependentUpon>ContactarProv.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Frm_clientes.xaml.cs">
       <DependentUpon>Frm_clientes.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="GestionVentas.xaml.cs">
       <DependentUpon>GestionVentas.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="HisVentas.xaml.cs">
       <DependentUpon>HisVentas.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="Inventarios.xaml.cs">
       <DependentUpon>Inventarios.xaml</DependentUpon>
     </Compile>
+
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+
     <Page Include="MenuWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
+    <Page Include="Notificaciones.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+
     <Page Include="Pagos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+
     <Page Include="RecuperarCont.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="MenuWindow.xaml.cs">
       <DependentUpon>MenuWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pagos.xaml.cs">
-      <DependentUpon>Pagos.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -168,17 +210,21 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
+
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

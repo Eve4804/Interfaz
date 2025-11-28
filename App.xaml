@@ -2,8 +2,18 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Interfaz"
+<<<<<<< HEAD
+             StartupUri="MainWindow.xaml"> 
+=======
+<<<<<<< HEAD
+             StartupUri="Pagos.xaml">
+=======
              StartupUri="CalcularFecha.xaml">
+>>>>>>> dccf6316d2c62a1b6bd3382b1f445cc035da2ee7
+>>>>>>> be9a1330c0521c48b534f48da0ffdb03a2a7dd04
     <Application.Resources>
-         
+         c:\users\pc\source\repos\interfaz\calcularfecha.xaml
+c:\users\pc\source\repos\interfaz\calcularfecha.xaml.cs
+
     </Application.Resources>
 </Application>
