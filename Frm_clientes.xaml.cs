@@ -55,18 +55,15 @@ namespace Interfaz
                 return;
             }
 
-            var cliente = FakeDatabase.Clientes
-                .FirstOrDefault(c =>
-                    c.Nombre.ToLower().Contains(filtro) ||
-                    c.RFC.ToLower().Contains(filtro));
-
-            if (cliente == null)
-            {
-                MessageBox.Show("No se encontró ningún cliente.");
-                return;
-            }
-
-            MostrarClienteEnFormulario(cliente);
+            // TODO: Implementar búsqueda desde PostgreSQL
+            // var cliente = await BuscarClienteDesdeDB(filtro);
+            // if (cliente == null)
+            // {
+            //     MessageBox.Show("No se encontró ningún cliente.");
+            //     return;
+            // }
+            // MostrarClienteEnFormulario(cliente);
+            MessageBox.Show("Función de búsqueda pendiente de implementar con PostgreSQL", "Información");
         }
 
         // ----------------------------------------------------
@@ -80,12 +77,9 @@ namespace Interfaz
                 return;
             }
 
-            var cliente = FakeDatabase.Clientes.FirstOrDefault(c => c.IdCliente == id);
-            if (cliente == null) return;
-
-            cliente.Activo = true;
-
-            MessageBox.Show("Cliente activado correctamente.");
+            // TODO: Implementar activación desde PostgreSQL
+            // await ActivarClienteEnDB(id);
+            MessageBox.Show("Función de activación pendiente de implementar con PostgreSQL", "Información");
         }
 
         // ----------------------------------------------------
@@ -99,12 +93,9 @@ namespace Interfaz
                 return;
             }
 
-            var cliente = FakeDatabase.Clientes.FirstOrDefault(c => c.IdCliente == id);
-            if (cliente == null) return;
-
-            cliente.Activo = false;
-
-            MessageBox.Show("Cliente desactivado correctamente.");
+            // TODO: Implementar desactivación desde PostgreSQL
+            // await DesactivarClienteEnDB(id);
+            MessageBox.Show("Función de desactivación pendiente de implementar con PostgreSQL", "Información");
         }
 
         // ----------------------------------------------------
@@ -141,9 +132,15 @@ namespace Interfaz
         {
             try
             {
+                // TODO: Implementar generación de reporte desde PostgreSQL
+                // var clientes = await ObtenerClientesDesdeDB();
+                MessageBox.Show("Función de reporte pendiente de implementar con PostgreSQL", "Información");
+                return;
+                
+                /*
                 var header = "IdCliente,Nombre,RFC,Tipo,Estado,Email,Telefono,DireccionFiscal,DireccionEnvio";
 
-                var lines = FakeDatabase.Clientes.Select(c =>
+                var lines = new List<Cliente>().Select(c =>
                     $"{c.IdCliente}," +
                     $"\"{EscapeCsv(c.Nombre)}\"," +
                     $"\"{EscapeCsv(c.RFC)}\"," +
@@ -165,6 +162,7 @@ namespace Interfaz
                 Process.Start(new ProcessStartInfo(ruta) { UseShellExecute = true });
 
                 MessageBox.Show("Reporte generado correctamente.");
+                */
             }
             catch (Exception ex)
             {

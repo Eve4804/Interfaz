@@ -28,8 +28,9 @@ namespace Interfaz
 
         private void CargarVentas()
         {
-            // Carga TODAS las ventas desde la "base de datos" en memoria
-            dgVentas.ItemsSource = FakeDatabase.Ventas;
+            // TODO: Implementar carga desde PostgreSQL
+            // dgVentas.ItemsSource = await CargarVentasDesdeDB();
+            dgVentas.ItemsSource = new List<Venta>();
         }
 
         private void dgVentas_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -53,9 +54,10 @@ namespace Interfaz
             string cliente = txtCliente.Text.Trim();
             string producto = txtProducto.Text.Trim();
 
-            var resultados = FakeDatabase.BuscarVentas(cliente, producto);
-            dgVentas.ItemsSource = resultados;
-
+            // TODO: Implementar búsqueda desde PostgreSQL
+            // var resultados = await BuscarVentasDesdeDB(cliente, producto);
+            // dgVentas.ItemsSource = resultados;
+            MessageBox.Show("Función de búsqueda pendiente de implementar con PostgreSQL", "Información");
         }
         
 

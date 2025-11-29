@@ -24,8 +24,6 @@ namespace Interfaz
         public MainWindow()
         {
             InitializeComponent();
-            var ventana = new Frm_clientes();
-            ventana.Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

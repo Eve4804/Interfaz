@@ -15,13 +15,33 @@ using System.Windows.Shapes;
 namespace Interfaz
 {
     /// <summary>
-    /// Lógica de interacción para Pagos_1_.xaml
+    /// Lógica de interacción para Pagos.xaml
     /// </summary>
-    public partial class Pagos_1_ : Window
+    public partial class Pagos : Window
     {
-        public Pagos_1_()
+        public Pagos()
         {
             InitializeComponent();
+        }
+
+        private void BtnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            // Validar que los campos no estén vacíos
+            if (string.IsNullOrWhiteSpace(txtProveedor.Text) ||
+                string.IsNullOrWhiteSpace(txtSolicitud.Text) ||
+                string.IsNullOrWhiteSpace(txtMonto.Text))
+            {
+                MessageBox.Show("Por favor complete todos los campos obligatorios.", "Validación", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            MessageBox.Show("Pago registrado exitosamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            this.Close();
+        }
+
+        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
