@@ -1,69 +1,100 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Interfaz
 {
-    /// <summary>
-    /// Lógica de interacción para MenuWindow.xaml
-    /// </summary>
     public partial class MenuWindow : Window
     {
-        public MenuWindow()
+        private string usuarioActual;
+
+        public MenuWindow(string usuario)
         {
             InitializeComponent();
-        
-        
-        }
-        private void CatProd_Click(object sender, RoutedEventArgs e)
-        {
-            Catalogo cataprod = new Catalogo();
-            cataprod.ShowDialog();
+            usuarioActual = usuario;
+            TxtUsuario.Text = $"Usuario: {usuario}";
         }
 
-        private void Clientes_Clic(object sender, RoutedEventArgs e)
+        // ============================================
+        // VENTAS Y CLIENTES
+        // ============================================
+        private void BtnGestionVentas_Click(object sender, MouseButtonEventArgs e)
         {
-            Frm_clientes clientes = new Frm_clientes();
-            clientes.ShowDialog();
+            GestionVentas ventana = new GestionVentas();
+            ventana.ShowDialog();
         }
 
-        private void HistorVtn_Click(object sender, RoutedEventArgs e)
+        private void BtnHistorialVentas_Click(object sender, MouseButtonEventArgs e)
         {
-            HisVentas hisVentas = new HisVentas();
-            hisVentas.ShowDialog();
+            HisVentas ventana = new HisVentas();
+            ventana.ShowDialog();
         }
 
-        private void Inventarios_Click2(object sender, RoutedEventArgs e)
+        private void BtnClientes_Click(object sender, MouseButtonEventArgs e)
         {
-            Inventarios inventarios = new Inventarios();    
-            inventarios.ShowDialog();   
+            Frm_clientes ventana = new Frm_clientes();
+            ventana.ShowDialog();
         }
 
-        private void GestiVenta_Click(object sender, RoutedEventArgs e)
+        // ============================================
+        // INVENTARIO Y PRODUCTOS
+        // ============================================
+        private void BtnInventarios_Click(object sender, MouseButtonEventArgs e)
         {
-            GestionVentas gestionVentas = new GestionVentas();
-            gestionVentas.ShowDialog();
+            Inventarios ventana = new Inventarios();
+            ventana.ShowDialog();
         }
 
-        private void Entregas_Click(object sender, RoutedEventArgs e)
+        private void BtnCatalogo_Click(object sender, MouseButtonEventArgs e)
         {
-            CalcularFecha win = new CalcularFecha();
-            win.ShowDialog();
+            Catalogo ventana = new Catalogo();
+            ventana.ShowDialog();
         }
 
-        private void CerrarSe_Click(object sender, RoutedEventArgs e)
+        private void BtnCalcularFecha_Click(object sender, MouseButtonEventArgs e)
         {
-            this.Close();
+            CalcularFecha ventana = new CalcularFecha();
+            ventana.ShowDialog();
+        }
+
+        // ============================================
+        // PROVEEDORES Y PAGOS
+        // ============================================
+        private void BtnContactarProveedor_Click(object sender, MouseButtonEventArgs e)
+        {
+            ContactarProv ventana = new ContactarProv();
+            ventana.ShowDialog();
+        }
+
+        private void BtnPagos_Click(object sender, MouseButtonEventArgs e)
+        {
+            Pagos ventana = new Pagos();
+            ventana.ShowDialog();
+        }
+
+        // ============================================
+        // ACCIONES GENERALES
+        // ============================================
+        private void BtnNotificaciones_Click(object sender, RoutedEventArgs e)
+        {
+            Notificaciones ventana = new Notificaciones();
+            ventana.ShowDialog();
+        }
+
+        private void BtnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            var resultado = MessageBox.Show(
+                "¿Está seguro que desea cerrar sesión?",
+                "Cerrar Sesión",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (resultado == MessageBoxResult.Yes)
+            {
+                MainWindow loginWindow = new MainWindow();
+                loginWindow.Show();
+                this.Close();
+            }
         }
     }
 }

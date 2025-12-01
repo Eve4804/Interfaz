@@ -1,248 +1,211 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Interfaz
 {
-    /// <summary>
-    /// Lógica de interacción para GestionVentas.xaml
-    /// </summary>
     public partial class GestionVentas : Window
     {
+        private List<Venta> todasLasVentas;
+        private Venta ventaSeleccionada;
+
         public GestionVentas()
         {
             InitializeComponent();
+            CargarDatosEjemplo();
+            ActualizarEstadisticas();
         }
 
-        // Evento para el botón Buscar
+        private void CargarDatosEjemplo()
+        {
+            // TODO: Reemplazar con datos de la base de datos
+            todasLasVentas = new List<Venta>
+            {
+                // Pedidos Nuevos
+                new Venta { IdVenta = 1001, Fecha = DateTime.Now.AddHours(-2), ClienteNombre = "Juan Pérez", Total = 1500.00m, MetodoPago = "Tarjeta", Estado = "Pendiente" },
+                new Venta { IdVenta = 1002, Fecha = DateTime.Now.AddHours(-1), ClienteNombre = "María García", Total = 2300.50m, MetodoPago = "Transferencia", Estado = "Pendiente" },
+                new Venta { IdVenta = 1003, Fecha = DateTime.Now.AddMinutes(-30), ClienteNombre = "Carlos López", Total = 890.00m, MetodoPago = "Efectivo", Estado = "Pendiente" },
+                new Venta { IdVenta = 1004, Fecha = DateTime.Now.AddMinutes(-15), ClienteNombre = "Ana Martínez", Total = 3200.00m, MetodoPago = "Crédito", Estado = "Pendiente" },
+
+                // Pedidos Confirmados (Pendientes de entrega)
+                new Venta { IdVenta = 1005, Fecha = DateTime.Now.AddDays(-1), ClienteNombre = "Roberto Sánchez", Total = 1800.00m, MetodoPago = "Tarjeta", Estado = "Confirmada" },
+                new Venta { IdVenta = 1006, Fecha = DateTime.Now.AddDays(-1), ClienteNombre = "Laura Rodríguez", Total = 2100.00m, MetodoPago = "Transferencia", Estado = "En tránsito" },
+                new Venta { IdVenta = 1007, Fecha = DateTime.Now.AddDays(-2), ClienteNombre = "Pedro Hernández", Total = 950.00m, MetodoPago = "Efectivo", Estado = "Confirmada" },
+
+                // Pedidos Cancelados
+                new Venta { IdVenta = 1008, Fecha = DateTime.Now.AddDays(-3), ClienteNombre = "Sofía Torres", Total = 1200.00m, MetodoPago = "Tarjeta", Estado = "Cancelada", Notas = "Cliente canceló" },
+                new Venta { IdVenta = 1009, Fecha = DateTime.Now.AddDays(-5), ClienteNombre = "Diego Ramírez", Total = 3500.00m, MetodoPago = "Crédito", Estado = "Cancelada", Notas = "Sin stock" },
+                new Venta { IdVenta = 1010, Fecha = DateTime.Now.AddDays(-7), ClienteNombre = "Carmen Flores", Total = 780.00m, MetodoPago = "Efectivo", Estado = "Cancelada", Notas = "Pago rechazado" }
+            };
+
+            ActualizarListas();
+        }
+
+        private void ActualizarListas()
+        {
+            // Filtrar por estado
+            var nuevos = todasLasVentas.Where(v => v.Estado == "Pendiente").ToList();
+            var pendientes = todasLasVentas.Where(v => v.Estado == "Confirmada" || v.Estado == "En tránsito").ToList();
+            var cancelados = todasLasVentas.Where(v => v.Estado == "Cancelada").ToList();
+
+            // Asignar a los DataGrids
+            DgPedidosNuevos.ItemsSource = nuevos;
+            DgPedidosPendientes.ItemsSource = pendientes;
+            DgPedidosCancelados.ItemsSource = cancelados;
+
+            // Actualizar estadísticas
+            TxtTotalNuevos.Text = nuevos.Count.ToString();
+            TxtTotalPendientes.Text = pendientes.Count.ToString();
+            TxtTotalCancelados.Text = cancelados.Count.ToString();
+        }
+
+        private void ActualizarEstadisticas()
+        {
+            if (todasLasVentas == null) return;
+
+            var nuevos = todasLasVentas.Count(v => v.Estado == "Pendiente");
+            var pendientes = todasLasVentas.Count(v => v.Estado == "Confirmada" || v.Estado == "En tránsito");
+            var cancelados = todasLasVentas.Count(v => v.Estado == "Cancelada");
+
+            TxtTotalNuevos.Text = nuevos.ToString();
+            TxtTotalPendientes.Text = pendientes.ToString();
+            TxtTotalCancelados.Text = cancelados.ToString();
+        }
+
         private void BtnBuscar_Click(object sender, RoutedEventArgs e)
         {
-            string textoBusqueda = TxtBuscar.Text.Trim();
+            string criterio = TxtBuscar.Text.ToLower().Trim();
 
-            if (string.IsNullOrEmpty(textoBusqueda))
+            if (string.IsNullOrWhiteSpace(criterio))
             {
-                MessageBox.Show("Por favor, ingrese un ID de pedido o cliente para buscar.",
-                    "Campo vacío",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
+                ActualizarListas();
                 return;
             }
 
-            MessageBox.Show($"Buscando pedido o cliente: '{textoBusqueda}'...\n\nSe mostrarán los resultados coincidentes.",
-                "Búsqueda en proceso",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
+            // Filtrar ventas
+            var resultados = todasLasVentas.Where(v =>
+                v.IdVenta.ToString().Contains(criterio) ||
+                v.ClienteNombre.ToLower().Contains(criterio)
+            ).ToList();
 
-            // Aquí podrías buscar en la base de datos
+            // Actualizar listas con resultados
+            var nuevos = resultados.Where(v => v.Estado == "Pendiente").ToList();
+            var pendientes = resultados.Where(v => v.Estado == "Confirmada" || v.Estado == "En tránsito").ToList();
+            var cancelados = resultados.Where(v => v.Estado == "Cancelada").ToList();
+
+            DgPedidosNuevos.ItemsSource = nuevos;
+            DgPedidosPendientes.ItemsSource = pendientes;
+            DgPedidosCancelados.ItemsSource = cancelados;
         }
 
-        // Evento para el botón Calcular fecha de entrega
-        private void BtnCalcularFechaEntrega_Click(object sender, RoutedEventArgs e)
+        private void BtnNuevaVenta_Click(object sender, RoutedEventArgs e)
         {
-            // Validar que los campos necesarios estén llenos
-            if (string.IsNullOrWhiteSpace(TxtIdPedidoNuevo.Text))
-            {
-                MessageBox.Show("Debe ingresar el ID del pedido.",
-                    "Campo requerido",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-                TxtIdPedidoNuevo.Focus();
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(TxtCantidadNuevo.Text))
-            {
-                MessageBox.Show("Debe ingresar la cantidad del producto.",
-                    "Campo requerido",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-                TxtCantidadNuevo.Focus();
-                return;
-            }
-
-            // Validar que la cantidad sea un número válido
-            if (!int.TryParse(TxtCantidadNuevo.Text, out int cantidad) || cantidad <= 0)
-            {
-                MessageBox.Show("La cantidad debe ser un número mayor a 0.",
-                    "Cantidad inválida",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                TxtCantidadNuevo.Focus();
-                return;
-            }
-
-            // Calcular fecha estimada (ejemplo: 7 días desde hoy)
-            DateTime fechaEntrega = DateTime.Now.AddDays(7);
-
-            MessageBox.Show($"Fecha de entrega calculada:\n\n" +
-                          $"📅 {fechaEntrega:dd/MM/yyyy}\n\n" +
-                          $"Tiempo estimado: 7 días hábiles\n" +
-                          $"Cantidad de productos: {cantidad}",
-                "Cálculo exitoso",
+            MessageBox.Show(
+                "Funcionalidad de Nueva Venta\n\n" +
+                "Aquí se abrirá un formulario para crear una nueva venta:\n" +
+                "- Seleccionar cliente\n" +
+                "- Agregar productos\n" +
+                "- Calcular total\n" +
+                "- Registrar venta",
+                "Nueva Venta",
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
         }
 
-        // Evento para validar entrada numérica en Cantidad
-        private void TxtCantidad_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        private void BtnConfirmar_Click(object sender, RoutedEventArgs e)
         {
-            // Solo permitir números
-            e.Handled = !int.TryParse(e.Text, out _);
-        }
+            var button = sender as Button;
+            var venta = button?.DataContext as Venta;
 
-        // Evento para validar entrada numérica en Total
-        private void TxtTotal_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
-        {
-            // Permitir números y punto decimal
-            if (!(char.IsDigit(e.Text[0]) || e.Text == "."))
-            {
-                e.Handled = true;
-            }
-        }
+            if (venta == null) return;
 
-        // Evento cuando cambia el estado de la orden en Pedidos Realizados
-        private void CmbEstadoOrden_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (CmbEstadoOrden.SelectedItem != null)
-            {
-                ComboBoxItem selectedItem = (ComboBoxItem)CmbEstadoOrden.SelectedItem;
-                string estado = selectedItem.Content.ToString();
-
-                // Validar que haya un ID de pedido antes de cambiar estado
-                if (!string.IsNullOrWhiteSpace(TxtIdPedidoRealizado.Text))
-                {
-                    MessageBox.Show($"Estado del pedido #{TxtIdPedidoRealizado.Text} actualizado a:\n\n" +
-                                  $"📋 {estado}\n\n" +
-                                  $"Los cambios se guardarán automáticamente.",
-                        "Estado actualizado",
-                        MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                }
-            }
-        }
-
-        // Evento para el botón Ir a Menú
-        private void BtnIrMenu_Click(object sender, RoutedEventArgs e)
-        {
-            var resultado = MessageBox.Show("¿Desea volver al menú principal?\n\n" +
-                                          "Asegúrese de haber guardado todos los cambios.",
-                "Volver al menú",
+            var resultado = MessageBox.Show(
+                $"¿Confirmar el pedido #{venta.IdVenta}?\n\n" +
+                $"Cliente: {venta.ClienteNombre}\n" +
+                $"Total: {venta.Total:C}\n\n" +
+                "El pedido pasará a estado 'Confirmada'",
+                "Confirmar Pedido",
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Question);
 
             if (resultado == MessageBoxResult.Yes)
             {
-                MessageBox.Show("Redirigiendo al menú principal...",
-                    "Navegación",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Information);
-
-                // Aquí abrirías tu ventana de menú principal
-                // MenuPrincipal menu = new MenuPrincipal();
-                // menu.Show();
-                // this.Close();
-            }
-        }
-
-        // Evento para el TextBox de búsqueda (Enter)
-        private void TxtBuscar_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-        {
-            if (e.Key == System.Windows.Input.Key.Enter)
-            {
-                BtnBuscar_Click(sender, e);
-            }
-        }
-
-        // Método auxiliar para limpiar campos de Pedidos Nuevos
-        private void LimpiarCamposNuevos()
-        {
-            TxtIdPedidoNuevo.Clear();
-            TxtIdClienteNuevo.Clear();
-            TxtClienteSolicitaNuevo.Clear();
-            TxtProductoNuevo.Clear();
-            TxtCantidadNuevo.Clear();
-            TxtTotalNuevo.Clear();
-
-            MessageBox.Show("Campos limpiados correctamente.",
-                "Formulario limpio",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
-        }
-
-        // Evento para validar y guardar pedido nuevo (opcional, si quisieras agregar un botón)
-        private void GuardarPedidoNuevo()
-        {
-            // Validaciones
-            if (string.IsNullOrWhiteSpace(TxtIdPedidoNuevo.Text) ||
-                string.IsNullOrWhiteSpace(TxtIdClienteNuevo.Text) ||
-                string.IsNullOrWhiteSpace(TxtClienteSolicitaNuevo.Text) ||
-                string.IsNullOrWhiteSpace(TxtProductoNuevo.Text) ||
-                string.IsNullOrWhiteSpace(TxtCantidadNuevo.Text) ||
-                string.IsNullOrWhiteSpace(TxtTotalNuevo.Text))
-            {
-                MessageBox.Show("Todos los campos son obligatorios para crear un pedido.",
-                    "Campos incompletos",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Warning);
-                return;
-            }
-
-            // Validar cantidad
-            if (!int.TryParse(TxtCantidadNuevo.Text, out int cantidad) || cantidad <= 0)
-            {
-                MessageBox.Show("La cantidad debe ser un número mayor a 0.",
-                    "Cantidad inválida",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                return;
-            }
-
-            // Validar total
-            if (!decimal.TryParse(TxtTotalNuevo.Text, out decimal total) || total <= 0)
-            {
-                MessageBox.Show("El total debe ser un monto válido mayor a 0.",
-                    "Total inválido",
-                    MessageBoxButton.OK,
-                    MessageBoxImage.Error);
-                return;
-            }
-
-            var resultado = MessageBox.Show($"¿Confirmar creación del pedido?\n\n" +
-                                          $"ID Pedido: {TxtIdPedidoNuevo.Text}\n" +
-                                          $"Cliente: {TxtClienteSolicitaNuevo.Text}\n" +
-                                          $"Producto: {TxtProductoNuevo.Text}\n" +
-                                          $"Cantidad: {cantidad}\n" +
-                                          $"Total: ${total:F2}",
-                "Confirmar pedido",
-                MessageBoxButton.YesNo,
-                MessageBoxImage.Question);
-
-            if (resultado == MessageBoxResult.Yes)
-            {
-                MessageBox.Show("¡Pedido creado exitosamente!\n\n" +
-                              $"ID: {TxtIdPedidoNuevo.Text}\n" +
-                              $"El pedido ha sido registrado en el sistema.",
+                venta.Estado = "Confirmada";
+                ActualizarListas();
+                MessageBox.Show(
+                    $"✓ Pedido #{venta.IdVenta} confirmado exitosamente",
                     "Éxito",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
-
-                // Aquí guardarías en la base de datos
-                // LimpiarCamposNuevos();
             }
         }
 
+        private void BtnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var venta = button?.DataContext as Venta;
 
+            if (venta == null) return;
 
+            var resultado = MessageBox.Show(
+                $"¿Cancelar el pedido #{venta.IdVenta}?\n\n" +
+                $"Cliente: {venta.ClienteNombre}\n" +
+                $"Total: {venta.Total:C}\n\n" +
+                "Esta acción no se puede deshacer",
+                "Cancelar Pedido",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Warning);
 
+            if (resultado == MessageBoxResult.Yes)
+            {
+                venta.Estado = "Cancelada";
+                venta.Notas = "Cancelado manualmente";
+                ActualizarListas();
+                MessageBox.Show(
+                    $"✗ Pedido #{venta.IdVenta} cancelado",
+                    "Pedido Cancelado",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+        }
+
+        private void BtnVerDetalles_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var venta = button?.DataContext as Venta;
+
+            if (venta == null) return;
+
+            MessageBox.Show(
+                $"📋 DETALLES DEL PEDIDO #{venta.IdVenta}\n\n" +
+                $"Cliente: {venta.ClienteNombre}\n" +
+                $"Fecha: {venta.Fecha:dd/MM/yyyy HH:mm}\n" +
+                $"Estado: {venta.Estado}\n" +
+                $"Método de Pago: {venta.MetodoPago}\n" +
+                $"Subtotal: {venta.Subtotal:C}\n" +
+                $"Impuestos: {venta.Impuestos:C}\n" +
+                $"Total: {venta.Total:C}\n" +
+                (string.IsNullOrEmpty(venta.Notas) ? "" : $"\nNotas: {venta.Notas}"),
+                "Detalles del Pedido",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information);
+        }
+
+        private void DgPedidosNuevos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ventaSeleccionada = DgPedidosNuevos.SelectedItem as Venta;
+        }
+
+        private void DgPedidosPendientes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ventaSeleccionada = DgPedidosPendientes.SelectedItem as Venta;
+        }
+
+        private void BtnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

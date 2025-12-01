@@ -94,8 +94,7 @@ namespace Interfaz
 
         private void IrMenu_Click(object sender, RoutedEventArgs e)
         {
-            MenuWindow menu = new MenuWindow();
-            menu.Show();
+            this.Close();
         }
 
         private void Notificaciones_Click(object sender, RoutedEventArgs e)

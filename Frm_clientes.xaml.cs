@@ -82,41 +82,17 @@ namespace Interfaz
             MessageBox.Show("Función de activación pendiente de implementar con PostgreSQL", "Información");
         }
 
-        // ----------------------------------------------------
-        // BOTÓN: DESACTIVAR CLIENTE
-        // ----------------------------------------------------
+        // TODO: Implementar cuando los controles XAML estén definidos
         private void btnDesactivar_Click(object sender, RoutedEventArgs e)
         {
-            if (!int.TryParse(txtIdCliente.Text, out int id))
-            {
-                MessageBox.Show("Primero selecciona un cliente.");
-                return;
-            }
-
-            // TODO: Implementar desactivación desde PostgreSQL
-            // await DesactivarClienteEnDB(id);
-            MessageBox.Show("Función de desactivación pendiente de implementar con PostgreSQL", "Información");
+            MessageBox.Show("Función pendiente de implementar con controles XAML", "Información");
         }
 
-        // ----------------------------------------------------
-        // BOTÓN: LIMPIAR CAMPOS
-        // ----------------------------------------------------
         private void btnLimpiar_Click(object sender, RoutedEventArgs e)
         {
-            txtIdCliente.Text = "";
-            txtRFC.Text = "";
-            txtNombre.Text = "";
-            txtEmail.Text = "";
-            txtTelefono.Text = "";
-            txtDireccionFiscal.Text = "";
-            txtDireccionEnvio.Text = "";
-            cmbTipo.SelectedIndex = -1;
-            txtBuscar.Text = "";
+            MessageBox.Show("Función pendiente de implementar con controles XAML", "Información");
         }
 
-        // ----------------------------------------------------
-        // FUNCIÓN PARA ESCAPAR TEXTO CSV
-        // ----------------------------------------------------
         private string EscapeCsv(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -125,49 +101,5 @@ namespace Interfaz
             return value.Replace("\"", "\"\"");
         }
 
-        // ----------------------------------------------------
-        // BOTÓN: GENERAR REPORTE CSV
-        // ----------------------------------------------------
-        private void btnGenerarReporte_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                // TODO: Implementar generación de reporte desde PostgreSQL
-                // var clientes = await ObtenerClientesDesdeDB();
-                MessageBox.Show("Función de reporte pendiente de implementar con PostgreSQL", "Información");
-                return;
-                
-                /*
-                var header = "IdCliente,Nombre,RFC,Tipo,Estado,Email,Telefono,DireccionFiscal,DireccionEnvio";
-
-                var lines = new List<Cliente>().Select(c =>
-                    $"{c.IdCliente}," +
-                    $"\"{EscapeCsv(c.Nombre)}\"," +
-                    $"\"{EscapeCsv(c.RFC)}\"," +
-                    $"\"{EscapeCsv(c.Tipo)}\"," +
-                    $"\"{(c.Activo ? "Activo" : "Inactivo")}\"," +
-                    $"\"{EscapeCsv(c.Email)}\"," +
-                    $"\"{EscapeCsv(c.Telefono)}\"," +
-                    $"\"{EscapeCsv(c.DireccionFiscal)}\"," +
-                    $"\"{EscapeCsv(c.DireccionEnvio)}\""
-                );
-
-                string ruta = Path.Combine(
-                    Path.GetTempPath(),
-                    $"reporte_clientes_{DateTime.Now:yyyyMMdd_HHmmss}.csv"
-                );
-
-                File.WriteAllLines(ruta, (new[] { header }).Concat(lines));
-
-                Process.Start(new ProcessStartInfo(ruta) { UseShellExecute = true });
-
-                MessageBox.Show("Reporte generado correctamente.");
-                */
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error generando reporte:\n" + ex.Message);
-            }
-        }
     }
 }

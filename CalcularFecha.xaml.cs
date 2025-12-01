@@ -305,6 +305,8 @@ namespace Interfaz
             }
         }
 
+        // TODO: Implementar cuando los controles XAML estén definidos
+        /*
         // Método auxiliar para limpiar campos
         private void LimpiarCampos()
         {
@@ -321,5 +323,6 @@ namespace Interfaz
                 MessageBoxButton.OK,
                 MessageBoxImage.Information);
         }
+        */
     }
 }

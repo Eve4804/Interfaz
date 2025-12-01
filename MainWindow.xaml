@@ -1,46 +1,143 @@
 ﻿<Window x:Class="Interfaz.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="LOGIN"
-        Width="372"
-        Height="265"
-        Background="White"
-        WindowStartupLocation="CenterScreen">
+        Title="Sistema ERP - Inicio de Sesión"
+        Width="500"
+        Height="650"
+        Background="#F5F5F5"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
 
-    <StackPanel Margin="20">
-        <!-- Título -->
-        <TextBlock Text="Iniciar Sesión" 
-                   FontSize="22" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center" 
-                   Foreground="#333" 
-                   Margin="0,0,0,20"/>
+    <Grid>
+        <!-- Fondo con gradiente -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#2196F3" Offset="0"/>
+                <GradientStop Color="#1976D2" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-        <!-- Grid para formulario -->
-        <Grid HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="200"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <!-- Contenedor principal -->
+        <Border Background="White" 
+                CornerRadius="10" 
+                Margin="30" 
+                Padding="30">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" Opacity="0.3" BlurRadius="20" ShadowDepth="5"/>
+            </Border.Effect>
 
-            <!-- Usuario -->
-            <TextBlock Text="Usuario" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="25,0,5,0"/>
-            <TextBox x:Name="UsuarioTextBox" Grid.Row="0" Grid.Column="1" Width="200" Background="#F9F9F9" BorderBrush="#CCC"/>
+            <StackPanel>
+                <!-- Logo/Icono -->
+                <Viewbox Width="70" Height="70" Margin="0,0,0,15">
+                    <Canvas Width="100" Height="100">
+                        <Ellipse Width="100" Height="100" Fill="#2196F3"/>
+                        <Path Data="M30,50 L45,65 L70,35" Stroke="White" StrokeThickness="8"/>
+                    </Canvas>
+                </Viewbox>
 
-            <!-- Contraseña -->
-            <TextBlock Text="Contraseña" Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" Foreground="#555" Margin="25,2,199,0" Grid.ColumnSpan="2"/>
-            <PasswordBox x:Name="ContrasenaBox" Grid.Row="1" Grid.Column="1" Width="200" Background="#F9F9F9" BorderBrush="#CCC"/>
-        </Grid>
+                <!-- Título -->
+                <TextBlock Text="Sistema ERP" 
+                           FontSize="28" 
+                           FontWeight="Bold" 
+                           HorizontalAlignment="Center" 
+                           Foreground="#333" 
+                           Margin="0,0,0,10"/>
 
-        <!-- Botones -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Button Content="Iniciar sesión" Width="150" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Click="Button_Click"/>
-            <Button Content="Olvidé contraseña" Width="150" Background="#2196F3" Foreground="White" BorderBrush="#2196F3" Margin="10,0,0,0" Click="Button_Click_1"/>
-        </StackPanel>
-    </StackPanel>
+                <TextBlock Text="Módulo de Gestión" 
+                           FontSize="14" 
+                           HorizontalAlignment="Center" 
+                           Foreground="#666" 
+                           Margin="0,0,0,20"/>
+
+                <!-- Formulario -->
+                <StackPanel>
+                    <!-- Usuario -->
+                    <TextBlock Text="Usuario" 
+                               FontSize="12" 
+                               Foreground="#555" 
+                               Margin="0,0,0,5"/>
+                    <Border Background="#F9F9F9" 
+                            BorderBrush="#DDD" 
+                            BorderThickness="1" 
+                            CornerRadius="5" 
+                            Padding="10,8">
+                        <TextBox x:Name="UsuarioTextBox" 
+                                 BorderThickness="0" 
+                                 Background="Transparent"
+                                 FontSize="14"
+                                 VerticalContentAlignment="Center"/>
+                    </Border>
+
+                    <!-- Contraseña -->
+                    <TextBlock Text="Contraseña" 
+                               FontSize="12" 
+                               Foreground="#555" 
+                               Margin="0,15,0,5"/>
+                    <Border Background="#F9F9F9" 
+                            BorderBrush="#DDD" 
+                            BorderThickness="1" 
+                            CornerRadius="5" 
+                            Padding="10,8">
+                        <PasswordBox x:Name="ContrasenaBox" 
+                                     BorderThickness="0" 
+                                     Background="Transparent"
+                                     FontSize="14"
+                                     VerticalContentAlignment="Center"/>
+                    </Border>
+
+
+                    <!-- Botón Iniciar Sesión -->
+                    <Button Content="INICIAR SESIÓN" 
+                            Height="45"
+                            Background="#4CAF50" 
+                            Foreground="White" 
+                            BorderThickness="0"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Margin="0,25,0,0"
+                            Cursor="Hand"
+                            Click="BtnIniciarSesion_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}" 
+                                                    CornerRadius="5" 
+                                                    Padding="10">
+                                                <ContentPresenter HorizontalAlignment="Center" 
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#45A049"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+
+                    <!-- Enlace Olvidé contraseña -->
+                    <TextBlock HorizontalAlignment="Center" 
+                               Margin="0,15,0,0">
+                        <Hyperlink Click="OlvideContrasena_Click" 
+                                   Foreground="#2196F3"
+                                   TextDecorations="None">
+                            ¿Olvidaste tu contraseña?
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <!-- Versión -->
+                <TextBlock Text="v1.0.0" 
+                           FontSize="10" 
+                           Foreground="#999" 
+                           HorizontalAlignment="Center" 
+                           Margin="0,20,0,0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
 </Window>
-

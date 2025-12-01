@@ -4,7 +4,49 @@
              xmlns:local="clr-namespace:Interfaz"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <!-- Aquí puedes agregar estilos, diccionarios de recursos o plantillas globales -->
+        <!-- Estilos globales del sistema ERP -->
+        
+        <!-- Gradiente azul para fondos -->
+        <LinearGradientBrush x:Key="FondoAzulGradiente" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#2196F3" Offset="0"/>
+            <GradientStop Color="#1976D2" Offset="1"/>
+        </LinearGradientBrush>
+        
+        <!-- Color azul primario -->
+        <SolidColorBrush x:Key="AzulPrimario" Color="#2196F3"/>
+        
+        <!-- Color azul oscuro -->
+        <SolidColorBrush x:Key="AzulOscuro" Color="#1976D2"/>
+        
+        <!-- Color verde éxito -->
+        <SolidColorBrush x:Key="VerdeExito" Color="#4CAF50"/>
+        
+        <!-- Estilo para ventanas con fondo azul -->
+        <Style x:Key="VentanaERP" TargetType="Window">
+            <Setter Property="Background" Value="{StaticResource FondoAzulGradiente}"/>
+        </Style>
+        
+        <!-- Estilo para contenedores blancos -->
+        <Style x:Key="ContenedorBlanco" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect Color="Black" Opacity="0.2" BlurRadius="15" ShadowDepth="3"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!-- Estilo para títulos -->
+        <Style x:Key="TituloVentana" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+        
     </Application.Resources>
 </Application>
 

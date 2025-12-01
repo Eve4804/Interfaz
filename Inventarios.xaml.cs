@@ -39,7 +39,8 @@ namespace Interfaz
                 new Producto { Id = "C005", Nombre = "Tubos de cartón", Precio = 5, Cantidad = 1, Estado = "Insuficiente" }
 
             };
-            CartonDataGrid.ItemsSource = productosCarton;
+            // TODO: Asignar a DataGrid cuando esté definido en XAML
+            // CartonDataGrid.ItemsSource = productosCarton;
 
         }
 
@@ -53,7 +54,8 @@ namespace Interfaz
                 new Producto { Id = "V004", Nombre = "SUV", Precio = 30000, Cantidad = 3, Estado = "Disponible" },
                 new Producto { Id = "V005", Nombre = "Camión de carga", Precio = 50000, Cantidad = 1, Estado = "Insuficiente" }
             };
-            VehiculosDataGrid.ItemsSource = productosVehiculos;
+            // TODO: Asignar a DataGrid cuando esté definido en XAML
+            // VehiculosDataGrid.ItemsSource = productosVehiculos;
         }
 
         private void CargarPlasticos()
@@ -66,7 +68,8 @@ namespace Interfaz
                 new Producto { Id = "P004", Nombre = "Contenedor de plástico", Precio = 5, Cantidad = 150, Estado = "Disponible" },
                 new Producto { Id = "P005", Nombre = "Película plástica", Precio = 4, Cantidad = 2, Estado = "Insuficiente" }
             };
-            PlasticosDataGrid.ItemsSource = productosPlasticos;
+            // TODO: Asignar a DataGrid cuando esté definido en XAML
+            // PlasticosDataGrid.ItemsSource = productosPlasticos;
         }
 
 
@@ -80,27 +83,10 @@ namespace Interfaz
             public string Estado { get; set; }
         }
 
+        // TODO: Implementar cuando los controles XAML estén definidos
         private void Buscar_Click(object sender, RoutedEventArgs e)
         {
-            string criterio = BuscarTextBox.Text.ToLower();
-
-            // Filtrar cartón
-            var productosCarton = ((List<Producto>)CartonDataGrid.ItemsSource)
-                .Where(p => p.Nombre.ToLower().Contains(criterio) || p.Id.ToLower().Contains(criterio))
-                .ToList();
-            CartonDataGrid.ItemsSource = productosCarton;
-
-            // Filtrar vehículos
-            var productosVehiculos = ((List<Producto>)VehiculosDataGrid.ItemsSource)
-                .Where(p => p.Nombre.ToLower().Contains(criterio) || p.Id.ToLower().Contains(criterio))
-                .ToList();
-            VehiculosDataGrid.ItemsSource = productosVehiculos;
-
-            // Filtrar plásticos
-            var productosPlasticos = ((List<Producto>)PlasticosDataGrid.ItemsSource)
-                .Where(p => p.Nombre.ToLower().Contains(criterio) || p.Id.ToLower().Contains(criterio))
-                .ToList();
-            PlasticosDataGrid.ItemsSource = productosPlasticos;
+            MessageBox.Show("Función de búsqueda pendiente de implementar con controles XAML", "Información");
         }
 
         private void ActInve_Click(object sender, RoutedEventArgs e)
@@ -117,8 +103,7 @@ namespace Interfaz
 
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
-            MenuWindow menu = new MenuWindow();
-            menu.Show();
+            this.Close();
         }
 
     }
