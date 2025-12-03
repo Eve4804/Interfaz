@@ -8,174 +8,230 @@
         WindowStartupLocation="CenterScreen">
 
     <Grid>
+        <!-- Título superior -->
         <TextBlock Text="👥 Gestión de Clientes" 
                    Style="{StaticResource TituloVentana}"
                    Margin="0,20,0,0"
                    VerticalAlignment="Top"/>
-        
+
+        <!-- Contenedor principal -->
         <Border Style="{StaticResource ContenedorBlanco}" 
                 Margin="40,80,40,40">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="10">
 
-        <!-- TÍTULO -->
-        <TextBlock Text="Sistema de Clientes"
-                   FontSize="22"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   Foreground="#333"
-                   Margin="0,0,0,20"/>
+                    <!-- Título -->
+                    <TextBlock Text="Sistema de Clientes"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Foreground="#333"
+                               Margin="0,0,0,20"/>
 
-        <Border Background="#F0F0F0" CornerRadius="10" Padding="15">
-            <StackPanel>
+                    <Border Background="#F0F0F0" CornerRadius="10" Padding="15">
+                        <StackPanel>
 
-                <!-- BUSCAR CLIENTE -->
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
-                    <TextBlock Text="Buscar cliente:"
-                               VerticalAlignment="Center"
-                               Foreground="#555"
-                               Margin="0,0,10,0"/>
+                            <!-- BUSCAR CLIENTE -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                                <TextBlock Text="Buscar cliente:"
+                                           VerticalAlignment="Center"
+                                           Foreground="#555"
+                                           Margin="0,0,10,0"/>
+                                <TextBox x:Name="txtBuscar"
+                                         Width="250"
+                                         Height="30"
+                                         Background="#F9F9F9"
+                                         BorderBrush="#CCC"
+                                         ToolTip="Ingrese RFC, nombre o 'Todos' para ver todos los clientes"/>
+                                <Button x:Name="btnBuscar"
+                                        Content="Buscar"
+                                        Width="100"
+                                        Background="#4CAF50"
+                                        Foreground="White"
+                                        BorderBrush="#4CAF50"
+                                        Margin="10,0,0,0"
+                                        Click="btnBuscar_Click"/>
+                            </StackPanel>
+                            
+                            <!-- BOTÓN EXPORTAR PDF -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                                <Button x:Name="btnExportarPDF"
+                                        Content="📄 Exportar Clientes a PDF"
+                                        Width="200"
+                                        Height="35"
+                                        Background="#FF5722"
+                                        Foreground="White"
+                                        BorderBrush="#FF5722"
+                                        FontWeight="Bold"
+                                        Click="btnExportarPDF_Click">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="Button">
+                                                        <Border Background="{TemplateBinding Background}"
+                                                                CornerRadius="8"
+                                                                Padding="{TemplateBinding Padding}">
+                                                            <ContentPresenter HorizontalAlignment="Center"
+                                                                              VerticalAlignment="Center"/>
+                                                        </Border>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </StackPanel>
 
-                    <TextBox x:Name="txtBuscar"
-                             Width="300"
-                             Height="30"
-                             Background="#F9F9F9"
-                             BorderBrush="#CCC"/>
+                            <!-- RESULTADOS DE BÚSQUEDA -->
+                            <Border x:Name="borderResultados"
+                                    Background="White"
+                                    BorderBrush="#CCC"
+                                    BorderThickness="1"
+                                    CornerRadius="5"
+                                    Margin="0,0,0,20"
+                                    Visibility="Collapsed">
+                                <StackPanel>
+                                    <TextBlock Text="Resultados de búsqueda:"
+                                               FontWeight="Bold"
+                                               Foreground="#333"
+                                               Margin="10,10,10,5"/>
+                                    <DataGrid x:Name="dgResultados"
+                                              Height="150"
+                                              AutoGenerateColumns="False"
+                                              IsReadOnly="True"
+                                              SelectionMode="Single"
+                                              CanUserAddRows="False"
+                                              CanUserDeleteRows="False"
+                                              HeadersVisibility="Column"
+                                              GridLinesVisibility="Horizontal"
+                                              AlternatingRowBackground="#F5F5F5"
+                                              SelectionChanged="dgResultados_SelectionChanged"
+                                              Margin="10">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="ID" Binding="{Binding IdCliente}" Width="50"/>
+                                            <DataGridTextColumn Header="RFC" Binding="{Binding Rfc}" Width="120"/>
+                                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="*"/>
+                                            <DataGridTextColumn Header="Tipo" Binding="{Binding Tipo}" Width="120"/>
+                                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="80"/>
+                                        </DataGrid.Columns>
+                                    </DataGrid>
+                                </StackPanel>
+                            </Border>
 
-                    <Button x:Name="btnBuscar"
-                            Content="Buscar"
-                            Width="100"
-                            Background="#4CAF50"
-                            Foreground="White"
-                            BorderBrush="#4CAF50"
-                            Margin="10,0,0,0"
-                            Click="btnBuscar_Click"/>
-                </StackPanel>
+                            <!-- DATOS DEL CLIENTE -->
+                            <TextBlock Text="Datos del Cliente"
+                                       FontWeight="Bold"
+                                       Foreground="#333"
+                                       Margin="0,0,0,10"/>
 
-                <!-- DATOS DEL CLIENTE -->
-                <TextBlock Text="Datos del Cliente"
-                           FontWeight="Bold"
-                           Foreground="#333"
-                           Margin="0,0,0,10"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="300"/>
-                    </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <!-- Estado -->
+                                </Grid.RowDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                                <TextBlock Text="ID Cliente:" Grid.Row="0" Grid.Column="0" Foreground="#555"/>
+                                <TextBox x:Name="txtIdCliente" Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="ID Cliente:" Grid.Row="0" Grid.Column="0" Foreground="#555"/>
-                    <TextBox x:Name="txtIdCliente" Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                                <TextBlock Text="RFC:" Grid.Row="1" Grid.Column="0" Foreground="#555"/>
+                                <TextBox x:Name="txtRFC" Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="RFC:" Grid.Row="1" Grid.Column="0" Foreground="#555"/>
-                    <TextBox x:Name="txtRFC" Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                                <TextBlock Text="Nombre:" Grid.Row="2" Grid.Column="0" Foreground="#555"/>
+                                <TextBox x:Name="txtNombre" Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="Nombre:" Grid.Row="2" Grid.Column="0" Foreground="#555"/>
-                    <TextBox x:Name="txtNombre" Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                                <TextBlock Text="Tipo:" Grid.Row="3" Grid.Column="0" Foreground="#555"/>
+                                <ComboBox x:Name="cmbTipo" Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC">
+                                    <ComboBoxItem Content="Persona Física"/>
+                                    <ComboBoxItem Content="Persona Moral"/>
+                                </ComboBox>
 
-                    <TextBlock Text="Tipo:" Grid.Row="3" Grid.Column="0" Foreground="#555"/>
-                    <ComboBox x:Name="cmbTipo" Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC">
-                        <ComboBoxItem Content="Persona Física"/>
-                        <ComboBoxItem Content="Persona Moral"/>
-                    </ComboBox>
+                                <TextBlock Text="Email:" Grid.Row="4" Grid.Column="0" Foreground="#555"/>
+                                <TextBox x:Name="txtEmail" Grid.Row="4" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="Email:" Grid.Row="4" Grid.Column="0" Foreground="#555"/>
-                    <TextBox x:Name="txtEmail" Grid.Row="4" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                                <TextBlock Text="Teléfono:" Grid.Row="5" Grid.Column="0" Foreground="#555"/>
+                                <TextBox x:Name="txtTelefono" Grid.Row="5" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                    <TextBlock Text="Teléfono:" Grid.Row="5" Grid.Column="0" Foreground="#555"/>
-                    <TextBox x:Name="txtTelefono" Grid.Row="5" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
-                </Grid>
+                                <TextBlock Text="Estado:" Grid.Row="6" Grid.Column="0" Foreground="#555"/>
+                                <ComboBox x:Name="cmbEstado" Grid.Row="6" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC">
+                                    <ComboBoxItem Content="Activo"/>
+                                    <ComboBoxItem Content="Inactivo"/>
+                                </ComboBox>
+                            </Grid>
 
-                <!-- DIRECCIONES -->
-                <TextBlock Text="Direcciones"
-                           FontWeight="Bold"
-                           Foreground="#333"
-                           Margin="20,20,0,10"/>
+                            <!-- DIRECCIONES -->
+                            <TextBlock Text="Direcciones"
+                                       FontWeight="Bold"
+                                       Foreground="#333"
+                                       Margin="20,20,0,10"/>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200"/>
-                        <ColumnDefinition Width="300"/>
-                    </Grid.ColumnDefinitions>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
 
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
 
-                    <TextBlock Text="Dirección Fiscal:" Grid.Row="0" Grid.Column="0" Foreground="#555"/>
-                    <TextBox x:Name="txtDireccionFiscal"
-                             Grid.Row="0"
-                             Grid.Column="1"
-                             Height="30"
-                             Background="#F9F9F9"
-                             BorderBrush="#CCC"/>
+                                <TextBlock Text="Dirección Fiscal:" Grid.Row="0" Grid.Column="0" Foreground="#555"/>
+                                <TextBox x:Name="txtDireccionFiscal"
+                                         Grid.Row="0"
+                                         Grid.Column="1"
+                                         Height="30"
+                                         Background="#F9F9F9"
+                                         BorderBrush="#CCC"/>
 
-                    <TextBlock Text="Dirección Envío:" Grid.Row="1" Grid.Column="0" Foreground="#555"/>
-                    <TextBox x:Name="txtDireccionEnvio"
-                             Grid.Row="1"
-                             Grid.Column="1"
-                             Height="30"
-                             Background="#F9F9F9"
-                             BorderBrush="#CCC"/>
-                </Grid>
+                                <TextBlock Text="Dirección Envío:" Grid.Row="1" Grid.Column="0" Foreground="#555"/>
+                                <TextBox x:Name="txtDireccionEnvio"
+                                         Grid.Row="1"
+                                         Grid.Column="1"
+                                         Height="30"
+                                         Background="#F9F9F9"
+                                         BorderBrush="#CCC"/>
+                            </Grid>
 
-                <!-- BOTONES -->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="20,30,0,0">
+                            <!-- BOTONES -->
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        Margin="20,30,0,0">
 
-                    <Button x:Name="btnActivar"
-                            Content="Activar Cliente"
-                            Width="130"
-                            Background="#4CAF50"
-                            Foreground="White"
-                            BorderBrush="#4CAF50"
-                            Margin="5"
-                            Click="btnActivar_Click"/>
+                                <Button x:Name="btnActualizar"
+                                        Content="Guardar / Actualizar"
+                                        Width="160"
+                                        Background="#2196F3"
+                                        Foreground="White"
+                                        BorderBrush="#2196F3"
+                                        Margin="5"
+                                        Click="btnActualizar_Click"/>
 
-                    <Button x:Name="btnDesactivar"
-                            Content="Desactivar Cliente"
-                            Width="130"
-                            Background="#F44336"
-                            Foreground="White"
-                            BorderBrush="#F44336"
-                            Margin="5"
-                            Click="btnDesactivar_Click"/>
+                                <Button x:Name="btnLimpiar"
+                                        Content="Limpiar"
+                                        Width="130"
+                                        Background="#9E9E9E"
+                                        Foreground="White"
+                                        BorderBrush="#9E9E9E"
+                                        Margin="5"
+                                        Click="btnLimpiar_Click"/>
+                            </StackPanel>
 
-                    <Button x:Name="btnActualizar"
-                            Content="Actualizar Datos"
-                            Width="130"
-                            Background="#2196F3"
-                            Foreground="White"
-                            BorderBrush="#2196F3"
-                            Margin="5"
-                            Click="btnGenerarReporte_Click"/>
-
-                    <Button x:Name="btnLimpiar"
-                            Content="Limpiar"
-                            Width="130"
-                            Background="#9E9E9E"
-                            Foreground="White"
-                            BorderBrush="#9E9E9E"
-                            Margin="5"
-                            Click="btnLimpiar_Click"/>
-                </StackPanel>
-
-            </StackPanel>
-        </Border>
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
             </ScrollViewer>
         </Border>
     </Grid>
 </Window>
-

@@ -1,44 +1,122 @@
 ﻿<Window x:Class="Interfaz.Notificaciones"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Notificaciones" Height="450" Width="800"
-        Background="White" WindowStartupLocation="CenterScreen">
+        Title="Notificaciones"
+        Width="800"
+        Height="500"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize">
 
-    <StackPanel Margin="20">
-        <!-- Título -->
-        <TextBlock Text="Notificaciones"
-                   FontSize="22"
-                   FontWeight="Bold"
-                   Foreground="#333"
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,20"/>
+    <Grid>
+        <!-- Fondo con gradiente -->
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#2196F3" Offset="0"/>
+                <GradientStop Color="#1976D2" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-        <!-- Pestañas -->
-        <TabControl>
-            <!-- Solicitudes enviadas -->
-            <TabItem Header="Solicitudes enviadas">
-                <ListBox x:Name="lstSolicitudes"
-                         Height="250"
-                         SelectionChanged="lstSolicitudes_SelectionChanged"/>
-            </TabItem>
+        <!-- Contenedor principal -->
+        <Border Background="White"
+                CornerRadius="10"
+                Margin="30"
+                Padding="30">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" Opacity="0.3" BlurRadius="20" ShadowDepth="5"/>
+            </Border.Effect>
 
-            <!-- Respuestas recibidas -->
-            <TabItem Header="Respuestas recibidas">
-                <ListBox x:Name="lstRespuestas"
-                         Height="250"
-                         SelectionChanged="lstRespuestas_SelectionChanged"/>
-            </TabItem>
-        </TabControl>
+            <!-- Usamos Grid para separar contenido y botón -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Título -->
+                    <RowDefinition Height="*"/>
+                    <!-- Pestañas -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Botón cerrar -->
+                </Grid.RowDefinitions>
 
-        <!-- Botón cerrar -->
-        <Button Content="Cerrar"
-                Width="120"
-                Height="35"
-                Background="#F44336"
-                Foreground="White"
-                BorderBrush="#F44336"
-                HorizontalAlignment="Center"
-                Margin="0,20,0,0"
-                Click="Cerrar_Click"/>
-    </StackPanel>
+                <!-- Título -->
+                <TextBlock Text="Notificaciones"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#333"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,0,20"/>
+
+                <!-- Pestañas -->
+                <TabControl Grid.Row="1" Margin="0,10,0,10">
+                    <TabItem Header="Solicitudes enviadas">
+                        <ListBox x:Name="lstSolicitudes"
+                                 Height="250"
+                                 SelectionChanged="lstSolicitudes_SelectionChanged"/>
+                    </TabItem>
+                    <TabItem Header="Respuestas recibidas">
+                        <ListBox x:Name="lstRespuestas"
+                                 Height="250"
+                                 SelectionChanged="lstRespuestas_SelectionChanged"/>
+                    </TabItem>
+                </TabControl>
+
+                <!-- Botones de acción -->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                    <Button Content="📄 Exportar a PDF"
+                            Width="150"
+                            Height="40"
+                            Background="#FF5722"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Margin="0,0,10,0"
+                            Cursor="Hand"
+                            Click="ExportarPDF_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="5"
+                                                    Padding="10">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="CERRAR"
+                            Width="150"
+                            Height="40"
+                            Background="#F44336"
+                            Foreground="White"
+                            BorderThickness="0"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Cursor="Hand"
+                            Click="Cerrar_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="5"
+                                                    Padding="10">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
 </Window>

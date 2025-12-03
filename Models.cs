@@ -73,45 +73,36 @@ namespace Interfaz
         public string Estado { get; set; }
     }
 
-    public class Pago
+    public class RegistroPago
     {
         public int IdPago { get; set; }
-        public int IdProveedor { get; set; }
-        public int? IdSolicitud { get; set; }
-        public decimal MontoTotal { get; set; }
+        public string Proveedor { get; set; }
+        public int Solicitud { get; set; }
+        public string Monto { get; set; }
         public string FormaPago { get; set; }
-        public DateTime FechaPago { get; set; }
-        public string EstadoPago { get; set; }
+        public string FechaPago { get; set; }
+        public string Estado { get; set; }
     }
-
     public class Venta
     {
         public int IdVenta { get; set; }
         public DateTime Fecha { get; set; }
-        public int IdCliente { get; set; }
         public string ClienteNombre { get; set; }
+        public string ProductoNombre { get; set; }
+        public int Cantidad { get; set; }
+        public string DireccionFiscal { get; set; }
+        public string DireccionEnvio { get; set; }
+        public string Direccion { get; set; } // Dirección que se usará (fiscal o envío)
+        public decimal Total { get; set; }
         public string Estado { get; set; }
         public string MetodoPago { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal Impuestos { get; set; }
-        public decimal Total { get; set; }
-        public string Notas { get; set; }
         public DateTime? FechaEntregaEstimada { get; set; }
         public DateTime? FechaEntregaReal { get; set; }
-        public List<VentaItem> Items { get; set; } = new List<VentaItem>();
+        public DateTime FechaCreacion { get; set; }
+        public DateTime FechaModificacion { get; set; }
     }
 
-    public class VentaItem
-    {
-        public int IdVentaItem { get; set; }
-        public int IdVenta { get; set; }
-        public int IdProducto { get; set; }
-        public string Producto { get; set; }
-        public int Cantidad { get; set; }
-        public decimal PrecioUnitario { get; set; }
-        public decimal Subtotal => Cantidad * PrecioUnitario;
-        public decimal Descuento { get; set; }
-    }
+
 
     public class Usuario
     {
@@ -124,7 +115,14 @@ namespace Interfaz
         public bool Activo { get; set; } = true;
         public DateTime? UltimoAcceso { get; set; }
     }
-
+    public class DetalleVenta
+    {
+        public int IdProducto { get; set; }
+        public string NombreProducto { get; set; }
+        public int Cantidad { get; set; }
+        public decimal PrecioUnitario { get; set; }
+        public decimal Total => Cantidad * PrecioUnitario;
+    }
     public class Notificacion
     {
         public int IdNotificacion { get; set; }

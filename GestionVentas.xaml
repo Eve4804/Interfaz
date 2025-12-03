@@ -23,74 +23,74 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
+               
+                <!-- Barra de búsqueda -->
                 <Grid Grid.Row="0" Margin="0,0,0,20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox x:Name="TxtBuscar" 
-                                 Width="300" 
-                                 Height="35" 
-                                 Background="#F9F9F9" 
-                                 BorderBrush="#DDD"
-                                 VerticalContentAlignment="Center"
-                                 Padding="10,0"
-                                 FontSize="14"/>
-                        <Button Content="🔍 Buscar" 
-                                Width="100" 
-                                Height="35" 
-                                Background="#2196F3" 
-                                Foreground="White" 
-                                BorderThickness="0"
-                                Margin="10,0,0,0" 
-                                Click="BtnBuscar_Click"
-                                Cursor="Hand"/>
-                    </StackPanel>
-
-                    <Button Grid.Column="1"
-                            Content="➕ Nueva Venta" 
-                            Width="150" 
-                            Height="35" 
-                            Background="#4CAF50" 
-                            Foreground="White" 
-                            BorderThickness="0"
-                            FontWeight="Bold"
-                            Click="BtnNuevaVenta_Click"
-                            Cursor="Hand"/>
+                    <TextBox x:Name="TxtBuscar" 
+             Width="300" Height="35" 
+             Background="#F9F9F9" BorderBrush="#DDD"
+             VerticalContentAlignment="Center" Padding="10,0"
+             FontSize="14"/>
+                    <Button Content="🔍 Buscar" Width="100" Height="35"
+            Background="#2196F3" Foreground="White" 
+            BorderThickness="0" Margin="310,0,0,0"
+            Click="BtnBuscar_Click"
+            Cursor="Hand"/>
                 </Grid>
-
                 <Grid Grid.Row="1" Margin="0,0,0,20">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                        <!-- Botón Excel -->
+                        <Button Content="Exportar a Excel"
+                Width="140" Height="40" Margin="5"
+                Background="#A8E6CF" Foreground="Black"
+                FontWeight="Bold" Padding="10"
+                Click="ExportarExcel_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                        CornerRadius="10"
+                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
 
-                    <Border Grid.Column="0" Background="#E3F2FD" CornerRadius="5" Padding="15" Margin="0,0,5,0">
-                        <StackPanel>
-                            <TextBlock Text="Pedidos Nuevos" FontSize="12" Foreground="#666"/>
-                            <TextBlock x:Name="TxtTotalNuevos" Text="0" FontSize="24" FontWeight="Bold" Foreground="#2196F3"/>
-                        </StackPanel>
-                    </Border>
-
-                    <Border Grid.Column="1" Background="#FFF3E0" CornerRadius="5" Padding="15" Margin="5,0">
-                        <StackPanel>
-                            <TextBlock Text="Pedidos Pendientes" FontSize="12" Foreground="#666"/>
-                            <TextBlock x:Name="TxtTotalPendientes" Text="0" FontSize="24" FontWeight="Bold" Foreground="#FF9800"/>
-                        </StackPanel>
-                    </Border>
-
-                    <Border Grid.Column="2" Background="#FFEBEE" CornerRadius="5" Padding="15" Margin="5,0,0,0">
-                        <StackPanel>
-                            <TextBlock Text="Pedidos Cancelados" FontSize="12" Foreground="#666"/>
-                            <TextBlock x:Name="TxtTotalCancelados" Text="0" FontSize="24" FontWeight="Bold" Foreground="#F44336"/>
-                        </StackPanel>
-                    </Border>
+                        <!-- Botón PDF -->
+                        <Button Content="Exportar a PDF"
+                Width="140" Height="40" Margin="5"
+                Background="#FFB6B6" Foreground="Black"
+                FontWeight="Bold" Padding="10"
+                Click="ExportarPDF_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                        CornerRadius="10"
+                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
                 </Grid>
-
-                <TabControl Grid.Row="2" BorderThickness="0">
+                <!-- Pestañas -->
+                <TabControl x:Name="TabControlVentas" Grid.Row="2" BorderThickness="0">
+                    <!-- Pedidos Nuevos -->
                     <TabItem Header="📋 Pedidos Nuevos" FontSize="14" Padding="15,10">
                         <Grid>
                             <DataGrid x:Name="DgPedidosNuevos"
@@ -105,32 +105,35 @@
                                       RowBackground="White"
                                       AlternatingRowBackground="#F9F9F9"
                                       BorderThickness="0"
-                                      SelectionChanged="DgPedidosNuevos_SelectionChanged">
+                                      SelectionChanged="DgPedidosNuevos_SelectionChanged"
+                                      Margin="10">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID Pedido" Binding="{Binding IdVenta}" Width="100"/>
-                                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=dd/MM/yyyy}" Width="120"/>
-                                    <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="*"/>
-                                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=C}" Width="120"/>
-                                    <DataGridTextColumn Header="Método Pago" Binding="{Binding MetodoPago}" Width="130"/>
+                                    <DataGridTextColumn Header="ID Pedido" Binding="{Binding IdVenta}" Width="70"/>
+                                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=dd/MM/yyyy}" Width="100"/>
+                                    <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="140"/>
+                                    <DataGridTextColumn Header="Producto" Binding="{Binding ProductoNombre}" Width="140"/>
+                                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="80"/>
+                                    <DataGridTextColumn Header="Dirección" Binding="{Binding Direccion}" Width="180"/>
+                                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=C}" Width="90"/>
+                                    <DataGridTextColumn Header="Método Pago" Binding="{Binding MetodoPago}" Width="110"/>
                                     <DataGridTemplateColumn Header="Acciones" Width="200">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
                                                 <StackPanel Orientation="Horizontal">
                                                     <Button Content="✓ Confirmar" 
-                                                            Background="#4CAF50" 
-                                                            Foreground="White" 
-                                                            BorderThickness="0"
-                                                            Padding="8,4"
-                                                            Margin="2"
+                                                            Background="#4CAF50" Foreground="White"
+                                                            BorderThickness="0" Padding="8,4" Margin="2"
                                                             Click="BtnConfirmar_Click"
                                                             Cursor="Hand"/>
                                                     <Button Content="✗ Cancelar" 
-                                                            Background="#F44336" 
-                                                            Foreground="White" 
-                                                            BorderThickness="0"
-                                                            Padding="8,4"
-                                                            Margin="2"
+                                                            Background="#F44336" Foreground="White"
+                                                            BorderThickness="0" Padding="8,4" Margin="2"
                                                             Click="BtnCancelar_Click"
+                                                            Cursor="Hand"/>
+                                                    <Button Content="👁️ Detalles"
+                                                            Background="#2196F3" Foreground="White"
+                                                            BorderThickness="0" Padding="8,4" Margin="2"
+                                                            Click="BtnVerDetalles_Click"
                                                             Cursor="Hand"/>
                                                 </StackPanel>
                                             </DataTemplate>
@@ -141,6 +144,7 @@
                         </Grid>
                     </TabItem>
 
+                    <!-- Pedidos Pendientes -->
                     <TabItem Header="⏳ Pedidos Pendientes" FontSize="14" Padding="15,10">
                         <Grid>
                             <DataGrid x:Name="DgPedidosPendientes"
@@ -157,24 +161,22 @@
                                       BorderThickness="0"
                                       SelectionChanged="DgPedidosPendientes_SelectionChanged">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID Pedido" Binding="{Binding IdVenta}" Width="100"/>
-                                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=dd/MM/yyyy}" Width="120"/>
-                                    <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="*"/>
-                                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=C}" Width="120"/>
-                                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="130"/>
-                                    <DataGridTemplateColumn Header="Acciones" Width="150">
+                                    <DataGridTextColumn Header="ID Pedido" Binding="{Binding IdVenta}" Width="70"/>
+                                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=dd/MM/yyyy}" Width="100"/>
+                                    <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="150"/>
+                                    <DataGridTextColumn Header="Producto" Binding="{Binding ProductoNombre}" Width="150"/>
+                                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="80"/>
+                                    <DataGridTextColumn Header="Dirección" Binding="{Binding Direccion}" Width="180"/>
+                                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=C}" Width="90"/>
+                                    <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="100"/>
+                                    <DataGridTemplateColumn Header="Acciones" Width="100">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Button Content="👁️ Ver Detalles" 
-                                                            Background="#2196F3" 
-                                                            Foreground="White" 
-                                                            BorderThickness="0"
-                                                            Padding="8,4"
-                                                            Margin="2"
-                                                            Click="BtnVerDetalles_Click"
-                                                            Cursor="Hand"/>
-                                                </StackPanel>
+                                                <Button Content="👁️ Ver Detalles" 
+                                                        Background="#2196F3" Foreground="White"
+                                                        BorderThickness="0" Padding="8,4" Margin="2"
+                                                        Click="BtnVerDetalles_Click"
+                                                        Cursor="Hand"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -183,6 +185,7 @@
                         </Grid>
                     </TabItem>
 
+                    <!-- Pedidos Cancelados -->
                     <TabItem Header="❌ Pedidos Cancelados" FontSize="14" Padding="15,10">
                         <Grid>
                             <DataGrid x:Name="DgPedidosCancelados"
@@ -198,19 +201,19 @@
                                       AlternatingRowBackground="#F9F9F9"
                                       BorderThickness="0">
                                 <DataGrid.Columns>
-                                    <DataGridTextColumn Header="ID Pedido" Binding="{Binding IdVenta}" Width="100"/>
-                                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=dd/MM/yyyy}" Width="120"/>
-                                    <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="*"/>
-                                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=C}" Width="120"/>
-                                    <DataGridTextColumn Header="Motivo" Binding="{Binding Notas}" Width="200"/>
-                                    <DataGridTemplateColumn Header="Acciones" Width="150">
+                                    <DataGridTextColumn Header="ID Pedido" Binding="{Binding IdVenta}" Width="70"/>
+                                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat=dd/MM/yyyy}" Width="100"/>
+                                    <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="150"/>
+                                    <DataGridTextColumn Header="Producto" Binding="{Binding ProductoNombre}" Width="150"/>
+                                    <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="80"/>
+                                    <DataGridTextColumn Header="Dirección" Binding="{Binding Direccion}" Width="180"/>
+                                    <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat=C}" Width="90"/>
+                                    <DataGridTemplateColumn Header="Acciones" Width="100">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button Content="👁️ Ver Detalles" 
-                                                        Background="#666" 
-                                                        Foreground="White" 
-                                                        BorderThickness="0"
-                                                        Padding="8,4"
+                                                <Button Content="👁️ Ver Detalles"
+                                                        Background="#666" Foreground="White"
+                                                        BorderThickness="0" Padding="8,4"
                                                         Click="BtnVerDetalles_Click"
                                                         Cursor="Hand"/>
                                             </DataTemplate>
@@ -222,14 +225,11 @@
                     </TabItem>
                 </TabControl>
 
+                <!-- Botón Cerrar -->
                 <Button Grid.Row="3"
-                        Content="Cerrar" 
-                        Width="120" 
-                        Height="40" 
-                        Background="#666" 
-                        Foreground="White" 
-                        BorderThickness="0"
-                        HorizontalAlignment="Right"
+                        Content="Cerrar" Width="120" Height="40"
+                        Background="#666" Foreground="White"
+                        BorderThickness="0" HorizontalAlignment="Right"
                         Margin="0,20,0,0"
                         Click="BtnCerrar_Click"
                         Cursor="Hand"/>

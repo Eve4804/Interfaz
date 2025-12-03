@@ -8,95 +8,188 @@
         WindowStartupLocation="CenterScreen">
 
     <Grid>
+        <!-- Encabezado -->
         <TextBlock Text="📦 Control de Inventarios" 
                    Style="{StaticResource TituloVentana}"
                    Margin="0,20,0,0"
                    VerticalAlignment="Top"/>
-        
-        <Border Style="{StaticResource ContenedorBlanco}" 
-                Margin="40,80,40,40">
+
+        <Border Style="{StaticResource ContenedorBlanco}" Margin="40,80,40,40">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="10">
-        <!-- Título -->
-        <TextBlock Text="Inventarios" 
-                   FontSize="22" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center" 
-                   Foreground="#333" 
-                   Margin="0,0,0,20"/>
-       
 
+                    <!-- Título -->
+                    <TextBlock Text="Inventarios" 
+                               FontSize="22" FontWeight="Bold" 
+                               HorizontalAlignment="Center" 
+                               Foreground="#333" Margin="0,0,0,20"/>
 
-        <!-- Buscador -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-            <TextBox x:Name="BuscarTextBox"
-                 Width="300" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
-            <Button Content="Buscar" Width="100" Height="30" 
-                    Background="#6CA0DC" Foreground="White" 
-                    BorderBrush="#4A7EBB" Margin="10,0,0,0" Click="Buscar_Click"/>
-        </StackPanel>
+                    <!-- Buscador -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                        <TextBox x:Name="BuscarTextBox"
+                                 Width="300" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                        <Button Content="Buscar" Width="100" Height="30" 
+                                Background="#6CA0DC" Foreground="White" 
+                                BorderBrush="#4A7EBB" Margin="10,0,0,0" Click="Buscar_Click"/>
+                    </StackPanel>
 
-        <!-- Pestañas -->
-        <TabControl Background="White" Margin="0,10,0,0">
-            <!-- Cartón -->
-            <TabItem Header="Cartón">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Productos de Cartón" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,0,0,10"/>
-                    <DataGrid x:Name="CartonDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id_prod" Binding="{Binding Id}" Width="80"/>
-                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="150"/>
-                            <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="100"/>
-                            <DataGridTextColumn Header="Producto disponible" Binding="{Binding Cantidad}" Width="150"/>
-                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="100"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </TabItem>
+                    <!-- Pestañas -->
+                    <TabControl Background="White" Margin="0,10,0,0">
 
-            <!-- Plásticos -->
-            <TabItem Header="Plásticos">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Productos de Plásticos" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,0,0,10"/>
-                    <DataGrid x:Name="PlasticosDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id_prod" Binding="{Binding Id}" Width="80"/>
-                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="150"/>
-                            <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="100"/>
-                            <DataGridTextColumn Header="Producto disponible" Binding="{Binding Cantidad}" Width="150"/>
-                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="100"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </TabItem>
+                        <!-- Cartón -->
+                        <TabItem Header="Cartón">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Productos de Cartón" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,0,0,10"/>
+                                <DataGrid x:Name="CartonDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id_prod" Binding="{Binding IdProducto}" Width="80"/>
+                                        <DataGridTextColumn Header="Nombre" Binding="{Binding NombreProducto}" Width="200"/>
+                                        <DataGridTextColumn Header="Fecha Act." Binding="{Binding FechaActualizacion, StringFormat=dd/MM/yyyy}" Width="100"/>
+                                        <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="Auto">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </TabItem>
 
-            <!-- Vehículos -->
-            <TabItem Header="Vehículos">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Productos de Vehículos" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,0,0,10"/>
-                    <DataGrid x:Name="VehiculosDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id_prod" Binding="{Binding Id}" Width="80"/>
-                            <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="150"/>
-                            <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="100"/>
-                            <DataGridTextColumn Header="Producto disponible" Binding="{Binding Cantidad}" Width="150"/>
-                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="100"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
-        <!-- Botones -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Button Content="Actualizar Inventario" Width="180" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0" Click="ActInve_Click"/>
-            <Button Content="Contactar proveedor" Width="180" Background="#2196F3" Foreground="White" BorderBrush="#2196F3" Click="ContacProv_Click"/>
-        </StackPanel>
+                        <!-- Plásticos -->
+                        <TabItem Header="Plásticos">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Productos de Plásticos" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,0,0,10"/>
+                                <DataGrid x:Name="PlasticosDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id_prod" Binding="{Binding IdProducto}" Width="80"/>
+                                        <DataGridTextColumn Header="Nombre" Binding="{Binding NombreProducto}" Width="200"/>
+                                        <DataGridTextColumn Header="Fecha Act." Binding="{Binding FechaActualizacion, StringFormat=dd/MM/yyyy}" Width="100"/>
+                                        <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="Auto">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </TabItem>
 
-        <!-- Botón Ir a Menú -->
-        <Button Content="Ir a Menú" Width="200" Height="40"
-                Background="#6CA0DC" Foreground="White" 
-                BorderBrush="#4A7EBB" Margin="0,10,0,0"
-                HorizontalAlignment="Center" Click="Menu_Click"/>
+                        <!-- Vehículos -->
+                        <TabItem Header="Vehículos">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Productos de Vehículos" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,0,0,10"/>
+                                <DataGrid x:Name="VehiculosDataGrid" AutoGenerateColumns="False" HeadersVisibility="Column" CanUserAddRows="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Id_prod" Binding="{Binding IdProducto}" Width="80"/>
+                                        <DataGridTextColumn Header="Nombre" Binding="{Binding NombreProducto}" Width="200"/>
+                                        <DataGridTextColumn Header="Fecha Act." Binding="{Binding FechaActualizacion, StringFormat=dd/MM/yyyy}" Width="100"/>
+                                        <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="Auto">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                        <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="*">
+                                            <DataGridTextColumn.ElementStyle>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                                    <Setter Property="TextAlignment" Value="Center"/>
+                                                </Style>
+                                            </DataGridTextColumn.ElementStyle>
+                                        </DataGridTextColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </TabItem>
+                    </TabControl>
+
+                    <!-- Botones de Exportación -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,10">
+                        <Button Content="📊 Exportar a Excel" Width="160" Height="40" 
+                                Background="#4CAF50" Foreground="White" 
+                                BorderBrush="#4CAF50" Margin="5" 
+                                FontWeight="Bold" Click="ExportarExcel_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        CornerRadius="10"
+                                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button Content="📄 Exportar a PDF" Width="160" Height="40" 
+                                Background="#FF5722" Foreground="White" 
+                                BorderBrush="#FF5722" Margin="5" 
+                                FontWeight="Bold" Click="ExportarPDF_Click">
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
+                                                        CornerRadius="10"
+                                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center"
+                                                                      VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+
+                    <!-- Botones de Acción -->
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                        <Button Content="Actualizar Inventario" Width="180" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0" Click="ActInve_Click"/>
+                        <Button Content="Contactar proveedor" Width="180" Background="#2196F3" Foreground="White" BorderBrush="#2196F3" Click="ContacProv_Click"/>
+                    </StackPanel>
+
+                    <!-- Botón Ir a Menú -->
+                    <Button Content="Ir a Menú" Width="200" Height="40"
+                            Background="#6CA0DC" Foreground="White" 
+                            BorderBrush="#4A7EBB" Margin="0,10,0,0"
+                            HorizontalAlignment="Center" Click="Menu_Click"/>
                 </StackPanel>
             </ScrollViewer>
         </Border>

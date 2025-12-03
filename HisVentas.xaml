@@ -12,57 +12,95 @@
                    Style="{StaticResource TituloVentana}"
                    Margin="0,20,0,0"
                    VerticalAlignment="Top"/>
-        
+
         <Border Style="{StaticResource ContenedorBlanco}" 
                 Margin="40,80,40,40">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="10">
-            <TextBlock Text="Historial de Ventas"
-                       FontSize="22"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"
-                       Foreground="#333"
-                       Margin="0,0,0,20"/>
+                    <TextBlock Text="Historial de Ventas"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Foreground="#333"
+                               Margin="0,0,0,20"/>
+                    <Grid Grid.Row="1" Margin="0,0,0,20">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
 
-            <Border Background="#F0F0F0" CornerRadius="10" Padding="15">
-                <StackPanel>
-
-                    <!-- Filtros de búsqueda -->
-                    <TextBlock Text="Filtros de Búsqueda" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
-                    <Grid Margin="0,0,0,20">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="300"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Text="Fecha Desde:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <DatePicker x:Name="dpDesde" Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
-
-                        <TextBlock Text="Fecha Hasta:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <DatePicker x:Name="dpHasta" Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
-
-                        <TextBlock Text="Cliente:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox x:Name="txtCliente" Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
-
-                        <TextBlock Text="Producto:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox x:Name="txtProducto" Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                            <!-- Botón PDF -->
+                            <Button Content="Exportar a PDF"
+                Width="140" Height="40" Margin="5"
+                Background="#FFB6B6" Foreground="Black"
+                FontWeight="Bold" Padding="10"
+                Click="ExportarPDF_Click">
+                                <Button.Style>
+                                    <Style TargetType="Button">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <Border Background="{TemplateBinding Background}"
+                                        CornerRadius="10"
+                                        Padding="{TemplateBinding Padding}">
+                                                        <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Button.Style>
+                            </Button>
+                        </StackPanel>
                     </Grid>
 
-                    <Button x:Name="btnBuscar"
-                            Content="Buscar"
-                            Width="120"
-                            Background="#4CAF50"
-                            Foreground="White"
-                            BorderBrush="#4CAF50"
-                            HorizontalAlignment="Center"
-                            Margin="0,0,0,20"
-                            Click="btnBuscar_Click"/>
+                    <!-- Filtros de búsqueda -->
+                    <Border Background="#F0F0F0" CornerRadius="10" Padding="15" Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="Filtros de Búsqueda" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Fecha Desde:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                                <DatePicker x:Name="dpDesde" Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+
+                                <TextBlock Text="Fecha Hasta:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                                <DatePicker x:Name="dpHasta" Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="300"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <TextBlock Text="Cliente:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                                <TextBox x:Name="txtCliente" Grid.Row="0" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+
+                                <TextBlock Text="Producto:" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                                <TextBox x:Name="txtProducto" Grid.Row="1" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC"/>
+                            </Grid>
+
+                            <Button x:Name="btnBuscar"
+                                    Content="Buscar"
+                                    Width="120"
+                                    Height="35"
+                                    Background="#4CAF50"
+                                    Foreground="White"
+                                    BorderBrush="#4CAF50"
+                                    HorizontalAlignment="Center"
+                                    Click="btnBuscar_Click"/>
+                        </StackPanel>
+                    </Border>
 
                     <!-- Tabla de ventas -->
                     <TextBlock Text="Ventas Registradas" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
@@ -75,15 +113,17 @@
                               SelectionChanged="dgVentas_SelectionChanged"
                               IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID Venta" Binding="{Binding IdVenta}" Width="80"/>
-                            <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="150"/>
-                            <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="*"/>
-                            <DataGridTextColumn Header="Total" Binding="{Binding Total}" Width="100"/>
-                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="120"/>
+                            <DataGridTextColumn Header="ID Venta" Binding="{Binding IdVenta}" Width="70"/>
+                            <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha, StringFormat='dd/MM/yyyy'}" Width="100"/>
+                            <DataGridTextColumn Header="Cliente" Binding="{Binding ClienteNombre}" Width="150"/>
+                            <DataGridTextColumn Header="Producto" Binding="{Binding ProductoNombre}" Width="150"/>
+                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="80"/>
+                            <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat='C'}" Width="100"/>
+                            <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="100"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <!-- Detalles de venta -->
+                    <!-- Detalles de venta seleccionada -->
                     <TextBlock Text="Detalles de Venta Seleccionada" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
                     <Grid Margin="0,0,0,20">
                         <Grid.ColumnDefinitions>
@@ -91,6 +131,8 @@
                             <ColumnDefinition Width="300"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -107,31 +149,18 @@
                         <TextBlock Text="Cliente:" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
                         <TextBox x:Name="txtClienteDetalle" Grid.Row="2" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
 
-                        <TextBlock Text="Estado:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox x:Name="txtEstado" Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
+                        <TextBlock Text="Producto:" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                        <TextBox x:Name="txtProductoDetalle" Grid.Row="3" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
 
-                        <TextBlock Text="Método de Pago:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <TextBox x:Name="txtMetodoPago" Grid.Row="4" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
+                        <TextBlock Text="Cantidad:" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                        <TextBox x:Name="txtCantidadDetalle" Grid.Row="4" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
+
+                        <TextBlock Text="Estado:" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                        <TextBox x:Name="txtEstado" Grid.Row="5" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
+
+                        <TextBlock Text="Método de Pago:" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                        <TextBox x:Name="txtMetodoPago" Grid.Row="6" Grid.Column="1" Height="30" Background="#F9F9F9" BorderBrush="#CCC" IsReadOnly="True"/>
                     </Grid>
-
-                    <!-- Productos de la venta -->
-                    <TextBlock Text="Productos de la Venta" FontWeight="Bold" Foreground="#333" Margin="0,0,0,10"/>
-                    <DataGrid x:Name="dgItems"
-                              AutoGenerateColumns="False"
-                              Height="150"
-                              Background="White"
-                              BorderBrush="#CCC"
-                              IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Producto" Binding="{Binding Producto}" Width="*"/>
-                            <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}" Width="80"/>
-                            <DataGridTextColumn Header="Precio" Binding="{Binding Precio}" Width="100"/>
-                            <DataGridTextColumn Header="Subtotal" Binding="{Binding Subtotal}" Width="100"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                </StackPanel>
-            </Border>
                 </StackPanel>
             </ScrollViewer>
         </Border>

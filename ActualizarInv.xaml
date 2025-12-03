@@ -25,7 +25,38 @@
                                FontWeight="Bold"
                                HorizontalAlignment="Center"
                                Foreground="#333"
-                               Margin="0,0,0,20"/>
+                               Margin="0,0,0,10"/>
+                    
+                    <!-- Información de estados -->
+                    <Border Background="#E3F2FD" 
+                            BorderBrush="#2196F3" 
+                            BorderThickness="1" 
+                            CornerRadius="5" 
+                            Padding="10"
+                            Margin="0,0,0,20">
+                        <StackPanel>
+                            <TextBlock Text="ℹ️ Estados automáticos según cantidad:" 
+                                       FontWeight="Bold" 
+                                       Foreground="#1976D2"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock Foreground="#555" FontSize="11">
+                                <Run Text="• Suficiente: " FontWeight="Bold"/>
+                                <Run Text="Mayor a 200 unidades"/>
+                            </TextBlock>
+                            <TextBlock Foreground="#555" FontSize="11">
+                                <Run Text="• En pedido: " FontWeight="Bold"/>
+                                <Run Text="De 100 a 200 unidades"/>
+                            </TextBlock>
+                            <TextBlock Foreground="#555" FontSize="11">
+                                <Run Text="• Agotado: " FontWeight="Bold"/>
+                                <Run Text="De 50 a 99 unidades"/>
+                            </TextBlock>
+                            <TextBlock Foreground="#555" FontSize="11">
+                                <Run Text="• Descontinuado: " FontWeight="Bold"/>
+                                <Run Text="Menor a 50 unidades"/>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
 
                     <!-- Formulario -->
                     <Grid HorizontalAlignment="Center">
@@ -35,11 +66,19 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <!-- 0 -->
                             <RowDefinition Height="Auto"/>
+                            <!-- 1 -->
                             <RowDefinition Height="Auto"/>
+                            <!-- 2 -->
                             <RowDefinition Height="Auto"/>
+                            <!-- 3 -->
                             <RowDefinition Height="Auto"/>
+                            <!-- 4 -->
                             <RowDefinition Height="Auto"/>
+                            <!-- 5 -->
+                            <RowDefinition Height="Auto"/>
+                            <!-- 6 -->
                         </Grid.RowDefinitions>
 
                         <!-- Id Producto -->
@@ -50,12 +89,18 @@
                         <TextBlock Text="Nombre" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
                         <TextBox x:Name="txtNombre" Grid.Row="1" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC"/>
 
-                        <!-- Estado -->
-                        <TextBlock Text="Estado" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-                        <ComboBox x:Name="cmbEstado" Grid.Row="2" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC">
-                            <ComboBoxItem Content="Suficiente"/>
-                            <ComboBoxItem Content="Insuficiente"/>
-                        </ComboBox>
+                        <!-- Estado (Calculado automáticamente) -->
+                        <TextBlock Text="Estado (Auto)" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                        <TextBox x:Name="txtEstado" 
+                                 Grid.Row="2" 
+                                 Grid.Column="1" 
+                                 Width="220" 
+                                 Background="#E8F5E9" 
+                                 BorderBrush="#4CAF50"
+                                 IsReadOnly="True"
+                                 FontWeight="Bold"
+                                 Foreground="#2E7D32"
+                                 ToolTip="El estado se calcula automáticamente según la cantidad"/>
 
                         <!-- Categoría -->
                         <TextBlock Text="Categoría" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
@@ -68,6 +113,16 @@
                         <!-- Precio -->
                         <TextBlock Text="Precio" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
                         <TextBox x:Name="txtPrecio" Grid.Row="4" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC"/>
+
+                        <!-- Cantidad -->
+                        <TextBlock Text="Cantidad" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
+                        <TextBox x:Name="txtCantidad" 
+                                 Grid.Row="5" 
+                                 Grid.Column="1" 
+                                 Width="220" 
+                                 Background="#F9F9F9" 
+                                 BorderBrush="#CCC"
+                                 TextChanged="txtCantidad_TextChanged"/>
                     </Grid>
 
                     <!-- Botones -->

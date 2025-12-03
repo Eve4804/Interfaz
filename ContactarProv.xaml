@@ -46,41 +46,51 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
+                            <!-- Id Solicitud -->
                             <RowDefinition Height="Auto"/>
+                            <!-- Id Producto -->
                             <RowDefinition Height="Auto"/>
+                            <!-- Nombre producto -->
                             <RowDefinition Height="Auto"/>
+                            <!-- Tipo proveedor -->
                             <RowDefinition Height="Auto"/>
+                            <!-- Nombre proveedor -->
                             <RowDefinition Height="Auto"/>
+                            <!-- Cantidad -->
+                            <RowDefinition Height="Auto"/>
+                            <!-- Fecha -->
                         </Grid.RowDefinitions>
 
-                        <!-- Tipo de proveedor -->
-                        <TextBlock Text="Tipo de proveedor" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
-                        <ComboBox x:Name="cmbProveedor" Grid.Row="0" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5">
-                            <ComboBoxItem Content="Cartón"/>
-                            <ComboBoxItem Content="Plásticos"/>
-                            <ComboBoxItem Content="Vehículos"/>
-                        </ComboBox>
-
-                        <!-- Id Solicitud -->
-                        <TextBlock Text="Id Solicitud" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
-                        <TextBox x:Name="txtId" Grid.Row="1" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5"/>
-
+                      
                         <!-- Id Producto -->
-                        <TextBlock Text="Id Producto" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
-                        <TextBox x:Name="txtProducto" Grid.Row="2" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5"/>
+                        <TextBlock Text="Id Producto" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+                        <TextBox x:Name="txtProducto" Grid.Row="1" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5"/>
 
                         <!-- Nombre del producto/servicio -->
-                        <TextBlock Text="Nombre del producto/servicio" Grid.Row="3" Grid.Column="0" VerticalAlignment="Top" Foreground="#555" Margin="0,5"/>
-                        <TextBox x:Name="txtDescripcion" Grid.Row="3" Grid.Column="1" Width="250" Height="60"
-                                 Background="#F9F9F9" BorderBrush="#CCC" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5"/>
+                        <TextBlock Text="Nombre del producto/servicio" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Foreground="#555" Margin="0,5"/>
+                        <TextBox x:Name="txtDescripcion" Grid.Row="2" Grid.Column="1" Width="250" Height="60"
+             Background="#F9F9F9" BorderBrush="#CCC" TextWrapping="Wrap" AcceptsReturn="True" Margin="0,5"/>
+
+                        <!-- Tipo de proveedor -->
+                        <TextBlock Text="Tipo de proveedor" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+                        <ComboBox x:Name="cmbCategoria" Grid.Row="3" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5"
+              SelectionChanged="cmbCategoria_SelectionChanged">
+                            <ComboBoxItem Content="Cartón" Tag="1"/>
+                            <ComboBoxItem Content="Plásticos" Tag="2"/>
+                            <ComboBoxItem Content="Vehículos" Tag="3"/>
+                        </ComboBox>
+
+                        <!-- Nombre de proveedor -->
+                        <TextBlock Text="Nombre de proveedor" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+                        <ComboBox x:Name="cmbProveedor" Grid.Row="4" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5"/>
 
                         <!-- Cantidad solicitada -->
-                        <TextBlock Text="Cantidad solicitada" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
-                        <TextBox x:Name="txtCantidad" Grid.Row="4" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5"/>
+                        <TextBlock Text="Cantidad solicitada" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+                        <TextBox x:Name="txtCantidad" Grid.Row="5" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5"/>
 
                         <!-- Fecha -->
-                        <TextBlock Text="Fecha en que se solicita" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
-                        <DatePicker x:Name="dpFecha" Grid.Row="5" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" SelectedDateFormat="Short"/>
+                        <TextBlock Text="Fecha en que se solicita" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" Foreground="#555" Margin="0,5"/>
+                        <DatePicker x:Name="dpFecha" Grid.Row="6" Grid.Column="1" Width="250" Background="#F9F9F9" BorderBrush="#CCC" Margin="0,5" SelectedDateFormat="Short"/>
                     </Grid>
 
                     <!-- Botones -->

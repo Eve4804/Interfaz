@@ -51,11 +51,7 @@ namespace Interfaz
             ventana.ShowDialog();
         }
 
-        private void BtnCalcularFecha_Click(object sender, MouseButtonEventArgs e)
-        {
-            CalcularFecha ventana = new CalcularFecha();
-            ventana.ShowDialog();
-        }
+      
 
         // ============================================
         // PROVEEDORES Y PAGOS

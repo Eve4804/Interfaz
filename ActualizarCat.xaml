@@ -2,69 +2,217 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Actualizar Catálogo"
-        Width="450"
-        Height="550"
-        Background="White"
+        Width="700"
+        Height="600"
+        Background="{StaticResource FondoAzulGradiente}"
         WindowStartupLocation="CenterScreen">
 
-    <StackPanel Margin="20" HorizontalAlignment="Center">
-        <!-- Título -->
-        <TextBlock Text="Actualizar Producto o Nuevo Producto" 
-                   FontSize="22" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center" 
-                   Foreground="#333" 
-                   Margin="0,0,0,20"/>
+    <Grid>
+        <!-- Encabezado -->
+        <TextBlock Text="📝 Actualizar Producto" 
+                   Style="{StaticResource TituloVentana}"
+                   Margin="0,20,0,0"
+                   VerticalAlignment="Top"/>
 
-        <!-- Grid para formulario -->
-        <Grid HorizontalAlignment="Center">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="220"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Border Style="{StaticResource ContenedorBlanco}" 
+                Margin="40,80,40,40">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="20">
 
-            <!-- Id Producto -->
-            <TextBlock Text="Id Producto" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <TextBox x:Name="txtId" Grid.Row="0" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="C006"/>
+                    <!-- Título -->
+                    <TextBlock Text="Actualizar o Crear Producto" 
+                               FontSize="22" 
+                               FontWeight="Bold" 
+                               HorizontalAlignment="Center" 
+                               Foreground="#333" 
+                               Margin="0,0,0,30"/>
 
-            <!-- Nombre -->
-            <TextBlock Text="Nombre" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <TextBox x:Name="txtNombre" Grid.Row="1" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="Caja organizadora"/>
+                    <Border Background="#F0F0F0" CornerRadius="10" Padding="25">
+                        <StackPanel>
 
-            <!-- Descripción -->
-            <TextBlock Text="Descripción" Grid.Row="2" Grid.Column="0" VerticalAlignment="Top" Foreground="#555"/>
-            <TextBox x:Name="txtDescripcion" Grid.Row="2" Grid.Column="1" Width="220" Height="60" AcceptsReturn="True" Background="#F9F9F9" BorderBrush="#CCC" Text="Caja de cartón con divisiones internas para organizar documentos o artículos pequeños."/>
+                            <!-- Sección: Buscar Producto Existente -->
+                            <TextBlock Text="🔍 Buscar Producto Existente" 
+                                       FontSize="16" 
+                                       FontWeight="Bold" 
+                                       Foreground="#555" 
+                                       Margin="0,0,0,15"/>
 
-            <!-- Precio -->
-            <TextBlock Text="Precio" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <TextBox x:Name="txtPrecio" Grid.Row="3" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="$6.25"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                                <TextBlock Text="ID o Nombre:" 
+                                           VerticalAlignment="Center" 
+                                           Foreground="#555" 
+                                           Margin="0,0,10,0"/>
+                                <TextBox x:Name="txtBuscar"
+                                         Width="250"
+                                         Height="30"
+                                         Background="#F9F9F9"
+                                         BorderBrush="#CCC"/>
+                                <Button Content="Buscar"
+                                        Width="100"
+                                        Height="30"
+                                        Background="#2196F3"
+                                        Foreground="White"
+                                        BorderBrush="#2196F3"
+                                        Margin="10,0,0,0"
+                                        Click="BtnBuscar_Click"/>
+                            </StackPanel>
 
-            <!-- Categoría -->
-            <TextBlock Text="Categoría" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <ComboBox x:Name="cmbCategoria" Grid.Row="4" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" SelectedIndex="0">
-                <ComboBoxItem Content="Cartón"/>
-                <ComboBoxItem Content="Plásticos"/>
-                <ComboBoxItem Content="Vehículos"/>
-            </ComboBox>
+                            <Separator Margin="0,10,0,20" Background="#CCC"/>
 
-            <!-- Imagen -->
-            <TextBlock Text="Imagen (URL)" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" Foreground="#555"/>
-            <TextBox x:Name="txtImagen" Grid.Row="5" Grid.Column="1" Width="220" Background="#F9F9F9" BorderBrush="#CCC" Text="https://ejemplo.com/imagenes/caja-organizadora.jpg"/>
-        </Grid>
+                            <!-- Formulario de Producto -->
+                            <TextBlock Text="📋 Información del Producto" 
+                                       FontSize="16" 
+                                       FontWeight="Bold" 
+                                       Foreground="#555" 
+                                       Margin="0,0,0,15"/>
 
-        <!-- Botones -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Button Content="Guardar" Width="120" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0" Click="btnGuardar_Click"/>
-            <Button Content="Cancelar" Width="120" Background="#F44336" Foreground="White" BorderBrush="#F44336" Click="btnCancelar_Click"/>
-        </StackPanel>
-    </StackPanel>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <!-- ID Producto (solo lectura si existe) -->
+                                <TextBlock Text="ID Producto:" 
+                                           Grid.Row="0" Grid.Column="0" 
+                                           VerticalAlignment="Center" 
+                                           Foreground="#555" 
+                                           Margin="0,0,0,15"/>
+                                <TextBox x:Name="txtId" 
+                                         Grid.Row="0" Grid.Column="1" 
+                                         Height="30"
+                                         Background="#F9F9F9" 
+                                         BorderBrush="#CCC" 
+                                         Margin="0,0,0,15"
+                                         IsReadOnly="True"
+                                         ToolTip="El ID se asigna automáticamente"/>
+
+                                <!-- Nombre -->
+                                <TextBlock Text="Nombre:*" 
+                                           Grid.Row="1" Grid.Column="0" 
+                                           VerticalAlignment="Center" 
+                                           Foreground="#555" 
+                                           Margin="0,0,0,15"/>
+                                <TextBox x:Name="txtNombre" 
+                                         Grid.Row="1" Grid.Column="1" 
+                                         Height="30"
+                                         Background="White" 
+                                         BorderBrush="#CCC" 
+                                         Margin="0,0,0,15"/>
+
+                                <!-- Descripción -->
+                                <TextBlock Text="Descripción:" 
+                                           Grid.Row="2" Grid.Column="0" 
+                                           VerticalAlignment="Top" 
+                                           Foreground="#555" 
+                                           Margin="0,5,0,15"/>
+                                <TextBox x:Name="txtDescripcion" 
+                                         Grid.Row="2" Grid.Column="1" 
+                                         Height="80"
+                                         TextWrapping="Wrap"
+                                         AcceptsReturn="True"
+                                         VerticalScrollBarVisibility="Auto"
+                                         Background="White" 
+                                         BorderBrush="#CCC" 
+                                         Margin="0,0,0,15"/>
+
+                                <!-- Precio -->
+                                <TextBlock Text="Precio:*" 
+                                           Grid.Row="3" Grid.Column="0" 
+                                           VerticalAlignment="Center" 
+                                           Foreground="#555" 
+                                           Margin="0,0,0,15"/>
+                                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,15">
+                                    <TextBlock Text="$" 
+                                               VerticalAlignment="Center" 
+                                               FontSize="16" 
+                                               Margin="0,0,5,0"/>
+                                    <TextBox x:Name="txtPrecio" 
+                                             Width="150"
+                                             Height="30"
+                                             Background="White" 
+                                             BorderBrush="#CCC"/>
+                                    <TextBlock Text="(ejemplo: 10.50)" 
+                                               VerticalAlignment="Center" 
+                                               Foreground="#999" 
+                                               FontStyle="Italic" 
+                                               Margin="10,0,0,0"/>
+                                </StackPanel>
+
+                                <!-- Categoría -->
+                                <TextBlock Text="Categoría:*" 
+                                           Grid.Row="4" Grid.Column="0" 
+                                           VerticalAlignment="Center" 
+                                           Foreground="#555" 
+                                           Margin="0,0,0,15"/>
+                                <ComboBox x:Name="cmbCategoria" 
+                                          Grid.Row="4" Grid.Column="1" 
+                                          Height="30"
+                                          Background="White" 
+                                          BorderBrush="#CCC" 
+                                          Margin="0,0,0,15">
+                                    <ComboBoxItem Content="Cartón" Tag="1"/>
+                                    <ComboBoxItem Content="Plásticos" Tag="2"/>
+                                    <ComboBoxItem Content="Vehículos" Tag="3"/>
+                                </ComboBox>
+
+                                <!-- Estado -->
+                                <TextBlock Text="Estado:*" 
+                                           Grid.Row="5" Grid.Column="0" 
+                                           VerticalAlignment="Center" 
+                                           Foreground="#555"/>
+                                <ComboBox x:Name="cmbEstado" 
+                                          Grid.Row="5" Grid.Column="1" 
+                                          Height="30"
+                                          Background="White" 
+                                          BorderBrush="#CCC"
+                                          SelectedIndex="0">
+                                    <ComboBoxItem Content="Activo"/>
+                                    <ComboBoxItem Content="Inactivo"/>
+                                </ComboBox>
+                            </Grid>
+
+                            <TextBlock Text="* Campos obligatorios" 
+                                       FontSize="11" 
+                                       Foreground="#999" 
+                                       FontStyle="Italic" 
+                                       Margin="0,10,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Botones -->
+                    <StackPanel Orientation="Horizontal" 
+                                HorizontalAlignment="Center" 
+                                Margin="0,30,0,0">
+                        <Button Content="💾 Guardar" 
+                                Width="150"
+                                Height="40"
+                                Background="#4CAF50" 
+                                Foreground="White" 
+                                BorderBrush="#4CAF50" 
+                                Margin="0,0,15,0" 
+                                FontSize="14"
+                                Click="BtnGuardar_Click"/>
+                        <Button Content="❌ Cancelar" 
+                                Width="150"
+                                Height="40"
+                                Background="#F44336" 
+                                Foreground="White" 
+                                BorderBrush="#F44336"
+                                FontSize="14"
+                                Click="BtnCancelar_Click"/>
+                    </StackPanel>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
 </Window>
-

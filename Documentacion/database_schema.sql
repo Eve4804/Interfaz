@@ -10,21 +10,144 @@
 -- ============================================
 -- TABLA: clientes
 -- ============================================
+DROP TABLE IF EXISTS clientes, t, tabla3 CASCADE;
+DROP TABLE clientes;
 CREATE TABLE clientes (
     id_cliente SERIAL PRIMARY KEY,
     rfc VARCHAR(13) NOT NULL UNIQUE,
     nombre VARCHAR(200) NOT NULL,
-    tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('Regular', 'Premium', 'Mayorista')),
+    tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('Persona Moral', 'Persona Física')),
     email VARCHAR(100),
-    telefono VARCHAR(20),
+    telefono VARCHAR(15), -- mejor como texto
     direccion_fiscal TEXT,
     direccion_envio TEXT,
-    metodo_pago VARCHAR(50),
+    estado VARCHAR(10) NOT NULL CHECK (estado IN ('Activo', 'Inactivo')),
     fecha_alta TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     activo BOOLEAN DEFAULT TRUE,
     fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
+INSERT INTO clientes (
+    rfc, nombre, tipo, email, telefono, direccion_fiscal, direccion_envio,
+    estado, fecha_alta, activo, fecha_modificacion
+)
+VALUES (
+    'PLMK850710FGH',
+    'Rogelio Pineda Torres',
+    'Persona Física',
+    'rogelio.pineda@gmail.com',
+    '5512345678',
+    'Av. Reforma 456, Col. Juárez, CDMX',
+    'Calle Hidalgo 78, Col. Centro, CDMX',
+    'Activo',
+    '2021-05-10 00:00:00',
+    TRUE,
+    '2025-11-15 00:00:00'
+);
+INSERT INTO clientes (
+    rfc, nombre, tipo, email, telefono, direccion_fiscal, direccion_envio,
+    estado, fecha_alta, activo, fecha_modificacion
+)
+VALUES('ABCD900101XYZ','Javier Morales López','Persona Moral','javier.morales@gmail.com','5543210098','Calle Fresno 123, Col. Centro, CDMX','Av. Palma 45, Col. Roma, CDMX','Activo','2021-03-08',TRUE,'2025-11-15'),
+('XCVB920202RTY','Ana Lucero Márquez','Persona Física','ana.lucero@gmail.com','5532168841','Av. Hidalgo 50, Col. Juárez, CDMX','Calle Fresno 88, Col. Del Valle, CDMX','Activo','2022-04-12',FALSE,'2025-10-21'),
+('MNBG780815QAZ','Paola Vargas Soto','Persona Física','paola.v.s@gmail.com','5544667788','Av. Chapultepec 400, Col. Roma, CDMX','Calle Nochebuena 33, Col. Del Valle, CDMX','Activo','2023-02-18',TRUE,'2025-12-01'),
+('PLKO940103WED','César Martínez Peña','Persona Moral','cesar.mtzp@gmail.com','5533442211','Calle Cedros 122, Col. Coyoacán, CDMX','Av. Universidad 1900, Col. Coyoacán, CDMX','Activo','2020-09-09',FALSE,'2025-09-30'),
+('LKJH970728FDS','Fernanda Torres Ruiz','Persona Física','f.torres@gmail.com','5578009911','Calle Olivo 77, Col. Narvarte, CDMX','Calle Olmo 80, Col. Narvarte, CDMX','Activo','2021-11-03',TRUE,'2025-11-02'),
+('QWER910606MNB','Roberto Jiménez Solís','Persona Moral','r.jimenez@gmail.com','5522349088','Av. Reforma 1500, Col. Centro, CDMX','Calle Mina 54, Col. Centro, CDMX','Inactivo','2018-05-17',FALSE,'2025-06-01'),
+('ASDF990130POL','Mariana Díaz Tejada','Persona Física','mariana.dt@gmail.com','5559084477','Calle Laurel 28, Col. Guadalupe Inn, CDMX','Av. Revolución 901, Col. Mixcoac, CDMX','Activo','2023-01-05',TRUE,'2025-09-14'),
+('ZXCV830517VFR','Luis Fernando Castañeda','Persona Moral','lf.castaneda@gmail.com','5588445599','Av. Observatorio 122, Col. Tacubaya, CDMX','Calle Fresno 33, Col. Tacubaya, CDMX','Activo','2020-07-21',FALSE,'2025-10-17'),
+('HGFD760819NHY','Rocío Salgado Torres','Persona Física','rocio.st@gmail.com','5532114450','Calle Magnolias 12, Col. Florida, CDMX','Av. Insurgentes Sur 2000, Col. Mixcoac, CDMX','Activo','2021-02-11',TRUE,'2025-08-22'),
+('YTRE900301TGB','Daniel Ortega Millán','Persona Moral','daniel.ortega@gmail.com','5577008822','Calle Rosas 55, Col. Del Carmen, CDMX','Calle Clavel 80, Col. Del Carmen, CDMX','Inactivo','2019-03-28',FALSE,'2025-07-12'),
+('BNMV880912QWE','Jimena Castillo Flores','Persona Física','jime.castillo@gmail.com','5522009911','Av. Xola 700, Col. Álamos, CDMX','Calle Abedul 100, Col. Álamos, CDMX','Activo','2022-05-03',TRUE,'2025-11-07'),
+('OPIU741201FGT','Arturo Reyes Prado','Persona Moral','arturo.reyes@gmail.com','5538997700','Calle Cedro 88, Col. Portales, CDMX','Av. Tlalpan 1001, Col. Portales, CDMX','Activo','2021-12-11',FALSE,'2025-08-19'),
+('MNBV920807OKM','Carla López Sánchez','Persona Física','carla.ls@gmail.com','5567882345','Calle Gardenia 23, Col. Roma Sur, CDMX','Calle Yácatas 11, Col. Narvarte, CDMX','Activo','2023-03-28',TRUE,'2025-10-05'),
+('UYTR980224ZXC','Jorge Ruiz Carranza','Persona Moral','jorge.ruiz@gmail.com','5588012233','Av. Universidad 2300, Col. Copilco, CDMX','Calle Encino 100, Col. Copilco, CDMX','Inactivo','2018-08-10',FALSE,'2025-12-01'),
+('RFVT900519ASD','Diana Pérez Oliva','Persona Física','diana.perez@gmail.com','5523451288','Calle Ciprés 44, Col. Roma Norte, CDMX','Av. Oaxaca 233, Col. Roma, CDMX','Activo','2020-06-16',TRUE,'2025-12-01'),
+('EDCV821117HJK','Héctor García Varela','Persona Moral','hector.gv@gmail.com','5599884433','Calle Abeto 13, Col. San Rafael, CDMX','Calle Magnolia 19, Col. San Rafael, CDMX','Activo','2021-05-12',FALSE,'2025-10-25'),
+('WSXQ750415BNM','Laura Núñez Campos','Persona Física','laura.nc@gmail.com','5588110099','Av. Cuauhtémoc 200, Col. Doctores, CDMX','Calle Dr. Vértiz 122, Col. Doctores, CDMX','Activo','2022-09-11',TRUE,'2025-11-21'),
+('QAZW970910XCV','Felipe Sánchez Ramírez','Persona Moral','felipe.sr@gmail.com','5571002211','Calz. Ignacio Zaragoza 1100, CDMX','Av. Texcoco 80, CDMX','Inactivo','2019-12-20',FALSE,'2025-10-03'),
+('TGBH860622POL','Adriana Juárez Robles','Persona Física','adri.juarez@gmail.com','5532210044','Calle Mirto 22, Col. Pensil, CDMX','Av. Marina Nacional 300, Col. Anáhuac, CDMX','Activo','2021-07-05',TRUE,'2025-06-18'),
+('NBGF950430ASX','Emilio Ramírez Luna','Persona Moral','emilio.rl@gmail.com','5588432233','Av. Patriotismo 1500, Col. San Pedro, CDMX','Calle Fresno 122, Col. San Pedro, CDMX','Inactivo','2020-04-11',FALSE,'2025-09-09'),
+('MKLP930201DCE','Sofía Miranda Cervantes','Persona Física','sofia.m.c@gmail.com','5543210012','Calle Bugambilia 77, Col. Rosas, CDMX','Av. Las Flores 811, Col. Rosas, CDMX','Activo','2023-08-02',TRUE,'2025-07-13'),
+('ZXAS820918PLM','Gustavo Torres León','Persona Moral','gustavo.tl@gmail.com','5577123400','Av. Balderas 22, Col. Centro, CDMX','Calle Mina 88, Col. Centro, CDMX','Activo','2018-11-08',FALSE,'2025-09-30'),
+('POIU980515HJK','Rebeca Navarrete Vega','Persona Física','rebeca.nv@gmail.com','5566002299','Calle Manzana 90, Col. Del Mar, CDMX','Av. Canal 900, Col. Del Mar, CDMX','Inactivo','2022-03-18',FALSE,'2025-08-27'),
+('OLKI890224RTY','Andrés Beltrán Torres','Persona Moral','andres.bt@gmail.com','5587011223','Av. Revolución 944, Col. Mixcoac, CDMX','Calle Félix Cuevas 22, Col. Mixcoac, CDMX','Activo','2021-08-28',TRUE,'2025-12-01'),
+('QWEM930917LKO','Karina Varela Ponce','Persona Física','karina.vp@gmail.com','5521883456','Calle Sauce 233, Col. Piedad, CDMX','Calle Petén 411, Col. Piedad, CDMX','Activo','2023-04-03',TRUE,'2025-11-01'),
+('KJHG990115ASR','Hugo Salinas Pérez','Persona Moral','hugo.sp@gmail.com','5534671200','Calle Robles 99, Col. Narvarte Oriente, CDMX','Av. Universidad 1300, Col. Narvarte, CDMX','Activo','2020-02-14',FALSE,'2025-10-10'),
+('BVFR950810UJM','Lourdes Campos Rivas','Persona Física','lourdes.cr@gmail.com','5579110022','Av. La Viga 77, Col. Jamaica, CDMX','Calle Rosales 6, Col. Jamaica, CDMX','Inactivo','2019-06-01',FALSE,'2025-07-29'),
+('DFGH880115XSW','Sergio Ponce Ibarra','Persona Moral','sergio.pi@gmail.com','5588221144','Calle Peral 18, Col. Morelos, CDMX','Calle Gorrión 90, Col. Morelos, CDMX','Activo','2021-09-13',TRUE,'2025-10-19'),
+('DRFG760811PLM','Marisol Cárdenas López','Persona Física','marisol.cl@gmail.com','5522003311','Calle Higo 32, Col. Aragón, CDMX','Av. Central 900, Col. Aragón, CDMX','Activo','2022-01-12',FALSE,'2025-11-26'),
+('WSAX901102BVF','Eduardo Méndez Gallardo','Persona Moral','eduardo.mg@gmail.com','5588334422','Calle Palma 18, Col. Roma, CDMX','Av. Durango 201, Col. Roma, CDMX','Inactivo','2019-02-09',FALSE,'2025-08-11'),
+('LOKM980819ZQA','Fabiola Trujillo Rivera','Persona Física','fab.tru@gmail.com','5578012344','Calle Ciprés 22, Col. Condesa, CDMX','Av. Tamaulipas 311, Col. Condesa, CDMX','Activo','2021-04-21',TRUE,'2025-09-04'),
+('QAZM990921PLK','Gerardo Palma Suárez','Persona Moral','gerardo.ps@gmail.com','5589447733','Av. México 812, Col. Xochimilco, CDMX','Calle Ahuejote 55, Col. Xochimilco, CDMX','Activo','2023-05-18',TRUE,'2025-11-11'),
+('MNBG870513TRE','Daniela Robles Solís','Persona Física','daniela.rs@gmail.com','5523008877','Calle Flor 211, Col. Jardines, CDMX','Av. Palmeras 800, Col. Jardines, CDMX','Inactivo','2020-03-09',FALSE,'2025-10-23'),
+('YTRE780618LKM','Iván Cabrera Larios','Persona Moral','ivan.cl@gmail.com','5521900099','Calle Cerezo 99, Col. Portales, CDMX','Av. Popocatépetl 133, Col. Portales, CDMX','Activo','2018-07-16',FALSE,'2025-12-01'),
+('LKJM990105PON','Patricia Vázquez Peña','Persona Física','paty.vp@gmail.com','5577304411','Av. Acoxpa 122, Col. Coapa, CDMX','Calle Cedros 80, Col. Coapa, CDMX','Activo','2022-08-04',TRUE,'2025-11-28'),
+('HGTR820615PL9','Marisol Hernández Gómez','Persona Física','marisol.hg@gmail.com','5532981144','Calle Encino 45, CDMX','Av. Sur 18, CDMX','Activo','2022-04-11',TRUE,'2025-07-03'),
+('PLKM930211XS3','Innovaciones del Pacífico SA','Persona Moral','contacto@innovapacifico.mx','6678902234','Av. Álvaro Obregón 900, Culiacán','Blvd. Pedro Infante 1200, Culiacán','Inactivo','2018-10-22',FALSE,'2024-10-19'),
+('ASZX750928KD1','Eduardo Martínez Silva','Persona Física','edmartinez@hotmail.com','5547609981','Calle Laurel 188, Querétaro','Av. Constituyentes 602, Querétaro','Activo','2020-12-05',TRUE,'2025-01-28'),
+('QWER890315TF7','Comercial AgroMex SA','Persona Moral','ventas@agromex.com','4487203399','Av. Paseo del Lago 300, Aguascalientes','Prol. Colosio 39, Aguascalientes','Activo','2019-06-18',FALSE,'2024-08-14'),
+('LHGJ750610PL3','María Fernanda López','Persona Física','mfernanda.lopez@gmail.com','5529083344','Priv. Nogales 122, Puebla','Av. Reforma 33, Puebla','Activo','2020-11-14',TRUE,'2024-09-01'),
+('QWRT820214LK9','Corporativo Andino SA','Persona Moral','contacto@andino.com','5533209981','Calz. Taxqueña 655, CDMX','Periférico Sur 1010, CDMX','Inactivo','2019-05-22',FALSE,'2023-01-15'),
+('MKLP930918ZP7','Héctor Jiménez Torres','Persona Física','hectorjtz@hotmail.com','5587302299','Av. Juárez 12, Toluca','Calle Luna 43, Toluca','Activo','2021-04-03',TRUE,'2025-04-18'),
+('PLMN801202FH4','Textiles Rivera SA','Persona Moral','ventas@riveratex.com','5577091145','Eje 8 Sur 87, CDMX','Insurgentes 355, CDMX','Activo','2017-06-27',FALSE,'2024-07-19'),
+('BNMA850511QW2','Laura Pérez Salgado','Persona Física','lauraps@gmail.com','5542889021','Av. Hidalgo 900, Querétaro','Calle Fresno 15, Querétaro','Inactivo','2023-10-20',FALSE,'2025-01-11'),
+('RKOP901217TR8','Servicios Globales MX SA','Persona Moral','info@sglobal.mx','5599002211','Av. Tláhuac 1200, CDMX','Calle del Sol 234, CDMX','Activo','2022-02-14',TRUE,'2024-12-01'),
+('CVBN700414LP6','Luis Ángel Montes','Persona Física','luismontes@mail.com','5530187722','Blvd. Europa 14, Puebla','Blvd. Niño Poblano 101, Puebla','Activo','2018-01-01',TRUE,'2025-03-10'),
+('HJGF910705ZT1','Consultores del Bajío SA','Persona Moral','contacto@bajio.com','4492289022','Av. Independencia 500, Aguascalientes','Prol. Zaragoza 70, Aguascalientes','Inactivo','2016-08-19',FALSE,'2023-08-21'),
+('LKJP960221PT3','Sofía Ramírez Cruz','Persona Física','sofi_rc@gmail.com','5540112987','Calle Robles 778, CDMX','Calle Olmo 55, CDMX','Activo','2020-05-29',TRUE,'2025-05-22'),
+('PLWE881130DR4','Alimentos Maya SA','Persona Moral','ventas@mayafoods.mx','5592231098','Av. Yucatán 123, Mérida','Calle 60 455, Mérida','Activo','2019-12-15',FALSE,'2024-03-02'),
+('ABHF801208GH5','Carlos Andrés Luna','Persona Física','carluna@gmail.com','5519007766','Cerrada Palma 13, CDMX','Av. Reforma 990, CDMX','Inactivo','2023-04-14',FALSE,'2024-09-29'),
+('TREF920704WS9','Soluciones TI Prisma SA','Persona Moral','prisma@soluciones.mx','5588231070','Av. Patria 299, Guadalajara','Av. México 3300, Guadalajara','Activo','2018-09-10',TRUE,'2025-02-14'),
+('MNBV750202EF6','Erika Torres Blanco','Persona Física','eritorres@hotmail.com','5521097761','Calle Olivos 156, CDMX','Av. Coyoacán 222, CDMX','Activo','2021-01-17',FALSE,'2024-11-12'),
+('GHYU940311OP8','Lácteos del Norte SA','Persona Moral','contacto@lacteosnorte.mx','8112237654','Av. Universidad 911, Monterrey','Calle Norte 100, Monterrey','Activo','2020-03-27',TRUE,'2025-09-01'),
+('ASDF770520KL9','Patricia Montes Valdez','Persona Física','patymontes@gmail.com','5530209911','Av. Morelos 751, Cuernavaca','Calle Clavel 51, Cuernavaca','Inactivo','2019-11-09',FALSE,'2024-10-05'),
+('YTRE851115QP3','Energomex SA','Persona Moral','admin@energomex.com','5588012200','Calz. de Tlalpan 809, CDMX','Av. División del Norte 3900, CDMX','Activo','2017-10-22',TRUE,'2025-07-20'),
+('LKJI920421XZ2','Bruno Ortega Rivera','Persona Física','bruno.ortega@gmail.com','5545678811','Calle Ciprés 19, CDMX','Av. Politécnico 399, CDMX','Activo','2023-07-15',TRUE,'2025-06-02'),
+('QWER970903VC7','Tecnologías Sonar SA','Persona Moral','contacto@sonarti.mx','5599210023','Av. Las Torres 1500, Toluca','Prol. Morelos 80, Toluca','Inactivo','2016-12-30',FALSE,'2024-02-10'),
+('ZXCV890224BN1','Ana Belén Ruiz','Persona Física','anabelen.ruiz@mail.com','5533802217','Calle Gardenia 88, Veracruz','Blvd. Ruiz Cortines 670, Veracruz','Activo','2018-05-03',TRUE,'2025-04-08'),
+('IOPL780812SD3','Transportes Rivera SA','Persona Moral','info@trivera.mx','5552709988','Av. Chapultepec 300, CDMX','Calle Niza 17, CDMX','Activo','2021-10-11',FALSE,'2024-06-17'),
+('HGFD950515ML2','Diego Caballero','Persona Física','diegocab@mail.com','5548083342','Av. Central 22, CDMX','Calle Río Pánuco 59, CDMX','Activo','2020-02-19',TRUE,'2025-05-13'),
+('BNMC900702ZW8','Comercializadora Atlas SA','Persona Moral','ventas@atlasmex.com','5587702399','Calz. Ignacio Zaragoza 177, CDMX','Calle Poniente 41, CDMX','Inactivo','2019-03-25',FALSE,'2024-08-11'),
+('PLKM740411HV5','Cintia Navarro','Persona Física','cintianv@gmail.com','5599214456','Calle Sábila 12, Oaxaca','Calle Dalia 99, Oaxaca','Activo','2022-11-06',TRUE,'2025-09-19'),
+('DFRT830130TR0','Bioquímica Cel SA','Persona Moral','info@bioquicel.mx','5545672209','Av. Observatorio 410, CDMX','Calle Magnolia 65, CDMX','Activo','2017-07-14',TRUE,'2024-02-17'),
+('MNBG930625OL6','Fabiola Aguilar','Persona Física','fabagui@mail.com','5590998877','Calle Insurgentes 56, Morelia','Calle Camelias 8, Morelia','Inactivo','2018-04-29',FALSE,'2024-12-03'),
+('POIU980513GG3','Distribuciones Mar SA','Persona Moral','contacto@dismar.com','5565019877','Blvd. Costero 201, Tijuana','Vía Rápida Poniente 400, Tijuana','Activo','2020-06-07',TRUE,'2025-06-01'),
+('QAZX860921JK1','Óscar Delgado','Persona Física','oscar.delgado@gmail.com','5521109080','Calle Arce 303, León','Blvd. López Mateos 68, León','Activo','2021-09-20',FALSE,'2025-03-21'),
+('WSXC701102PL4','Luna Digital SA','Persona Moral','info@lunadigital.mx','5570219988','Av. Vallarta 2200, Guadalajara','Calle Hidalgo 77, Guadalajara','Inactivo','2016-03-10',FALSE,'2023-11-27'),
+('JKLM750816JH7','Rosa María Sánchez','Persona Física','rosa.sanchez@gmail.com','5533211044','Av. Patriotismo 810, CDMX','Av. Revolución 19, CDMX','Activo','2020-08-01',TRUE,'2025-05-28'),
+('AZWS910702RT5','Construcciones del Sur SA','Persona Moral','ventas@delsur.mx','5588341900','Calle 5 de Mayo 411, Mérida','Calle 21 #109, Mérida','Activo','2019-01-12',FALSE,'2024-09-30'),
+('LKJD740519PA3','Gerardo Núñez Ortiz','Persona Física','gerardo.nunoz@gmail.com','5543217809','Calle Sauce 88, CDMX','Av. Patriotismo 300, CDMX','Activo','2018-09-14',TRUE,'2025-02-11'),
+('PLWO900812RT7','Grupo Marítimo del Golfo SA','Persona Moral','contacto@gmgolfo.mx','2298874312','Blvd. Portuario 601, Veracruz','Av. Costa Verde 100, Veracruz','Inactivo','2020-03-25',FALSE,'2024-06-29'),
+('HGFD820106LK9','Daniela Correa Luna','Persona Física','danielac.luna@gmail.com','5582031199','Calle Mirlo 55, Monterrey','Av. Garza Sada 400, Monterrey','Activo','2021-05-03',TRUE,'2025-07-14'),
+('QAZX780810BN4','Tecnologías Nova SA','Persona Moral','admin@novati.com','5544109988','Eje Central 409, CDMX','Calle Mérida 199, CDMX','Activo','2017-11-09',FALSE,'2023-09-23'),
+('ASDF950629MP1','Nayeli Rivas Soto','Persona Física','nayelirs@hotmail.com','5533442219','Av. San Pedro 611, Toluca','Calle Pino 41, Toluca','Inactivo','2022-07-21',FALSE,'2024-08-07'),
+('ZXCV880501QW2','Comercial del Norte SA','Persona Moral','ventas@comernorte.mx','8122009934','Av. Lincoln 1500, Monterrey','Calle Hidalgo 88, Monterrey','Activo','2019-02-15',TRUE,'2025-05-20'),
+('BNMV760914DR6','Gabriel Téllez Carmona','Persona Física','gabrieltc@gmail.com','5579102244','Calle Robles 209, Guadalajara','Av. Vallarta 5110, Guadalajara','Activo','2023-01-11',TRUE,'2025-03-18'),
+('ERTY900421LT0','Constructora Orbital SA','Persona Moral','info@orbitalconstr.mx','5576220988','Av. Morelos 1010, CDMX','Calle Pilares 19, CDMX','Inactivo','2020-09-29',FALSE,'2024-11-01'),
+('POLK861207FH8','Ximena Flores Beltrán','Persona Física','ximenafb@gmail.com','5519028876','Calle Eucalipto 66, Puebla','Calle Cedros 92, Puebla','Activo','2021-06-17',TRUE,'2025-06-05'),
+('MNBC831220DS3','Servicios y Logística Vega SA','Persona Moral','contacto@vegalog.mx','5578302277','Blvd. Las Torres 333, Toluca','Calle Reforma 12, Toluca','Activo','2018-03-12',FALSE,'2024-02-14'),
+('TYUI910405LK1','Sergio Calderón Ruiz','Persona Física','sergiocr@hotmail.com','5545201133','Calle Ciprés 77, Querétaro','Blvd. Bernardo Quintana 1030, Querétaro','Activo','2022-10-09',TRUE,'2025-04-12'),
+('GHJK770211QW5','Metales Industriales MX SA','Persona Moral','ventas@metalesmx.com','5554991100','Av. Central 700, Ecatepec','Calle 5 de Mayo 333, Ecatepec','Inactivo','2017-12-22',FALSE,'2024-03-08'),
+('FRDE830716PT9','Jocelyn Ávila Reyes','Persona Física','jocereyes@gmail.com','5581207766','Calle Diamante 44, Morelia','Calle Topacio 9, Morelia','Activo','2020-05-30',TRUE,'2025-05-01'),
+('VBNM900908SW3','Agropecuaria Terra SA','Persona Moral','contacto@terraagro.mx','4497321988','Av. Siglo XXI 1800, Aguascalientes','Prol. Colosio 600, Aguascalientes','Activo','2019-08-14',FALSE,'2024-10-11'),
+('PLMN950124HF2','Elena Torres Baeza','Persona Física','elena_tb@gmail.com','5530119001','Av. República 55, CDMX','Calle Londres 202, CDMX','Activo','2023-02-28',TRUE,'2025-07-10'),
+('QWSD720815ZX7','Soluciones Digitales Orion SA','Persona Moral','info@oriontech.mx','5588809921','Av. Juárez 773, Monterrey','Calle Matamoros 120, Monterrey','Inactivo','2018-09-02',FALSE,'2024-07-03'),
+('ASXC860605DV4','Kevin Hernández Bravo','Persona Física','kevinhb@gmail.com','5548842210','Calle Rosales 33, CDMX','Av. Universidad 3100, CDMX','Activo','2021-01-19',TRUE,'2025-01-30'),
+('YUJK810924KL8','Transportes Solar SA','Persona Moral','contacto@transsolar.mx','5590401088','Av. Revolución 1502, CDMX','Blvd. San Ángel 77, CDMX','Activo','2020-06-11',TRUE,'2025-06-14'),
+('HGTR780319RE1','Rocío Morales Patiño','Persona Física','rociomp@hotmail.com','5532910044','Calle Palma 511, Oaxaca','Calle Orquídeas 20, Oaxaca','Inactivo','2022-03-08',FALSE,'2024-09-22'),
+('EDCV930701WO9','Comercial Delta SA','Persona Moral','ventas@delta.com.mx','5588772201','Av. 5 de Febrero 2011, Querétaro','Calle Gladiolas 108, Querétaro','Activo','2019-10-03',FALSE,'2024-12-12'),
+('BNHG910516JU3','Miguel Ángel Trejo','Persona Física','miguel.trejo@mail.com','5538762219','Calle Cedro 90, León','Blvd. Aeropuerto 121, León','Activo','2020-04-27',TRUE,'2025-03-02'),
+('TRFG880912LP5','Innova SolarTech SA','Persona Moral','info@solartek.mx','5588209940','Av. Sonora 180, Hermosillo','Blvd. Kino 900, Hermosillo','Inactivo','2018-06-03',FALSE,'2024-02-18'),
+('CVBN760728GF2','Claudia Gutiérrez Vera','Persona Física','claudiagv@gmail.com','5549001177','Calle Magnolia 701, Mérida','Calle 50 122, Mérida','Activo','2021-11-15',TRUE,'2025-06-29'),
+('TYGH950322PA8','Telecomunicaciones Altavista SA','Persona Moral','contacto@altavistatlc.mx','5572990011','Av. Palmas 400, CDMX','Calle Lerma 55, CDMX','Activo','2019-07-08',FALSE,'2024-08-02'),
+('PLKO820419DF6','Lucía Peña Cornejo','Persona Física','luciapc@hotmail.com','5520118890','Calle Cedros 881, Pachuca','Av. Universidad 399, Pachuca','Activo','2023-03-28',TRUE,'2025-07-01'),
+('ASWE780602ML9','Maquinaria Industrial Torres SA','Persona Moral','ventas@mitorres.mx','5542208811','Calle Industriales 1222, CDMX','Blvd. Zaragoza 211, CDMX','Inactivo','2017-02-04',FALSE,'2024-06-17'),
+('LKJI900128TR0','Jonathan Salinas Cruz','Persona Física','jonasal@gmail.com','5576302219','Av. México 612, Guadalajara','Calle Américas 150, Guadalajara','Activo','2022-09-09',TRUE,'2025-02-27'),
+('QWER810906BN1','Café y Cacao del Sur SA','Persona Moral','contacto@cafecacao.mx','9612210044','Calle Central 199, Tuxtla','Av. 5a Norte 700, Tuxtla','Activo','2018-04-25',FALSE,'2023-12-15'),
+('MNBV770711FD4','Iván Roldán Medina','Persona Física','ivanrm@gmail.com','5532109984','Calle Peral 24, CDMX','Av. Coyoacán 199, CDMX','Inactivo','2020-02-11',FALSE,'2024-11-09'),
+('ZXCV930905QP7','CyberTech MX SA','Persona Moral','admin@cybertech.mx','5588992200','Insurgentes Sur 740, CDMX','Av. Roma 122, CDMX','Activo','2021-04-13',TRUE,'2025-05-09');
+ 
+select * from administradores;
 -- ============================================
 -- TABLA: categorias
 -- ============================================
@@ -34,21 +157,557 @@ CREATE TABLE categorias (
     descripcion TEXT,
     activo BOOLEAN DEFAULT TRUE
 );
+-- Insertar categorías iniciales
+INSERT INTO categorias (nombre, descripcion) VALUES
+('Cartón', 'Productos de cartón y embalaje'),
+('Plástico', 'Productos plásticos y burbujas'),
+('Vehículos', 'Vehículos de transporte');
+
 
 -- ============================================
 -- TABLA: productos
 -- ============================================
+DROP TABLE productos;
 CREATE TABLE productos (
     id_producto SERIAL PRIMARY KEY,
     nombre VARCHAR(200) NOT NULL,
     descripcion TEXT,
-    precio DECIMAL(10, 2) NOT NULL CHECK (precio >= 0),
+    precio DECIMAL (1000, 2) NOT NULL CHECK (precio >= 0),
     id_categoria INTEGER REFERENCES categorias(id_categoria),
-    imagen_url VARCHAR(500),
-    activo BOOLEAN DEFAULT TRUE,
+    estado VARCHAR(10) NOT NULL CHECK (estado IN ('Activo', 'Inactivo')),
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_modificacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+select * from productos;
+-- Insertar productos de ejemplo
+INSERT INTO productos (nombre, descripcion, precio, id_categoria, estado)
+VALUES
+('Botella Plástica 250ml', 'Botella plástica pequeña para jugos', 6.00, 2, 'Activo'),
+('Botella Plástica 750ml', 'Botella plástica mediana para agua', 9.00, 2, 'Activo'),
+('Botella Plástica 3L', 'Botella plástica grande para refrescos', 18.00, 2, 'Activo'),
+('Envase Plástico Sopas', 'Envase plástico resistente para sopas calientes', 12.00, 2, 'Activo'),
+('Envase Plástico Postres', 'Envase plástico para postres fríos', 8.00, 2, 'Activo'),
+('Envase Plástico Ensaladas', 'Envase plástico para ensaladas frescas', 10.00, 2, 'Activo'),
+('Bolsa Plástica Mercado', 'Bolsa plástica estándar para mercado', 3.00, 2, 'Activo'),
+('Bolsa Plástica Supermercado', 'Bolsa plástica reforzada para supermercado', 4.00, 2, 'Activo'),
+('Bolsa Plástica Boutique', 'Bolsa plástica decorada para boutique', 7.00, 2, 'Activo'),
+('Bolsa Plástica Farmacia', 'Bolsa plástica pequeña para medicamentos', 2.50, 2, 'Activo'),
+('Cubiertos Plásticos Básicos', 'Cubiertos plásticos desechables básicos', 2.00, 2, 'Activo'),
+('Cubiertos Plásticos Coloridos', 'Cubiertos plásticos de colores para fiestas', 3.50, 2, 'Activo'),
+('Cubiertos Plásticos Resistentes', 'Cubiertos plásticos reforzados', 5.00, 2, 'Activo'),
+('Plato Plástico Fiesta', 'Plato plástico decorado para fiestas', 4.00, 2, 'Activo'),
+('Plato Plástico Catering', 'Plato plástico premium para catering', 6.00, 2, 'Activo'),
+('Plato Plástico Infantil', 'Plato plástico con dibujos infantiles', 5.00, 2, 'Activo'),
+('Vaso Plástico Fiesta', 'Vaso plástico decorado para fiestas', 3.00, 2, 'Activo'),
+('Vaso Plástico Catering', 'Vaso plástico premium para catering', 4.50, 2, 'Activo'),
+('Vaso Plástico Infantil', 'Vaso plástico con dibujos infantiles', 3.50, 2, 'Activo'),
+('Recipiente Plástico Snacks', 'Recipiente plástico para snacks', 7.00, 2, 'Activo'),
+('Recipiente Plástico Cereales', 'Recipiente plástico para cereales', 9.00, 2, 'Activo'),
+('Recipiente Plástico Frutas', 'Recipiente plástico para frutas frescas', 11.00, 2, 'Activo'),
+('Caja Plástica Juguetes', 'Caja plástica para almacenamiento de juguetes', 20.00, 2, 'Activo'),
+('Caja Plástica Herramientas', 'Caja plástica reforzada para herramientas', 25.00, 2, 'Activo'),
+('Caja Plástica Oficina', 'Caja plástica para suministros de oficina', 18.00, 2, 'Activo'),
+('Caja Plástica Escolar', 'Caja plástica para útiles escolares', 16.00, 2, 'Activo'),
+('Caja Plástica Decorada', 'Caja plástica decorada para regalos', 22.00, 2, 'Activo'),
+('Caja Plástica Transparente', 'Caja plástica transparente para almacenaje', 24.00, 2, 'Activo'),
+('Contenedor Plástico Alimentos', 'Contenedor plástico para alimentos secos', 28.00, 2, 'Activo'),
+('Contenedor Plástico Bebidas', 'Contenedor plástico para botellas', 32.00, 2, 'Activo'),
+('Contenedor Plástico Químicos', 'Contenedor plástico resistente para químicos', 40.00, 2, 'Activo'),
+('Contenedor Plástico Industrial', 'Contenedor plástico de gran capacidad', 55.00, 2, 'Activo'),
+('Tupper Plástico Pequeño', 'Tupper plástico para porciones pequeñas', 6.00, 2, 'Activo'),
+('Tupper Plástico Mediano', 'Tupper plástico para porciones medianas', 8.00, 2, 'Activo'),
+('Tupper Plástico Grande', 'Tupper plástico para porciones grandes', 10.00, 2, 'Activo'),
+('Tupper Plástico Hermético', 'Tupper plástico hermético para líquidos', 12.00, 2, 'Activo'),
+('Cubo Plástico Agua', 'Cubo plástico para agua', 15.00, 2, 'Activo'),
+('Cubo Plástico Pintura', 'Cubo plástico para pintura', 18.00, 2, 'Activo'),
+('Cubo Plástico Limpieza', 'Cubo plástico para limpieza doméstica', 20.00, 2, 'Activo'),
+('Bidón Plástico 5L', 'Bidón plástico pequeño para líquidos', 22.00, 2, 'Activo'),
+('Bidón Plástico 10L', 'Bidón plástico mediano para líquidos', 28.00, 2, 'Activo'),
+('Bidón Plástico 20L', 'Bidón plástico grande para líquidos', 35.00, 2, 'Activo'),
+('Canasta Plástica Frutas', 'Canasta plástica para frutas', 12.00, 2, 'Activo'),
+('Canasta Plástica Verduras', 'Canasta plástica para verduras', 14.00, 2, 'Activo'),
+('Canasta Plástica Ropa', 'Canasta plástica para ropa sucia', 18.00, 2, 'Activo'),
+('Cajón Plástico Pequeño', 'Cajón plástico para objetos pequeños', 16.00, 2, 'Activo'),
+('Cajón Plástico Mediano', 'Cajón plástico para objetos medianos', 20.00, 2, 'Activo'),
+('Cajón Plástico Grande', 'Cajón plástico para objetos grandes', 25.00, 2, 'Activo'),
+('Bandeja Plástica Comida', 'Bandeja plástica para comida rápida', 5.00, 2, 'Activo'),
+('Bandeja Plástica Repostería', 'Bandeja plástica para repostería', 7.00, 2, 'Activo'),
+('Bandeja Plástica Decorada', 'Bandeja plástica decorada para fiestas', 9.00, 2, 'Activo');
+INSERT INTO productos (nombre, descripcion, precio, id_categoria, estado)
+VALUES
+('Ambulancia Mediana', 'Ambulancia mediana equipada con camilla y oxígeno', 1200000.00, 3, 'Activo'),
+('Ambulancia Grande', 'Ambulancia grande para traslados largos', 1500000.00, 3, 'Activo'),
+('Ambulancia Blindada', 'Ambulancia blindada para zonas de riesgo', 2000000.00, 3, 'Activo'),
+('Ambulancia Aérea', 'Helicóptero ambulancia para emergencias', 5000000.00, 3, 'Activo'),
+('Ambulancia Marítima', 'Lancha ambulancia para zonas costeras', 3000000.00, 3, 'Activo'),
+('Patrulla Urbana', 'Automóvil patrulla para vigilancia urbana', 480000.00, 3, 'Activo'),
+('Patrulla Rural', 'Camioneta patrulla para zonas rurales', 520000.00, 3, 'Activo'),
+('Patrulla Blindada', 'Vehículo blindado para operaciones especiales', 1200000.00, 3, 'Activo'),
+('Motocicleta Policial', 'Motocicleta para patrullaje rápido', 160000.00, 3, 'Activo'),
+('Helicóptero Policial', 'Helicóptero para vigilancia aérea', 8000000.00, 3, 'Activo'),
+('Helicóptero Militar', 'Helicóptero militar de transporte', 12000000.00, 3, 'Activo'),
+('Helicóptero Civil', 'Helicóptero civil para transporte ejecutivo', 9500000.00, 3, 'Activo'),
+('Helicóptero Rescate', 'Helicóptero para operaciones de rescate', 10000000.00, 3, 'Activo'),
+('Avión Comercial Pequeño', 'Avión comercial de 50 pasajeros', 25000000.00, 3, 'Activo'),
+('Avión Comercial Mediano', 'Avión comercial de 150 pasajeros', 60000000.00, 3, 'Activo'),
+('Avión Comercial Grande', 'Avión comercial de 300 pasajeros', 120000000.00, 3, 'Activo'),
+('Avión Ejecutivo', 'Avión ejecutivo privado', 35000000.00, 3, 'Activo'),
+('Avión Carga', 'Avión de carga internacional', 80000000.00, 3, 'Activo'),
+('Avión Militar', 'Avión militar de combate', 150000000.00, 3, 'Activo'),
+('Avión Entrenamiento', 'Avión militar de entrenamiento', 20000000.00, 3, 'Activo'),
+('Barco Pesquero', 'Barco pesquero mediano', 5000000.00, 3, 'Activo'),
+('Barco Carga', 'Barco de carga internacional', 25000000.00, 3, 'Activo'),
+('Barco Pasajeros', 'Barco de pasajeros turístico', 30000000.00, 3, 'Activo'),
+('Barco Militar', 'Barco militar de patrulla', 40000000.00, 3, 'Activo'),
+('Lancha Rápida', 'Lancha rápida recreativa', 1200000.00, 3, 'Activo'),
+('Lancha Patrulla', 'Lancha patrulla costera', 2200000.00, 3, 'Activo'),
+('Lancha Rescate', 'Lancha para operaciones de rescate', 2500000.00, 3, 'Activo'),
+('Submarino Pequeño', 'Submarino de investigación', 50000000.00, 3, 'Activo'),
+('Submarino Militar', 'Submarino militar de ataque', 200000000.00, 3, 'Activo'),
+('Vehículo Todoterreno Compacto', 'Vehículo todoterreno de 2 puertas', 350000.00, 3, 'Activo'),
+('Vehículo Todoterreno Mediano', 'Vehículo todoterreno de 4 puertas', 420000.00, 3, 'Activo'),
+('Vehículo Todoterreno Premium', 'SUV todoterreno premium', 600000.00, 3, 'Activo'),
+('Vehículo Deportivo Compacto', 'Automóvil deportivo compacto', 550000.00, 3, 'Activo'),
+('Vehículo Deportivo Mediano', 'Automóvil deportivo mediano', 750000.00, 3, 'Activo'),
+('Vehículo Deportivo Premium', 'Automóvil deportivo premium', 1200000.00, 3, 'Activo'),
+('Vehículo Clásico Compacto', 'Automóvil clásico restaurado', 300000.00, 3, 'Activo'),
+('Vehículo Clásico Mediano', 'Automóvil clásico de colección', 500000.00, 3, 'Activo'),
+('Vehículo Clásico Premium', 'Automóvil clásico premium', 1000000.00, 3, 'Activo'),
+('Vehículo de Carreras Compacto', 'Automóvil de carreras compacto', 800000.00, 3, 'Activo'),
+('Vehículo de Carreras Mediano', 'Automóvil de carreras mediano', 1200000.00, 3, 'Activo'),
+('Vehículo de Carreras Premium', 'Automóvil de carreras premium', 2000000.00, 3, 'Activo'),
+('Vehículo de Rally Compacto', 'Automóvil de rally compacto', 700000.00, 3, 'Activo'),
+('Vehículo de Rally Mediano', 'Automóvil de rally mediano', 950000.00, 3, 'Activo'),
+('Vehículo de Rally Premium', 'Automóvil de rally premium', 1500000.00, 3, 'Activo'),
+('Vehículo de Fórmula Compacto', 'Automóvil de fórmula junior', 1200000.00, 3, 'Activo'),
+('Vehículo de Fórmula Mediano', 'Automóvil de fórmula intermedio', 2500000.00, 3, 'Activo'),
+('Vehículo de Fórmula Premium', 'Automóvil de fórmula profesional', 5000000.00, 3, 'Activo'),
+('Vehículo Blindado Compacto', 'Automóvil blindado compacto', 800000.00, 3, 'Activo'),
+('Vehículo Blindado Mediano', 'Automóvil blindado mediano', 1200000.00, 3, 'Activo'),
+('Vehículo Blindado Premium', 'Automóvil blindado premium', 2000000.00, 3, 'Activo'),
+('Vehículo de Transporte Escolar', 'Camión escolar para transporte de niños', 950000.00, 3, 'Activo'),
+('Vehículo de Transporte Ejecutivo', 'Camión ejecutivo para transporte corporativo', 1800000.00, 3, 'Activo'),
+('Vehículo de Transporte Turístico', 'Camión turístico panorámico', 2200000.00, 3, 'Activo'),
+('Vehículo de Transporte Urbano', 'Camión urbano de pasajeros', 1500000.00, 3, 'Activo'),
+('Vehículo de Transporte Rural', 'Camión rural de pasajeros', 1200000.00, 3, 'Activo'),
+('Vehículo de Transporte Premium', 'Camión premium de pasajeros', 2500000.00, 3, 'Activo');
+
+INSERT INTO productos (nombre, descripcion, precio, id_categoria, estado)
+VALUES
+('Automóvil Sedán Compacto', 'Vehículo sedán compacto de 4 puertas', 250000.00, 3, 'Activo'),
+('Automóvil Sedán Mediano', 'Vehículo sedán mediano con aire acondicionado', 320000.00, 3, 'Activo'),
+('Automóvil Sedán Premium', 'Sedán premium con acabados de lujo', 450000.00, 3, 'Activo'),
+('Automóvil Hatchback', 'Vehículo hatchback económico', 220000.00, 3, 'Activo'),
+('Automóvil Coupé', 'Vehículo coupé deportivo', 380000.00, 3, 'Activo'),
+('Automóvil Convertible', 'Vehículo convertible con techo retráctil', 520000.00, 3, 'Activo'),
+('Automóvil SUV Compacta', 'SUV compacta de 5 pasajeros', 400000.00, 3, 'Activo'),
+('Automóvil SUV Mediana', 'SUV mediana con tracción 4x4', 480000.00, 3, 'Activo'),
+('Automóvil SUV Premium', 'SUV premium con acabados de lujo', 650000.00, 3, 'Activo'),
+('Automóvil Pickup Compacta', 'Pickup compacta de carga ligera', 350000.00, 3, 'Activo'),
+('Automóvil Pickup Mediana', 'Pickup mediana de doble cabina', 420000.00, 3, 'Activo'),
+('Automóvil Pickup Grande', 'Pickup grande para carga pesada', 550000.00, 3, 'Activo'),
+('Motocicleta Urbana', 'Motocicleta ligera para ciudad', 75000.00, 3, 'Activo'),
+('Motocicleta Deportiva', 'Motocicleta deportiva de alta velocidad', 180000.00, 3, 'Activo'),
+('Motocicleta Touring', 'Motocicleta touring para viajes largos', 220000.00, 3, 'Activo'),
+('Motocicleta Enduro', 'Motocicleta enduro para caminos difíciles', 150000.00, 3, 'Activo'),
+('Motocicleta Scooter', 'Scooter económico para ciudad', 60000.00, 3, 'Activo'),
+('Motocicleta Eléctrica', 'Motocicleta eléctrica ecológica', 120000.00, 3, 'Activo'),
+('Camión Ligero', 'Camión ligero para reparto urbano', 480000.00, 3, 'Activo'),
+('Camión Mediano', 'Camión mediano para transporte regional', 650000.00, 3, 'Activo'),
+('Camión Pesado', 'Camión pesado para carga industrial', 950000.00, 3, 'Activo'),
+('Camión Trailer', 'Camión trailer de larga distancia', 1200000.00, 3, 'Activo'),
+('Camión Cisterna', 'Camión cisterna para líquidos', 1100000.00, 3, 'Activo'),
+('Camión Volteo', 'Camión volteo para construcción', 980000.00, 3, 'Activo'),
+('Camión Refrigerado', 'Camión con caja refrigerada', 1050000.00, 3, 'Activo'),
+('Camión Plataforma', 'Camión plataforma para maquinaria', 1150000.00, 3, 'Activo'),
+('Camión Caja Seca', 'Camión caja seca estándar', 900000.00, 3, 'Activo'),
+('Camión Grúa', 'Camión grúa para remolque', 1250000.00, 3, 'Activo'),
+('Camión Blindado', 'Camión blindado para transporte de valores', 1500000.00, 3, 'Activo'),
+('Autobús Urbano', 'Autobús urbano de 40 pasajeros', 1800000.00, 3, 'Activo'),
+('Autobús Escolar', 'Autobús escolar de 30 pasajeros', 950000.00, 3, 'Activo'),
+('Autobús Turístico', 'Autobús turístico panorámico', 2200000.00, 3, 'Activo'),
+('Autobús Ejecutivo', 'Autobús ejecutivo con asientos reclinables', 2500000.00, 3, 'Activo'),
+('Autobús Articulado', 'Autobús articulado de gran capacidad', 3000000.00, 3, 'Activo'),
+('Tractor Agrícola Compacto', 'Tractor agrícola para pequeñas parcelas', 400000.00, 3, 'Activo'),
+('Tractor Agrícola Mediano', 'Tractor agrícola mediano multifuncional', 550000.00, 3, 'Activo'),
+('Tractor Agrícola Grande', 'Tractor agrícola de gran potencia', 750000.00, 3, 'Activo'),
+('Tractor Industrial', 'Tractor industrial para construcción', 850000.00, 3, 'Activo'),
+('Remolque Pequeño', 'Remolque pequeño para autos', 60000.00, 3, 'Activo'),
+('Remolque Mediano', 'Remolque mediano para camionetas', 95000.00, 3, 'Activo'),
+('Remolque Grande', 'Remolque grande para camiones', 150000.00, 3, 'Activo'),
+('Remolque Plataforma', 'Remolque plataforma para maquinaria', 200000.00, 3, 'Activo'),
+('Remolque Refrigerado', 'Remolque refrigerado para alimentos', 250000.00, 3, 'Activo'),
+('Remolque Cisterna', 'Remolque cisterna para líquidos', 300000.00, 3, 'Activo'),
+('Remolque Caja Seca', 'Remolque caja seca estándar', 180000.00, 3, 'Activo'),
+('Remolque Volteo', 'Remolque volteo para construcción', 220000.00, 3, 'Activo'),
+('Remolque Ganadero', 'Remolque para transporte de ganado', 280000.00, 3, 'Activo'),
+('Remolque Blindado', 'Remolque blindado para valores', 350000.00, 3, 'Activo'),
+('Vehículo Eléctrico Compacto', 'Automóvil eléctrico compacto', 380000.00, 3, 'Activo'),
+('Vehículo Eléctrico SUV', 'SUV eléctrica de 5 pasajeros', 520000.00, 3, 'Activo'),
+('Vehículo Eléctrico Premium', 'Sedán eléctrico premium', 680000.00, 3, 'Activo'),
+('Vehículo Híbrido Compacto', 'Automóvil híbrido compacto', 420000.00, 3, 'Activo'),
+('Vehículo Híbrido SUV', 'SUV híbrida mediana', 580000.00, 3, 'Activo'),
+('Vehículo Híbrido Premium', 'Sedán híbrido premium', 720000.00, 3, 'Activo'),
+('Cuatrimoto', 'Vehículo recreativo de cuatro ruedas', 150000.00, 3, 'Activo'),
+('Side by Side', 'Vehículo recreativo todoterreno', 220000.00, 3, 'Activo'),
+('Go-Kart', 'Vehículo recreativo pequeño', 80000.00, 3, 'Activo');
+
+
+INSERT INTO productos (nombre, descripcion, precio, id_categoria, estado)
+VALUES
+('Botella Plástica 500ml', 'Botella transparente de plástico PET', 8.50, 2, 'Activo'),
+('Botella Plástica 1L', 'Botella plástica para bebidas', 12.00, 2, 'Activo'),
+('Botella Plástica 2L', 'Botella plástica grande para refrescos', 15.00, 2, 'Activo'),
+('Envase Plástico Redondo', 'Envase plástico para alimentos', 10.00, 2, 'Activo'),
+('Envase Plástico Rectangular', 'Envase plástico para comida preparada', 12.50, 2, 'Activo'),
+('Envase Plástico con Tapa', 'Envase plástico hermético', 14.00, 2, 'Activo'),
+('Bolsa Plástica Transparente', 'Bolsa plástica para empaque', 5.00, 2, 'Activo'),
+('Bolsa Plástica Negra', 'Bolsa plástica resistente para basura', 6.50, 2, 'Activo'),
+('Bolsa Plástica Reutilizable', 'Bolsa plástica ecológica', 7.00, 2, 'Activo'),
+('Cubiertos Plásticos', 'Juego de tenedor, cuchillo y cuchara plásticos', 4.50, 2, 'Activo'),
+('Plato Plástico Redondo', 'Plato plástico desechable', 3.00, 2, 'Activo'),
+('Plato Plástico Cuadrado', 'Plato plástico para catering', 3.50, 2, 'Activo'),
+('Vaso Plástico 250ml', 'Vaso plástico transparente', 2.00, 2, 'Activo'),
+('Vaso Plástico 500ml', 'Vaso plástico grande', 2.50, 2, 'Activo'),
+('Recipiente Plástico Hermético', 'Recipiente plástico con tapa hermética', 9.00, 2, 'Activo'),
+('Recipiente Plástico Apilable', 'Recipiente plástico para almacenamiento', 11.00, 2, 'Activo'),
+('Caja Plástica Organizadora', 'Caja plástica para organización de objetos', 20.00, 2, 'Activo'),
+('Caja Plástica Transparente', 'Caja plástica transparente para almacenaje', 22.00, 2, 'Activo'),
+('Caja Plástica con Divisiones', 'Caja plástica con compartimentos', 25.00, 2, 'Activo'),
+('Contenedor Plástico Industrial', 'Contenedor plástico de gran capacidad', 50.00, 2, 'Activo'),
+('Contenedor Plástico Apilable', 'Contenedor plástico apilable para logística', 55.00, 2, 'Activo'),
+('Contenedor Plástico Hermético', 'Contenedor plástico hermético para químicos', 60.00, 2, 'Activo'),
+('Tupper Plástico Pequeño', 'Tupper plástico para alimentos pequeños', 8.00, 2, 'Activo'),
+('Tupper Plástico Mediano', 'Tupper plástico para alimentos medianos', 10.00, 2, 'Activo'),
+('Tupper Plástico Grande', 'Tupper plástico para alimentos grandes', 12.00, 2, 'Activo'),
+('Cubo Plástico 10L', 'Cubo plástico para agua', 18.00, 2, 'Activo'),
+('Cubo Plástico 20L', 'Cubo plástico grande para líquidos', 25.00, 2, 'Activo'),
+('Cubo Plástico con Tapa', 'Cubo plástico con tapa hermética', 28.00, 2, 'Activo'),
+('Bidón Plástico 5L', 'Bidón plástico para líquidos', 15.00, 2, 'Activo'),
+('Bidón Plástico 10L', 'Bidón plástico mediano', 20.00, 2, 'Activo'),
+('Bidón Plástico 20L', 'Bidón plástico grande', 30.00, 2, 'Activo'),
+('Bidón Plástico 50L', 'Bidón plástico industrial', 60.00, 2, 'Activo'),
+('Canasta Plástica Pequeña', 'Canasta plástica para frutas', 12.00, 2, 'Activo'),
+('Canasta Plástica Grande', 'Canasta plástica para verduras', 18.00, 2, 'Activo'),
+('Canasta Plástica Reforzada', 'Canasta plástica resistente', 22.00, 2, 'Activo'),
+('Cajón Plástico', 'Cajón plástico para almacenaje', 25.00, 2, 'Activo'),
+('Cajón Plástico con Ruedas', 'Cajón plástico móvil', 30.00, 2, 'Activo'),
+('Cajón Plástico Transparente', 'Cajón plástico transparente', 28.00, 2, 'Activo'),
+('Bandeja Plástica', 'Bandeja plástica para alimentos', 6.00, 2, 'Activo'),
+('Bandeja Plástica Reutilizable', 'Bandeja plástica ecológica', 8.00, 2, 'Activo'),
+('Bandeja Plástica Decorada', 'Bandeja plástica con diseño', 10.00, 2, 'Activo'),
+('Cucharas Plásticas', 'Paquete de cucharas plásticas', 3.00, 2, 'Activo'),
+('Tenedores Plásticos', 'Paquete de tenedores plásticos', 3.00, 2, 'Activo'),
+('Cuchillos Plásticos', 'Paquete de cuchillos plásticos', 3.00, 2, 'Activo'),
+('Cubiertos Plásticos Premium', 'Cubiertos plásticos reforzados', 5.00, 2, 'Activo'),
+('Platos Plásticos Premium', 'Platos plásticos reforzados', 6.00, 2, 'Activo'),
+('Vasos Plásticos Premium', 'Vasos plásticos reforzados', 4.00, 2, 'Activo'),
+('Botellas Plásticas Premium', 'Botellas plásticas reforzadas', 12.00, 2, 'Activo'),
+('Envases Plásticos Premium', 'Envases plásticos reforzados', 15.00, 2, 'Activo'),
+('Recipientes Plásticos Premium', 'Recipientes plásticos reforzados', 18.00, 2, 'Activo'),
+('Contenedores Plásticos Premium', 'Contenedores plásticos reforzados', 40.00, 2, 'Activo'),
+('Caja Plástica Decorativa', 'Caja plástica con acabados decorativos', 26.00, 2, 'Activo'),
+('Caja Plástica Transparente Grande', 'Caja plástica transparente de gran tamaño', 30.00, 2, 'Activo'),
+('Caja Plástica con Ruedas', 'Caja plástica móvil con ruedas', 32.00, 2, 'Activo'),
+('Caja Plástica Apilable', 'Caja plástica apilable para almacenaje', 28.00, 2, 'Activo'),
+('Caja Plástica Hermética', 'Caja plástica hermética para alimentos', 27.00, 2, 'Activo'),
+('Caja Plástica Escolar', 'Caja plástica para útiles escolares', 22.00, 2, 'Activo'),
+('Caja Plástica Oficina', 'Caja plástica para suministros de oficina', 23.00, 2, 'Activo'),
+('Caja Plástica Industrial', 'Caja plástica reforzada para industria', 40.00, 2, 'Activo'),
+('Caja Plástica Hospitalaria', 'Caja plástica para uso hospitalario', 42.00, 2, 'Activo'),
+('Caja Plástica Laboratorio', 'Caja plástica para muestras de laboratorio', 38.00, 2, 'Activo'),
+('Caja Plástica Farmacéutica', 'Caja plástica para medicamentos', 36.00, 2, 'Activo'),
+('Caja Plástica Cosmética', 'Caja plástica para cosméticos', 34.00, 2, 'Activo'),
+('Caja Plástica Alimentaria', 'Caja plástica para alimentos', 30.00, 2, 'Activo'),
+('Caja Plástica Bebidas', 'Caja plástica para botellas y bebidas', 32.00, 2, 'Activo'),
+('Caja Plástica Exportación', 'Caja plástica certificada para exportación', 45.00, 2, 'Activo'),
+('Caja Plástica Importación', 'Caja plástica certificada para importación', 45.00, 2, 'Activo'),
+('Caja Plástica Mudanza', 'Caja plástica reforzada para mudanza', 50.00, 2, 'Activo'),
+('Caja Plástica Almacenaje', 'Caja plástica estándar para almacenaje', 28.00, 2, 'Activo'),
+('Caja Plástica Organización', 'Caja plástica para organización doméstica', 26.00, 2, 'Activo'),
+('Caja Plástica Multiuso Grande', 'Caja plástica multiuso de gran tamaño', 29.00, 2, 'Activo'),
+('Caja Plástica Exhibición', 'Caja plástica para exhibición de productos', 35.00, 2, 'Activo'),
+('Caja Plástica Publicitaria', 'Caja plástica impresa para publicidad', 33.00, 2, 'Activo'),
+('Caja Plástica Señalización', 'Caja plástica para señalización temporal', 31.00, 2, 'Activo'),
+('Caja Plástica Displays', 'Caja plástica reforzada para displays', 37.00, 2, 'Activo'),
+('Caja Plástica Packaging', 'Caja plástica premium para packaging', 39.00, 2, 'Activo'),
+('Caja Plástica Envases', 'Caja plástica moldeada para envases', 34.00, 2, 'Activo'),
+('Caja Plástica Bandejas', 'Caja plástica para bandejas de alimentos', 27.00, 2, 'Activo'),
+('Caja Plástica Charolas', 'Caja plástica para charolas de repostería', 28.00, 2, 'Activo'),
+('Caja Plástica Organizadora Grande', 'Caja plástica organizadora de gran capacidad', 36.00, 2, 'Activo'),
+('Caja Plástica Organizadora Pequeña', 'Caja plástica organizadora pequeña', 22.00, 2, 'Activo'),
+('Caja Plástica Organizadora Mediana', 'Caja plástica organizadora mediana', 28.00, 2, 'Activo'),
+('Caja Plástica Decorada Premium', 'Caja plástica decorada premium', 40.00, 2, 'Activo'),
+('Caja Plástica Transparente Premium', 'Caja plástica transparente premium', 42.00, 2, 'Activo'),
+('Caja Plástica Hermética Premium', 'Caja plástica hermética premium', 38.00, 2, 'Activo'),
+('Caja Plástica Escolar Premium', 'Caja plástica escolar premium', 30.00, 2, 'Activo'),
+('Caja Plástica Oficina Premium', 'Caja plástica oficina premium', 32.00, 2, 'Activo'),
+('Caja Plástica Industrial Premium', 'Caja plástica industrial premium', 50.00, 2, 'Activo'),
+('Caja Plástica Hospitalaria Premium', 'Caja plástica hospitalaria premium', 52.00, 2, 'Activo'),
+('Caja Plástica Laboratorio Premium', 'Caja plástica laboratorio premium', 48.00, 2, 'Activo'),
+('Caja Plástica Farmacéutica Premium', 'Caja plástica farmacéutica premium', 46.00, 2, 'Activo'),
+('Caja Plástica Cosmética Premium', 'Caja plástica cosmética premium', 44.00, 2, 'Activo'),
+('Caja Plástica Alimentaria Premium', 'Caja plástica alimentaria premium', 40.00, 2, 'Activo'),
+('Caja Plástica Bebidas Premium', 'Caja plástica bebidas premium', 42.00, 2, 'Activo'),
+('Caja Plástica Exportación Premium', 'Caja plástica exportación premium', 55.00, 2, 'Activo'),
+('Caja Plástica Importación Premium', 'Caja plástica importación premium', 55.00, 2, 'Activo'),
+('Caja Plástica Mudanza Premium', 'Caja plástica mudanza premium', 60.00, 2, 'Activo'),
+('Caja Plástica Almacenaje Premium', 'Caja plástica almacenaje premium', 38.00, 2, 'Activo'),
+('Caja Plástica Organización Premium', 'Caja plástica organización premium', 36.00, 2, 'Activo');
+
+INSERT INTO productos (nombre, descripcion, precio, id_categoria, estado)
+VALUES
+('Botella Plástica Deportiva', 'Botella plástica con tapa deportiva', 18.00, 2, 'Activo'),
+('Botella Plástica Infantil', 'Botella plástica con diseños infantiles', 15.00, 2, 'Activo'),
+('Botella Plástica Escolar', 'Botella plástica para uso escolar', 12.00, 2, 'Activo'),
+('Botella Plástica Reutilizable', 'Botella plástica ecológica reutilizable', 20.00, 2, 'Activo'),
+('Botella Plástica Premium', 'Botella plástica de alta calidad', 25.00, 2, 'Activo'),
+('Envase Plástico Pequeño', 'Envase plástico para muestras pequeñas', 8.00, 2, 'Activo'),
+('Envase Plástico Mediano', 'Envase plástico para alimentos medianos', 12.00, 2, 'Activo'),
+('Envase Plástico Grande', 'Envase plástico para alimentos grandes', 16.00, 2, 'Activo'),
+('Envase Plástico Industrial', 'Envase plástico para uso industrial', 30.00, 2, 'Activo'),
+('Envase Plástico Premium', 'Envase plástico reforzado premium', 35.00, 2, 'Activo'),
+('Bolsa Plástica Pequeña', 'Bolsa plástica para objetos pequeños', 4.00, 2, 'Activo'),
+('Bolsa Plástica Mediana', 'Bolsa plástica para objetos medianos', 6.00, 2, 'Activo'),
+('Bolsa Plástica Grande', 'Bolsa plástica para objetos grandes', 8.00, 2, 'Activo'),
+('Bolsa Plástica Industrial', 'Bolsa plástica reforzada para industria', 12.00, 2, 'Activo'),
+('Bolsa Plástica Premium', 'Bolsa plástica ecológica premium', 15.00, 2, 'Activo'),
+('Cubiertos Plásticos Infantiles', 'Cubiertos plásticos con diseños infantiles', 5.00, 2, 'Activo'),
+('Cubiertos Plásticos Reforzados', 'Cubiertos plásticos resistentes', 6.00, 2, 'Activo'),
+('Cubiertos Plásticos Premium', 'Cubiertos plásticos de alta calidad', 8.00, 2, 'Activo'),
+('Plato Plástico Infantil', 'Plato plástico con diseños infantiles', 4.00, 2, 'Activo'),
+('Plato Plástico Reforzado', 'Plato plástico resistente', 5.00, 2, 'Activo'),
+('Plato Plástico Premium', 'Plato plástico de alta calidad', 7.00, 2, 'Activo'),
+('Vaso Plástico Infantil', 'Vaso plástico con diseños infantiles', 3.00, 2, 'Activo'),
+('Vaso Plástico Reforzado', 'Vaso plástico resistente', 4.00, 2, 'Activo'),
+('Vaso Plástico Premium', 'Vaso plástico de alta calidad', 6.00, 2, 'Activo'),
+('Recipiente Plástico Infantil', 'Recipiente plástico para niños', 9.00, 2, 'Activo'),
+('Recipiente Plástico Reforzado', 'Recipiente plástico resistente', 12.00, 2, 'Activo'),
+('Recipiente Plástico Premium', 'Recipiente plástico de alta calidad', 15.00, 2, 'Activo'),
+('Caja Plástica Infantil', 'Caja plástica con diseños infantiles', 18.00, 2, 'Activo'),
+('Caja Plástica Reforzada', 'Caja plástica resistente', 22.00, 2, 'Activo'),
+('Caja Plástica Premium', 'Caja plástica de alta calidad', 28.00, 2, 'Activo'),
+('Contenedor Plástico Infantil', 'Contenedor plástico para juguetes', 25.00, 2, 'Activo'),
+('Contenedor Plástico Reforzado', 'Contenedor plástico resistente', 35.00, 2, 'Activo'),
+('Contenedor Plástico Premium', 'Contenedor plástico de alta calidad', 45.00, 2, 'Activo'),
+('Tupper Plástico Infantil', 'Tupper plástico con diseños infantiles', 10.00, 2, 'Activo'),
+('Tupper Plástico Reforzado', 'Tupper plástico resistente', 12.00, 2, 'Activo'),
+('Tupper Plástico Premium', 'Tupper plástico de alta calidad', 15.00, 2, 'Activo'),
+('Cubo Plástico Infantil', 'Cubo plástico para juegos', 14.00, 2, 'Activo'),
+('Cubo Plástico Reforzado', 'Cubo plástico resistente', 20.00, 2, 'Activo'),
+('Cubo Plástico Premium', 'Cubo plástico de alta calidad', 25.00, 2, 'Activo'),
+('Bidón Plástico Infantil', 'Bidón plástico pequeño para niños', 12.00, 2, 'Activo'),
+('Bidón Plástico Reforzado', 'Bidón plástico resistente', 20.00, 2, 'Activo'),
+('Bidón Plástico Premium', 'Bidón plástico de alta calidad', 28.00, 2, 'Activo'),
+('Canasta Plástica Infantil', 'Canasta plástica para juguetes', 15.00, 2, 'Activo'),
+('Canasta Plástica Reforzada', 'Canasta plástica resistente', 22.00, 2, 'Activo'),
+('Canasta Plástica Premium', 'Canasta plástica de alta calidad', 30.00, 2, 'Activo'),
+('Cajón Plástico Infantil', 'Cajón plástico para juguetes', 18.00, 2, 'Activo'),
+('Cajón Plástico Reforzado', 'Cajón plástico resistente', 25.00, 2, 'Activo'),
+('Cajón Plástico Premium', 'Cajón plástico de alta calidad', 32.00, 2, 'Activo'),
+('Bandeja Plástica Infantil', 'Bandeja plástica para niños', 6.00, 2, 'Activo'),
+('Bandeja Plástica Reforzada', 'Bandeja plástica resistente', 8.00, 2, 'Activo'),
+('Bandeja Plástica Premium', 'Bandeja plástica de alta calidad', 10.00, 2, 'Activo');
+
+INSERT INTO productos (nombre, descripcion, precio, id_categoria, estado)
+VALUES
+('Botella Plástica Escolar Premium', 'Botella plástica escolar de alta calidad', 22.00, 2, 'Activo'),
+('Botella Plástica Infantil Premium', 'Botella plástica infantil de alta calidad', 20.00, 2, 'Activo'),
+('Botella Plástica Reforzada Premium', 'Botella plástica reforzada premium', 28.00, 2, 'Activo'),
+('Envase Plástico Escolar', 'Envase plástico para uso escolar', 12.00, 2, 'Activo'),
+('Envase Plástico Infantil', 'Envase plástico para niños', 10.00, 2, 'Activo'),
+('Envase Plástico Reforzado Premium', 'Envase plástico reforzado premium', 18.00, 2, 'Activo'),
+('Bolsa Plástica Escolar', 'Bolsa plástica para útiles escolares', 6.00, 2, 'Activo'),
+('Bolsa Plástica Infantil', 'Bolsa plástica para niños', 5.00, 2, 'Activo'),
+('Bolsa Plástica Reforzada Premium', 'Bolsa plástica reforzada premium', 12.00, 2, 'Activo'),
+('Cubiertos Plásticos Escolares', 'Cubiertos plásticos para uso escolar', 4.00, 2, 'Activo'),
+('Cubiertos Plásticos Infantiles Premium', 'Cubiertos plásticos infantiles premium', 6.00, 2, 'Activo'),
+('Cubiertos Plásticos Reforzados Premium', 'Cubiertos plásticos reforzados premium', 8.00, 2, 'Activo'),
+('Plato Plástico Escolar', 'Plato plástico para uso escolar', 4.00, 2, 'Activo'),
+('Plato Plástico Infantil Premium', 'Plato plástico infantil premium', 6.00, 2, 'Activo'),
+('Plato Plástico Reforzado Premium', 'Plato plástico reforzado premium', 8.00, 2, 'Activo'),
+('Vaso Plástico Escolar', 'Vaso plástico para uso escolar', 3.00, 2, 'Activo'),
+('Vaso Plástico Infantil Premium', 'Vaso plástico infantil premium', 5.00, 2, 'Activo'),
+('Vaso Plástico Reforzado Premium', 'Vaso plástico reforzado premium', 7.00, 2, 'Activo'),
+('Recipiente Plástico Escolar', 'Recipiente plástico para uso escolar', 9.00, 2, 'Activo'),
+('Recipiente Plástico Infantil Premium', 'Recipiente plástico infantil de alta calidad', 12.00, 2, 'Activo'),
+('Recipiente Plástico Reforzado Premium', 'Recipiente plástico reforzado premium', 16.00, 2, 'Activo'),
+('Recipiente Plástico Escolar Premium', 'Recipiente plástico escolar de alta calidad', 14.00, 2, 'Activo'),
+('Caja Plástica Escolar Premium', 'Caja plástica escolar de alta calidad', 20.00, 2, 'Activo'),
+('Caja Plástica Infantil Premium', 'Caja plástica infantil de alta calidad', 22.00, 2, 'Activo'),
+('Caja Plástica Reforzada Premium', 'Caja plástica reforzada premium', 28.00, 2, 'Activo'),
+('Caja Plástica Multiuso Premium', 'Caja plástica multiuso de alta calidad', 26.00, 2, 'Activo'),
+('Caja Plástica Organizadora Premium', 'Caja plástica organizadora de alta calidad', 30.00, 2, 'Activo'),
+('Caja Plástica Transparente Escolar', 'Caja plástica transparente para uso escolar', 24.00, 2, 'Activo'),
+('Caja Plástica Transparente Infantil', 'Caja plástica transparente para niños', 25.00, 2, 'Activo'),
+('Caja Plástica Transparente Premium', 'Caja plástica transparente de alta calidad', 32.00, 2, 'Activo'),
+('Contenedor Plástico Escolar', 'Contenedor plástico para uso escolar', 28.00, 2, 'Activo'),
+('Contenedor Plástico Infantil', 'Contenedor plástico para juguetes', 26.00, 2, 'Activo'),
+('Contenedor Plástico Reforzado Premium', 'Contenedor plástico reforzado premium', 38.00, 2, 'Activo'),
+('Contenedor Plástico Escolar Premium', 'Contenedor plástico escolar de alta calidad', 35.00, 2, 'Activo'),
+('Contenedor Plástico Infantil Premium', 'Contenedor plástico infantil de alta calidad', 34.00, 2, 'Activo'),
+('Contenedor Plástico Multiuso', 'Contenedor plástico multiuso', 30.00, 2, 'Activo'),
+('Contenedor Plástico Organizacional', 'Contenedor plástico para organización', 32.00, 2, 'Activo'),
+('Contenedor Plástico Hermético Escolar', 'Contenedor plástico hermético para escuela', 28.00, 2, 'Activo'),
+('Contenedor Plástico Hermético Infantil', 'Contenedor plástico hermético para niños', 29.00, 2, 'Activo'),
+('Tupper Plástico Escolar', 'Tupper plástico para uso escolar', 10.00, 2, 'Activo'),
+('Tupper Plástico Infantil', 'Tupper plástico para niños', 9.00, 2, 'Activo'),
+('Tupper Plástico Reforzado Premium', 'Tupper plástico reforzado premium', 14.00, 2, 'Activo'),
+('Tupper Plástico Escolar Premium', 'Tupper plástico escolar de alta calidad', 12.00, 2, 'Activo'),
+('Tupper Plástico Infantil Premium', 'Tupper plástico infantil de alta calidad', 11.00, 2, 'Activo'),
+('Tupper Plástico Multiuso', 'Tupper plástico multiuso', 13.00, 2, 'Activo'),
+('Tupper Plástico Organizacional', 'Tupper plástico para organización', 15.00, 2, 'Activo'),
+('Cubo Plástico Escolar', 'Cubo plástico para uso escolar', 16.00, 2, 'Activo'),
+('Cubo Plástico Infantil', 'Cubo plástico para juegos infantiles', 14.00, 2, 'Activo'),
+('Cubo Plástico Reforzado Premium', 'Cubo plástico reforzado premium', 20.00, 2, 'Activo'),
+('Cubo Plástico Escolar Premium', 'Cubo plástico escolar de alta calidad', 18.00, 2, 'Activo'),
+('Cubo Plástico Infantil Premium', 'Cubo plástico infantil de alta calidad', 17.00, 2, 'Activo'),
+('Bidón Plástico Escolar', 'Bidón plástico para uso escolar', 22.00, 2, 'Activo'),
+('Bidón Plástico Infantil', 'Bidón plástico para niños', 20.00, 2, 'Activo'),
+('Bidón Plástico Reforzado Premium', 'Bidón plástico reforzado premium', 28.00, 2, 'Activo'),
+('Bidón Plástico Escolar Premium', 'Bidón plástico escolar de alta calidad', 26.00, 2, 'Activo'),
+('Bidón Plástico Infantil Premium', 'Bidón plástico infantil de alta calidad', 24.00, 2, 'Activo'),
+('Canasta Plástica Escolar', 'Canasta plástica para uso escolar', 18.00, 2, 'Activo'),
+('Canasta Plástica Infantil', 'Canasta plástica para juguetes', 16.00, 2, 'Activo'),
+('Canasta Plástica Reforzada Premium', 'Canasta plástica reforzada premium', 22.00, 2, 'Activo'),
+('Canasta Plástica Escolar Premium', 'Canasta plástica escolar de alta calidad', 20.00, 2, 'Activo'),
+('Canasta Plástica Infantil Premium', 'Canasta plástica infantil de alta calidad', 19.00, 2, 'Activo'),
+('Cajón Plástico Escolar', 'Cajón plástico para útiles escolares', 21.00, 2, 'Activo'),
+('Cajón Plástico Infantil', 'Cajón plástico para juguetes', 19.00, 2, 'Activo'),
+('Cajón Plástico Reforzado Premium', 'Cajón plástico reforzado premium', 26.00, 2, 'Activo'),
+('Cajón Plástico Escolar Premium', 'Cajón plástico escolar de alta calidad', 24.00, 2, 'Activo'),
+('Cajón Plástico Infantil Premium', 'Cajón plástico infantil de alta calidad', 23.00, 2, 'Activo'),
+('Bandeja Plástica Escolar', 'Bandeja plástica para uso escolar', 8.00, 2, 'Activo'),
+('Bandeja Plástica Infantil', 'Bandeja plástica para niños', 7.00, 2, 'Activo'),
+('Bandeja Plástica Reforzada Premium', 'Bandeja plástica reforzada premium', 10.00, 2, 'Activo'),
+('Bandeja Plástica Escolar Premium', 'Bandeja plástica escolar de alta calidad', 9.00, 2, 'Activo'),
+('Bandeja Plástica Infantil Premium', 'Bandeja plástica infantil de alta calidad', 8.50, 2, 'Activo');
+
+
+
+INSERT INTO productos (nombre, descripcion, precio, id_categoria, estado)
+VALUES
+('Caja Cartón Pequeña', 'Caja de cartón tamaño chico para envíos ligeros', 12.50, 1, 'Activo'),
+('Caja Cartón Mediana', 'Caja de cartón tamaño mediano para uso general', 18.00, 1, 'Inactivo'),
+('Caja Cartón Grande', 'Caja de cartón tamaño grande para mudanzas', 25.75, 1, 'Activo'),
+('Cartón Corrugado Rollo', 'Rollo de cartón corrugado para embalaje', 30.00, 1, 'Activo'),
+('Cartón Doble Capa', 'Cartón resistente de doble capa', 22.40, 1, 'Activo'),
+('Cartón Triple Capa', 'Cartón extra resistente de triple capa', 28.90, 1, 'Activo'),
+('Cartón Reciclado', 'Cartón ecológico fabricado con material reciclado', 15.00, 1, 'Activo'),
+('Cartón Blanco', 'Cartón blanco para presentaciones y empaques premium', 19.50, 1, 'Activo'),
+('Cartón Kraft', 'Cartón kraft marrón para embalaje rústico', 16.75, 1, 'Activo'),
+('Cartón Laminado', 'Cartón laminado para mayor resistencia a la humedad', 21.30, 1, 'Activo'),
+('Cartón Microcorrugado', 'Cartón microcorrugado para empaques pequeños', 14.20, 1, 'Activo'),
+('Cartón Flexible', 'Cartón flexible para manualidades', 11.80, 1, 'Activo'),
+('Cartón Rígido', 'Cartón rígido para estructuras', 23.00, 1, 'Activo'),
+('Cartón Decorado', 'Cartón con diseños impresos para regalos', 26.50, 1, 'Activo'),
+('Cartón Color Azul', 'Cartón teñido en azul para presentaciones', 17.90, 1, 'Activo'),
+('Cartón Color Rojo', 'Cartón teñido en rojo para presentaciones', 17.90, 1, 'Activo'),
+('Cartón Color Verde', 'Cartón teñido en verde para presentaciones', 17.90, 1, 'Activo'),
+('Cartón Color Negro', 'Cartón teñido en negro para presentaciones', 17.90, 1, 'Activo'),
+('Cartón para Archivo', 'Cartón especial para carpetas y archivadores', 13.50, 1, 'Activo'),
+('Cartón para Carpeta', 'Cartón reforzado para carpetas escolares', 12.80, 1, 'Activo'),
+('Cartón para Exhibición', 'Cartón rígido para stands y exhibiciones', 29.00, 1, 'Activo'),
+('Cartón para Manualidades', 'Cartón versátil para proyectos escolares', 10.50, 1, 'Activo'),
+('Cartón para Empaque', 'Cartón estándar para empaques comerciales', 18.20, 1, 'Activo'),
+('Cartón para Transporte', 'Cartón reforzado para transporte de mercancías', 27.40, 1, 'Activo'),
+('Cartón para Alimentos', 'Cartón apto para empaques de alimentos secos', 20.00, 1, 'Activo'),
+('Cartón para Bebidas', 'Cartón diseñado para empaques de botellas', 24.60, 1, 'Activo'),
+('Cartón para Electrónicos', 'Cartón antiestático para empaques de electrónicos', 32.00, 1, 'Activo'),
+('Cartón para Fragiles', 'Cartón con relleno para objetos frágiles', 28.50, 1, 'Activo'),
+('Cartón para Regalos', 'Cartón decorado para empaques de regalo', 22.00, 1, 'Activo'),
+('Cartón para Libros', 'Cartón protector para envíos de libros', 16.00, 1, 'Activo'),
+('Cartón para Revistas', 'Cartón protector para envíos de revistas', 15.50, 1, 'Activo'),
+('Cartón para Posters', 'Cartón tubular para envíos de posters', 19.00, 1, 'Activo'),
+('Cartón para Arte', 'Cartón especial para obras de arte', 35.00, 1, 'Activo'),
+('Cartón para Fotografía', 'Cartón protector para fotografías grandes', 21.00, 1, 'Activo'),
+('Cartón para Documentos', 'Cartón reforzado para documentos importantes', 18.00, 1, 'Activo'),
+('Cartón para Exportación', 'Cartón certificado para exportaciones', 40.00, 1, 'Activo'),
+('Cartón para Importación', 'Cartón certificado para importaciones', 40.00, 1, 'Activo'),
+('Cartón para Muebles', 'Cartón protector para muebles en mudanza', 50.00, 1, 'Activo'),
+('Cartón para Electrodomésticos', 'Cartón protector para electrodomésticos grandes', 55.00, 1, 'Activo'),
+('Cartón para Juguetes', 'Cartón decorado para empaques de juguetes', 23.00, 1, 'Activo'),
+('Cartón para Cosméticos', 'Cartón premium para empaques de cosméticos', 27.00, 1, 'Activo'),
+('Cartón para Farmacéuticos', 'Cartón apto para empaques de medicamentos', 25.00, 1, 'Activo'),
+('Cartón para Calzado', 'Cartón estándar para cajas de zapatos', 20.00, 1, 'Activo'),
+('Cartón para Ropa', 'Cartón estándar para cajas de ropa', 22.00, 1, 'Activo'),
+('Cartón para Accesorios', 'Cartón pequeño para accesorios', 15.00, 1, 'Activo'),
+('Cartón para Herramientas', 'Cartón reforzado para herramientas', 30.00, 1, 'Activo'),
+('Cartón para Ferretería', 'Cartón estándar para productos de ferretería', 28.00, 1, 'Activo'),
+('Cartón para Papelería', 'Cartón estándar para productos de papelería', 12.00, 1, 'Activo'),
+('Cartón para Oficina', 'Cartón estándar para suministros de oficina', 18.00, 1, 'Activo'),
+('Cartón para Escuela', 'Cartón estándar para útiles escolares', 14.00, 1, 'Activo'),
+('Cartón para Supermercado', 'Cartón estándar para productos de supermercado', 20.00, 1, 'Activo'),
+('Cartón para Tienda', 'Cartón estándar para productos de tienda', 19.00, 1, 'Activo'),
+('Cartón para Boutique', 'Cartón premium para boutique', 25.00, 1, 'Activo'),
+('Cartón para Panadería', 'Cartón apto para empaques de panadería', 17.00, 1, 'Activo'),
+('Cartón para Pastelería', 'Cartón apto para empaques de pastelería', 18.00, 1, 'Activo'),
+('Cartón para Heladería', 'Cartón apto para empaques de helados', 19.00, 1, 'Activo'),
+('Cartón para Restaurante', 'Cartón apto para empaques de restaurante', 22.00, 1, 'Activo'),
+('Cartón para Cafetería', 'Cartón apto para empaques de cafetería', 21.00, 1, 'Activo'),
+('Cartón para Bar', 'Cartón apto para empaques de bar', 23.00, 1, 'Activo'),
+('Cartón para Hotel', 'Cartón apto para empaques de hotel', 30.00, 1, 'Activo'),
+('Cartón para Hospital', 'Cartón apto para empaques hospitalarios', 28.00, 1, 'Activo'),
+('Cartón para Laboratorio', 'Cartón apto para empaques de laboratorio', 32.00, 1, 'Activo'),
+('Cartón para Industria', 'Cartón estándar para industria', 35.00, 1, 'Activo'),
+('Cartón para Construcción', 'Cartón reforzado para construcción', 40.00, 1, 'Activo'),
+('Cartón para Transporte Pesado', 'Cartón reforzado para transporte pesado', 45.00, 1, 'Activo'),
+('Cartón para Exportación Premium', 'Cartón premium para exportación', 50.00, 1, 'Activo'),
+('Cartón para Importación Premium', 'Cartón premium para importación', 50.00, 1, 'Activo'),
+('Cartón para Mudanza', 'Cartón reforzado para mudanza', 55.00, 1, 'Activo'),
+('Cartón para Almacenaje', 'Cartón estándar para almacenaje', 20.00, 1, 'Activo'),
+('Cartón para Organización', 'Cartón estándar para organización', 19.00, 1, 'Activo'),
+('Cartón para Decoración', 'Cartón decorativo para eventos y fiestas', 22.00, 1, 'Activo'),
+('Cartón para Exhibidores', 'Cartón rígido para exhibidores de productos', 28.00, 1, 'Activo'),
+('Cartón para Publicidad', 'Cartón impreso para material publicitario', 25.00, 1, 'Activo'),
+('Cartón para Señalización', 'Cartón para letreros temporales', 20.00, 1, 'Activo'),
+('Cartón para Displays', 'Cartón reforzado para displays comerciales', 30.00, 1, 'Activo'),
+('Cartón para Packaging', 'Cartón premium para packaging de lujo', 35.00, 1, 'Activo'),
+('Cartón para Envases', 'Cartón moldeado para envases ecológicos', 27.00, 1, 'Activo'),
+('Cartón para Bandejas', 'Cartón para bandejas de alimentos', 18.00, 1, 'Activo'),
+('Cartón para Charolas', 'Cartón para charolas de repostería', 19.00, 1, 'Activo'),
+('Cartón para Displays de Tienda', 'Cartón para exhibiciones en puntos de venta', 32.00, 1, 'Activo'),
+('Cartón para Estuches', 'Cartón para estuches de productos pequeños', 24.00, 1, 'Activo'),
+('Cartón para Cajas de Regalo', 'Cartón decorado para cajas de regalo', 26.00, 1, 'Activo'),
+('Cartón para Cajas de Archivo', 'Cartón reforzado para cajas de archivo', 21.00, 1, 'Activo'),
+('Cartón para Cajas de Mudanza', 'Cartón reforzado para mudanza', 40.00, 1, 'Activo'),
+('Cartón para Cajas de Botellas', 'Cartón protector para botellas de vidrio', 33.00, 1, 'Activo'),
+('Cartón para Cajas de Electrónica', 'Cartón protector para dispositivos electrónicos', 36.00, 1, 'Activo'),
+('Cartón para Cajas de Calzado', 'Cartón estándar para cajas de zapatos', 22.00, 1, 'Activo'),
+('Cartón para Cajas de Ropa', 'Cartón estándar para cajas de ropa', 23.00, 1, 'Activo'),
+('Cartón para Cajas de Juguetes', 'Cartón decorado para cajas de juguetes', 25.00, 1, 'Activo'),
+('Cartón para Cajas de Cosméticos', 'Cartón premium para cajas de cosméticos', 28.00, 1, 'Activo'),
+('Cartón para Cajas de Farmacia', 'Cartón apto para cajas de medicamentos', 26.00, 1, 'Activo'),
+('Cartón para Cajas de Papelería', 'Cartón estándar para cajas de papelería', 20.00, 1, 'Activo'),
+('Cartón para Cajas de Oficina', 'Cartón estándar para cajas de suministros de oficina', 21.00, 1, 'Activo'),
+('Cartón para Cajas de Escuela', 'Cartón estándar para cajas escolares', 19.00, 1, 'Activo'),
+('Cartón para Cajas de Supermercado', 'Cartón estándar para cajas de supermercado', 23.00, 1, 'Activo'),
+('Cartón para Cajas de Boutique', 'Cartón premium para cajas boutique', 27.00, 1, 'Activo'),
+('Cartón para Cajas de Panadería', 'Cartón apto para cajas de panadería', 22.00, 1, 'Activo'),
+('Cartón para Cajas de Pastelería', 'Cartón apto para cajas de pastelería', 23.00, 1, 'Inactivo'),
+('Cartón para Cajas de Heladería', 'Cartón apto para cajas de helados', 24.00, 1, 'Inactivo'),
+('Cartón para Cajas de Restaurante', 'Cartón apto para cajas de restaurante', 26.00, 1, 'Activo'),
+('Cartón para Cajas de Cafetería', 'Cartón apto para cajas de cafetería', 25.00, 1, 'Activo'),
+('Cartón para Cajas de Hotel', 'Cartón apto para cajas de hotel', 30.00, 1, 'Activo'),
+('Cartón para Cajas de Hospital', 'Cartón apto para cajas hospitalarias', 28.00, 1, 'Activo'),
+('Cartón para Cajas de Laboratorio', 'Cartón apto para cajas de laboratorio', 32.00, 1, 'Activo'),
+('Cartón para Cajas Industriales', 'Cartón estándar para cajas industriales', 35.00, 1, 'Activo'),
+('Cartón para Cajas de Construcción', 'Cartón reforzado para cajas de construcción', 40.00, 1, 'Activo'),
+('Cartón para Cajas de Transporte', 'Cartón reforzado para cajas de transporte pesado', 45.00, 1, 'Activo'),
+('Cartón para Cajas Premium', 'Cartón premium para cajas de exportación', 50.00, 1, 'Activo'),
+('Cartón para Cajas de Importación', 'Cartón premium para cajas de importación', 50.00, 1, 'Activo'),
+('Cartón para Cajas de Almacenaje', 'Cartón estándar para cajas de almacenaje', 20.00, 1, 'Activo'),
+('Cartón para Cajas Organizadoras', 'Cartón estándar para cajas organizadoras', 21.00, 1, 'Activo'),
+('Cartón para Cajas Multiuso', 'Cartón estándar para cajas multiuso', 22.00, 1, 'Activo'),
+('Cartón para Cajas de Exhibición', 'Cartón rígido para cajas de exhibición', 28.00, 1, 'Activo'),
+('Cartón para Cajas de Publicidad', 'Cartón impreso para cajas publicitarias', 25.00, 1, 'Activo'),
+('Cartón para Cajas de Señalización', 'Cartón para cajas de señalización', 20.00, 1, 'Activo'),
+('Cartón para Cajas de Displays', 'Cartón reforzado para cajas de displays', 30.00, 1, 'Activo'),
+('Cartón para Cajas de Packaging', 'Cartón premium para cajas de packaging', 35.00, 1, 'Activo'),
+('Cartón para Cajas de Envases', 'Cartón moldeado para cajas de envases', 27.00, 1, 'Activo'),
+('Cartón para Cajas de Bandejas', 'Cartón para cajas de bandejas', 18.00, 1, 'Activo'),
+('Cartón para Cajas de Charolas', 'Cartón para cajas de charolas', 19.00, 1, 'Inactivo');
+
 
 -- ============================================
 -- TABLA: inventarios
@@ -57,8 +716,7 @@ CREATE TABLE inventarios (
     id_inventario SERIAL PRIMARY KEY,
     id_producto INTEGER NOT NULL REFERENCES productos(id_producto),
     cantidad INTEGER NOT NULL DEFAULT 0 CHECK (cantidad >= 0),
-    estado VARCHAR(50) NOT NULL CHECK (estado IN ('Disponible', 'Agotado', 'En pedido', 'Descontinuado')),
-    ubicacion VARCHAR(100),
+    estado VARCHAR(50) NOT NULL CHECK (estado IN ('Suficiente', 'Agotado', 'En pedido', 'Descontinuado')),
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -67,6 +725,7 @@ CREATE TABLE inventarios (
 -- ============================================
 CREATE TABLE proveedores (
     id_proveedor SERIAL PRIMARY KEY,
+	id_categoria INTEGER REFERENCES categorias(id_categoria),
     nombre VARCHAR(200) NOT NULL,
     contacto VARCHAR(100),
     telefono VARCHAR(20),
@@ -98,9 +757,15 @@ CREATE TABLE pagos (
     id_proveedor INTEGER NOT NULL REFERENCES proveedores(id_proveedor),
     id_solicitud INTEGER REFERENCES solicitudes_proveedor(id_solicitud),
     monto_total DECIMAL(10, 2) NOT NULL CHECK (monto_total >= 0),
-    forma_pago VARCHAR(50) NOT NULL CHECK (forma_pago IN ('Transferencia', 'Tarjeta', 'Depósito', 'Efectivo', 'Cheque')),
+    clabe_interbancaria VARCHAR(18) NOT NULL 
+        CHECK (clabe_interbancaria ~ '^[0-9]{18}$'),
+    numero_cuenta VARCHAR(20) NOT NULL 
+        CHECK (numero_cuenta ~ '^[0-9]{10,20}$'),
+    forma_pago VARCHAR(50) NOT NULL 
+        CHECK (forma_pago IN ('Transferencia', 'Tarjeta', 'Depósito', 'Efectivo', 'Cheque')),
     fecha_pago DATE NOT NULL,
-    estado_pago VARCHAR(50) DEFAULT 'Pendiente' CHECK (estado_pago IN ('Pendiente', 'Pagado', 'Cancelado')),
+    estado_pago VARCHAR(50) DEFAULT 'Pendiente' 
+        CHECK (estado_pago IN ('Pendiente', 'Pagado', 'Cancelado')),
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -137,24 +802,11 @@ CREATE TABLE venta_items (
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ============================================
--- TABLA: usuarios (para el sistema de login)
--- ============================================
-CREATE TABLE usuarios (
-    id_usuario SERIAL PRIMARY KEY,
-    nombre_usuario VARCHAR(50) NOT NULL UNIQUE,
-    contrasena VARCHAR(255) NOT NULL, -- Debe estar hasheada
-    nombre_completo VARCHAR(200),
-    email VARCHAR(100),
-    rol VARCHAR(50) DEFAULT 'Usuario' CHECK (rol IN ('Admin', 'Usuario', 'Vendedor', 'Almacenista')),
-    activo BOOLEAN DEFAULT TRUE,
-    ultimo_acceso TIMESTAMP,
-    fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
 
 -- ============================================
 -- TABLA: notificaciones
 -- ============================================
+DROP TABLE notificaiones;
 CREATE TABLE notificaciones (
     id_notificacion SERIAL PRIMARY KEY,
     tipo VARCHAR(50) NOT NULL CHECK (tipo IN ('Solicitud', 'Respuesta', 'Alerta', 'Información')),
@@ -168,6 +820,7 @@ CREATE TABLE notificaciones (
 -- ============================================
 -- TABLA: historial_inventario (auditoría)
 -- ============================================
+DROP TABLE historial_inventario;
 CREATE TABLE historial_inventario (
     id_historial SERIAL PRIMARY KEY,
     id_producto INTEGER NOT NULL REFERENCES productos(id_producto),
@@ -179,223 +832,9 @@ CREATE TABLE historial_inventario (
     fecha_movimiento TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ============================================
--- ÍNDICES PARA MEJORAR RENDIMIENTO
--- ============================================
-CREATE INDEX idx_clientes_nombre ON clientes(nombre);
-CREATE INDEX idx_clientes_rfc ON clientes(rfc);
-CREATE INDEX idx_productos_nombre ON productos(nombre);
-CREATE INDEX idx_productos_categoria ON productos(id_categoria);
-CREATE INDEX idx_ventas_cliente ON ventas(id_cliente);
-CREATE INDEX idx_ventas_fecha ON ventas(fecha);
-CREATE INDEX idx_venta_items_venta ON venta_items(id_venta);
-CREATE INDEX idx_venta_items_producto ON venta_items(id_producto);
-CREATE INDEX idx_inventarios_producto ON inventarios(id_producto);
-CREATE INDEX idx_pagos_proveedor ON pagos(id_proveedor);
-CREATE INDEX idx_notificaciones_usuario ON notificaciones(id_usuario);
 
--- ============================================
--- TRIGGERS PARA ACTUALIZACIÓN AUTOMÁTICA
--- ============================================
 
--- Trigger para actualizar fecha_modificacion en clientes
-CREATE OR REPLACE FUNCTION actualizar_fecha_modificacion()
-RETURNS TRIGGER AS $$
-BEGIN
-    NEW.fecha_modificacion = CURRENT_TIMESTAMP;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
 
-CREATE TRIGGER trigger_clientes_modificacion
-BEFORE UPDATE ON clientes
-FOR EACH ROW
-EXECUTE FUNCTION actualizar_fecha_modificacion();
-
-CREATE TRIGGER trigger_productos_modificacion
-BEFORE UPDATE ON productos
-FOR EACH ROW
-EXECUTE FUNCTION actualizar_fecha_modificacion();
-
-CREATE TRIGGER trigger_ventas_modificacion
-BEFORE UPDATE ON ventas
-FOR EACH ROW
-EXECUTE FUNCTION actualizar_fecha_modificacion();
-
--- Trigger para actualizar total de venta automáticamente
-CREATE OR REPLACE FUNCTION calcular_total_venta()
-RETURNS TRIGGER AS $$
-BEGIN
-    UPDATE ventas
-    SET subtotal = (
-        SELECT COALESCE(SUM(subtotal - descuento), 0)
-        FROM venta_items
-        WHERE id_venta = NEW.id_venta
-    ),
-    total = (
-        SELECT COALESCE(SUM(subtotal - descuento), 0) + COALESCE(ventas.impuestos, 0)
-        FROM venta_items
-        WHERE id_venta = NEW.id_venta
-    )
-    WHERE id_venta = NEW.id_venta;
-    
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_actualizar_total_venta
-AFTER INSERT OR UPDATE OR DELETE ON venta_items
-FOR EACH ROW
-EXECUTE FUNCTION calcular_total_venta();
-
--- Trigger para registrar movimientos de inventario
-CREATE OR REPLACE FUNCTION registrar_movimiento_inventario()
-RETURNS TRIGGER AS $$
-BEGIN
-    IF TG_OP = 'UPDATE' AND OLD.cantidad != NEW.cantidad THEN
-        INSERT INTO historial_inventario (id_producto, cantidad_anterior, cantidad_nueva, tipo_movimiento, motivo)
-        VALUES (NEW.id_producto, OLD.cantidad, NEW.cantidad, 'Ajuste', 'Actualización manual');
-    END IF;
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_historial_inventario
-AFTER UPDATE ON inventarios
-FOR EACH ROW
-EXECUTE FUNCTION registrar_movimiento_inventario();
-
--- ============================================
--- DATOS INICIALES
--- ============================================
-
--- Insertar usuario administrador por defecto
-INSERT INTO usuarios (nombre_usuario, contrasena, nombre_completo, rol)
-VALUES ('admin', '12345678', 'Administrador del Sistema', 'Admin');
--- NOTA: En producción, la contraseña debe estar hasheada (usar bcrypt, SHA256, etc.)
-
--- Insertar categorías iniciales
-INSERT INTO categorias (nombre, descripcion) VALUES
-('Cartón', 'Productos de cartón y embalaje'),
-('Plástico', 'Productos plásticos y burbujas'),
-('Vehículos', 'Vehículos de transporte'),
-('Otros', 'Otros productos');
-
--- Insertar productos de ejemplo
-INSERT INTO productos (nombre, descripcion, precio, id_categoria) VALUES
-('Caja de cartón pequeña', 'Caja de cartón 30x30x30 cm', 25.00, 1),
-('Caja de cartón mediana', 'Caja de cartón 50x50x50 cm', 45.00, 1),
-('Caja de cartón grande', 'Caja de cartón 80x80x80 cm', 75.00, 1),
-('Plástico burbuja rollo', 'Rollo de plástico burbuja 1m x 50m', 36.00, 2),
-('Cinta adhesiva', 'Cinta adhesiva transparente 48mm x 100m', 15.00, 4),
-('Papel kraft', 'Papel kraft para embalaje 1m x 100m', 120.00, 4);
-
--- Insertar inventarios iniciales
-INSERT INTO inventarios (id_producto, cantidad, estado, ubicacion) VALUES
-(1, 500, 'Disponible', 'Almacén A - Estante 1'),
-(2, 300, 'Disponible', 'Almacén A - Estante 2'),
-(3, 150, 'Disponible', 'Almacén A - Estante 3'),
-(4, 200, 'Disponible', 'Almacén B - Estante 1'),
-(5, 1000, 'Disponible', 'Almacén B - Estante 2'),
-(6, 80, 'Disponible', 'Almacén B - Estante 3');
-
--- Insertar clientes de ejemplo
-INSERT INTO clientes (rfc, nombre, tipo, email, telefono, direccion_fiscal, direccion_envio, metodo_pago) VALUES
-('ABC123456789', 'Juan Pérez', 'Regular', 'juan@example.com', '555-1234', 'Calle Falsa 123', 'Av. Siempre Viva 742', 'Tarjeta'),
-('XYZ987654321', 'María López', 'Premium', 'maria@example.com', '555-9876', 'Centro 505', 'Centro 505', 'Efectivo'),
-('DEF456789123', 'Carlos Ramírez', 'Mayorista', 'carlos@example.com', '555-5555', 'Industrial 100', 'Industrial 100', 'Transferencia');
-
--- Insertar proveedores de ejemplo
-INSERT INTO proveedores (nombre, contacto, telefono, email, direccion) VALUES
-('Proveedor Cartón SA', 'Roberto García', '555-1111', 'ventas@cartonsa.com', 'Zona Industrial 200'),
-('Plásticos del Norte', 'Ana Martínez', '555-2222', 'contacto@plasticosnorte.com', 'Parque Industrial 300'),
-('Distribuidora General', 'Luis Hernández', '555-3333', 'info@distgeneral.com', 'Centro Comercial 400');
-
--- ============================================
--- VISTAS ÚTILES
--- ============================================
-
--- Vista de inventario con información de producto
-CREATE VIEW vista_inventario_completo AS
-SELECT 
-    i.id_inventario,
-    p.id_producto,
-    p.nombre AS producto,
-    c.nombre AS categoria,
-    i.cantidad,
-    i.estado,
-    i.ubicacion,
-    p.precio,
-    (i.cantidad * p.precio) AS valor_total,
-    i.fecha_actualizacion
-FROM inventarios i
-JOIN productos p ON i.id_producto = p.id_producto
-LEFT JOIN categorias c ON p.id_categoria = c.id_categoria
-WHERE p.activo = TRUE;
-
--- Vista de ventas con detalles
-CREATE VIEW vista_ventas_completas AS
-SELECT 
-    v.id_venta,
-    v.fecha,
-    c.nombre AS cliente,
-    c.rfc,
-    v.estado,
-    v.metodo_pago,
-    v.subtotal,
-    v.impuestos,
-    v.total,
-    v.fecha_entrega_estimada,
-    v.fecha_entrega_real,
-    COUNT(vi.id_venta_item) AS cantidad_items
-FROM ventas v
-JOIN clientes c ON v.id_cliente = c.id_cliente
-LEFT JOIN venta_items vi ON v.id_venta = vi.id_venta
-GROUP BY v.id_venta, c.nombre, c.rfc;
-
--- Vista de productos más vendidos
-CREATE VIEW vista_productos_mas_vendidos AS
-SELECT 
-    p.id_producto,
-    p.nombre AS producto,
-    c.nombre AS categoria,
-    SUM(vi.cantidad) AS total_vendido,
-    SUM(vi.subtotal) AS ingresos_totales,
-    COUNT(DISTINCT vi.id_venta) AS numero_ventas
-FROM venta_items vi
-JOIN productos p ON vi.id_producto = p.id_producto
-LEFT JOIN categorias c ON p.id_categoria = c.id_categoria
-GROUP BY p.id_producto, p.nombre, c.nombre
-ORDER BY total_vendido DESC;
-
--- ============================================
--- FUNCIONES ÚTILES
--- ============================================
-
--- Función para obtener stock disponible de un producto
-CREATE OR REPLACE FUNCTION obtener_stock_disponible(p_id_producto INTEGER)
-RETURNS INTEGER AS $$
-DECLARE
-    v_cantidad INTEGER;
-BEGIN
-    SELECT cantidad INTO v_cantidad
-    FROM inventarios
-    WHERE id_producto = p_id_producto AND estado = 'Disponible';
-    
-    RETURN COALESCE(v_cantidad, 0);
-END;
-$$ LANGUAGE plpgsql;
-
--- Función para verificar si hay stock suficiente
-CREATE OR REPLACE FUNCTION verificar_stock(p_id_producto INTEGER, p_cantidad_requerida INTEGER)
-RETURNS BOOLEAN AS $$
-DECLARE
-    v_stock_disponible INTEGER;
-BEGIN
-    v_stock_disponible := obtener_stock_disponible(p_id_producto);
-    RETURN v_stock_disponible >= p_cantidad_requerida;
-END;
-$$ LANGUAGE plpgsql;
 
 -- ============================================
 -- PERMISOS (ajustar según necesidades)

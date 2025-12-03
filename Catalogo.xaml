@@ -1,127 +1,214 @@
 ﻿<Window x:Class="Interfaz.Catalogo"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Catálogo de productos"
-        Width="660"
-        Height="500"
-        Background="White"
+        Title="Catálogo de Productos"
+        Width="1000"
+        Height="700"
+        Background="{StaticResource FondoAzulGradiente}"
         WindowStartupLocation="CenterScreen">
 
-    <StackPanel Margin="20" HorizontalAlignment="Center">
-        <!-- Título -->
-        <TextBlock Text="Catálogo de Productos" 
-                   FontSize="22" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center" 
-                   Foreground="#333" 
-                   Margin="0,0,0,20"/>
+    <Grid>
+        <TextBlock Text="📦 Catálogo de Productos" 
+                   Style="{StaticResource TituloVentana}"
+                   Margin="0,20,0,0"
+                   VerticalAlignment="Top"/>
 
-        <!-- Buscador -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-            <TextBox x:Name="TxtBuscar" Width="300" Height="30" Background="#F9F9F9" BorderBrush="#CCC" KeyDown="TxtBuscar_KeyDown"/>
-            <Button Content="Buscar" Width="100" Height="30" 
-                    Background="#6CA0DC" Foreground="White" 
-                    BorderBrush="#4A7EBB" Margin="10,0,0,0" Click="BtnBuscar_Click"/>
-            
-        </StackPanel>
-
-        <!-- Pestañas -->
-        <TabControl x:Name="TabControlCategorias" Background="White" Margin="0,10,0,0" SelectionChanged="TabControl_SelectionChanged">
-            <!-- Cartón -->
-            <TabItem Header="Cartón">
+        <Border Style="{StaticResource ContenedorBlanco}" 
+                Margin="40,80,40,40">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Margin="10">
-                    <TextBlock Text="Productos de Cartón" FontSize="16" FontWeight="Bold" Foreground="#555" Margin="0,0,0,10"/>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition Width="150"/>
-                            <ColumnDefinition Width="200"/>
-                            <ColumnDefinition Width="80"/>
-                            <ColumnDefinition Width="100"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
 
-                        <!-- Encabezados -->
-                        <TextBlock Text="Id_prod" Grid.Row="0" Grid.Column="0" FontWeight="Bold" Foreground="#333"/>
-                        <TextBlock Text="Nombre" Grid.Row="0" Grid.Column="1" FontWeight="Bold" Foreground="#333"/>
-                        <TextBlock Text="Descripción" Grid.Row="0" Grid.Column="2" FontWeight="Bold" Foreground="#333"/>
-                        <TextBlock Text="Precio" Grid.Row="0" Grid.Column="3" FontWeight="Bold" Foreground="#333"/>
-                        <TextBlock Text="Imagen" Grid.Row="0" Grid.Column="4" FontWeight="Bold" Foreground="#333"/>
+                    <!-- TÍTULO -->
+                    <TextBlock Text="Catálogo de Productos"
+                               FontSize="22"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Foreground="#333"
+                               Margin="0,0,0,20"/>
 
-                        <!-- Producto 1 -->
-                        <TextBlock Text="C001" Grid.Row="1" Grid.Column="0"/>
-                        <TextBlock Text="Caja pequeña" Grid.Row="1" Grid.Column="1"/>
-                        <TextBlock Text="Caja de cartón para envíos pequeños" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap"/>
-                        <TextBlock Text="$5.00" Grid.Row="1" Grid.Column="3"/>
-                        <TextBlock Text="📦" Grid.Row="1" Grid.Column="4"/>
+                    <Border Background="#F0F0F0" CornerRadius="10" Padding="15">
+                        <StackPanel>
 
-                        <!-- Producto 2 -->
-                        <TextBlock Text="C002" Grid.Row="2" Grid.Column="0"/>
-                        <TextBlock Text="Caja mediana" Grid.Row="2" Grid.Column="1"/>
-                        <TextBlock Text="Caja de cartón resistente para uso general" Grid.Row="2" Grid.Column="2" TextWrapping="Wrap"/>
-                        <TextBlock Text="$7.50" Grid.Row="2" Grid.Column="3"/>
-                        <TextBlock Text="📦" Grid.Row="2" Grid.Column="4"/>
+                            <!-- BUSCAR PRODUCTO -->
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                                <TextBlock Text="Buscar producto:"
+                                           VerticalAlignment="Center"
+                                           Foreground="#555"
+                                           Margin="0,0,10,0"/>
 
-                        <!-- Producto 3 -->
-                        <TextBlock Text="C003" Grid.Row="3" Grid.Column="0"/>
-                        <TextBlock Text="Caja grande" Grid.Row="3" Grid.Column="1"/>
-                        <TextBlock Text="Caja de cartón para objetos voluminosos" Grid.Row="3" Grid.Column="2" TextWrapping="Wrap"/>
-                        <TextBlock Text="$10.00" Grid.Row="3" Grid.Column="3"/>
-                        <TextBlock Text="📦" Grid.Row="3" Grid.Column="4"/>
+                                <TextBox x:Name="TxtBuscar"
+                                         Width="300"
+                                         Height="30"
+                                         Background="#F9F9F9"
+                                         BorderBrush="#CCC"
+                                         KeyDown="TxtBuscar_KeyDown"/>
 
-                        <!-- Producto 4 -->
-                        <TextBlock Text="C004" Grid.Row="4" Grid.Column="0"/>
-                        <TextBlock Text="Cartón corrugado" Grid.Row="4" Grid.Column="1"/>
-                        <TextBlock Text="Rollo de cartón corrugado para embalaje" Grid.Row="4" Grid.Column="2" TextWrapping="Wrap"/>
-                        <TextBlock Text="$15.00" Grid.Row="4" Grid.Column="3"/>
-                        <TextBlock Text="📄" Grid.Row="4" Grid.Column="4"/>
+                                <Button Content="Buscar"
+                                        Width="100"
+                                        Background="#4CAF50"
+                                        Foreground="White"
+                                        BorderBrush="#4CAF50"
+                                        Margin="10,0,0,0"
+                                        Click="BtnBuscar_Click"/>
+                            </StackPanel>
 
-                        <!-- Producto 5 -->
-                        <TextBlock Text="C005" Grid.Row="5" Grid.Column="0"/>
-                        <TextBlock Text="Tubos de cartón" Grid.Row="5" Grid.Column="1"/>
-                        <TextBlock Text="Tubos resistentes para envío de documentos" Grid.Row="5" Grid.Column="2" TextWrapping="Wrap"/>
-                        <TextBlock Text="$3.50" Grid.Row="5" Grid.Column="3"/>
-                        <TextBlock Text="🧻" Grid.Row="5" Grid.Column="4"/>
-                    </Grid>
+                            <!-- PESTAÑAS DE CATEGORÍAS -->
+                            <TabControl x:Name="TabControlCategorias" 
+                                        Background="White" 
+                                        BorderBrush="#CCC"
+                                        Margin="0,10,0,20"
+                                        SelectionChanged="TabControl_SelectionChanged">
+
+                                <!-- Cartón -->
+                                <TabItem Header="Cartón">
+                                    <StackPanel Margin="15">
+                                        <TextBlock Text="Productos de Cartón"
+                                                   FontWeight="Bold"
+                                                   Foreground="#333"
+                                                   Margin="0,0,0,15"
+                                                   FontSize="16"/>
+
+                                        <DataGrid x:Name="CartonDataGrid" 
+                                                  AutoGenerateColumns="False" 
+                                                  HeadersVisibility="Column" 
+                                                  CanUserAddRows="False"
+                                                  IsReadOnly="True"
+                                                  AlternatingRowBackground="#F9F9F9"
+                                                  GridLinesVisibility="Horizontal"
+                                                  BorderBrush="#CCC"
+                                                  BorderThickness="1">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="ID" Binding="{Binding IdProducto}" Width="60"/>
+                                                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
+                                                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="*"/>
+                                                <DataGridTextColumn Header="Precio" Binding="{Binding Precio, StringFormat=C2}" Width="100">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="80">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                </TabItem>
+
+                                <!-- Plásticos -->
+                                <TabItem Header="Plásticos">
+                                    <StackPanel Margin="15">
+                                        <TextBlock Text="Productos de Plásticos"
+                                                   FontWeight="Bold"
+                                                   Foreground="#333"
+                                                   Margin="0,0,0,15"
+                                                   FontSize="16"/>
+
+                                        <DataGrid x:Name="PlasticosDataGrid" 
+                                                  AutoGenerateColumns="False" 
+                                                  HeadersVisibility="Column" 
+                                                  CanUserAddRows="False"
+                                                  IsReadOnly="True"
+                                                  AlternatingRowBackground="#F9F9F9"
+                                                  GridLinesVisibility="Horizontal"
+                                                  BorderBrush="#CCC"
+                                                  BorderThickness="1">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="ID" Binding="{Binding IdProducto}" Width="60"/>
+                                                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
+                                                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="*"/>
+                                                <DataGridTextColumn Header="Precio" Binding="{Binding Precio, StringFormat=C2}" Width="100">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="80">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                </TabItem>
+
+                                <!-- Vehículos -->
+                                <TabItem Header="Vehículos">
+                                    <StackPanel Margin="15">
+                                        <TextBlock Text="Productos de Vehículos"
+                                                   FontWeight="Bold"
+                                                   Foreground="#333"
+                                                   Margin="0,0,0,15"
+                                                   FontSize="16"/>
+
+                                        <DataGrid x:Name="VehiculosDataGrid" 
+                                                  AutoGenerateColumns="False" 
+                                                  HeadersVisibility="Column" 
+                                                  CanUserAddRows="False"
+                                                  IsReadOnly="True"
+                                                  AlternatingRowBackground="#F9F9F9"
+                                                  GridLinesVisibility="Horizontal"
+                                                  BorderBrush="#CCC"
+                                                  BorderThickness="1">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn Header="ID" Binding="{Binding IdProducto}" Width="60"/>
+                                                <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="200"/>
+                                                <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}" Width="*"/>
+                                                <DataGridTextColumn Header="Precio" Binding="{Binding Precio, StringFormat=C2}" Width="100">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                                <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="80">
+                                                    <DataGridTextColumn.ElementStyle>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                                                        </Style>
+                                                    </DataGridTextColumn.ElementStyle>
+                                                </DataGridTextColumn>
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </StackPanel>
+                                </TabItem>
+                            </TabControl>
+
+                            <!-- BOTONES -->
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        Margin="0,10,0,0">
+
+                                <Button Content="Actualizar Catálogo"
+                                        Width="150"
+                                        Background="#4CAF50"
+                                        Foreground="White"
+                                        BorderBrush="#4CAF50"
+                                        Margin="5"
+                                        Click="BtnActualizarCatalogo_Click"/>
+
+                                <Button Content="Ir a Menú"
+                                        Width="150"
+                                        Background="#2196F3"
+                                        Foreground="White"
+                                        BorderBrush="#2196F3"
+                                        Margin="5"
+                                        Click="BtnIrMenu_Click"/>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </Border>
                 </StackPanel>
-            </TabItem>
-
-            <!-- Plásticos -->
-            <TabItem Header="Plásticos">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Productos de Plásticos" FontSize="16" FontWeight="Bold" Foreground="#555"/>
-                    <TextBlock Text="(Próximamente se agregarán productos)" 
-                               Margin="0,20,0,0" 
-                               Foreground="#999"
-                               FontStyle="Italic"/>
-                </StackPanel>
-            </TabItem>
-
-            <!-- Vehículos -->
-            <TabItem Header="Vehículos">
-                <StackPanel Margin="10">
-                    <TextBlock Text="Productos de Vehículos" FontSize="16" FontWeight="Bold" Foreground="#555"/>
-                    <TextBlock Text="(Próximamente se agregarán productos)" 
-                               Margin="0,20,0,0" 
-                               Foreground="#999"
-                               FontStyle="Italic"/>
-                </StackPanel>
-            </TabItem>
-        </TabControl>
-
-        <!-- Botones -->
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
-            <Button Content="Actualizar Catálogo" Width="180" Height="40" Background="#4CAF50" Foreground="White" BorderBrush="#4CAF50" Margin="0,0,15,0" Click="BtnActualizarCatalogo_Click"
-                    Cursor="Hand"/>
-            <Button Content="Ir a Menú" Width="180" Height="40" Background="#6CA0DC" Foreground="White" BorderBrush="#4A7EBB" Click="BtnIrMenu_Click"
-                    Cursor="Hand"/>
-        </StackPanel>
-    </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
 </Window>

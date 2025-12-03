@@ -1,0 +1,98 @@
+﻿<Window x:Class="Interfaz.HistorialPagos"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Historial de Pagos"
+        Width="1050"
+        Height="580"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#E3F2FD" Offset="0"/>
+            <GradientStop Color="#BBDEFB" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid Margin="20">
+        <Border Background="White"
+                CornerRadius="15"
+                Padding="20">
+            <Border.Effect>
+                <DropShadowEffect Color="Black"
+                                  BlurRadius="15"
+                                  ShadowDepth="3"
+                                  Opacity="0.25"/>
+            </Border.Effect>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Título -->
+                <TextBlock Text="Historial de Pagos"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           Foreground="#1A237E"
+                           HorizontalAlignment="Center"
+                           Margin="0 0 0 20"/>
+
+                <!-- DataGrid -->
+                <DataGrid x:Name="dgHistorial"
+                          Grid.Row="1"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          MouseDoubleClick="dgHistorial_MouseDoubleClick"
+                          AlternatingRowBackground="#F0F0F0"
+                          Background="White"
+                          BorderBrush="#999"
+                          BorderThickness="1"
+                          Margin="10">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID Pago" Binding="{Binding IdPago}" Width="100"/>
+                        <DataGridTextColumn Header="Proveedor" Binding="{Binding Proveedor}" Width="150"/>
+                        <DataGridTextColumn Header="Solicitud" Binding="{Binding Solicitud}" Width="120"/>
+                        <DataGridTextColumn Header="Monto" Binding="{Binding Monto}" Width="120"/>
+                        <DataGridTextColumn Header="Forma Pago" Binding="{Binding FormaPago}" Width="140"/>
+                        <DataGridTextColumn Header="Fecha Pago" Binding="{Binding FechaPago}" Width="140"/>
+                        <DataGridTextColumn Header="Estado" Binding="{Binding Estado}" Width="130"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!-- Botones alineados abajo -->
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,15,0,0">
+                    <Button Content="Actualizar"
+                            Width="140" Height="40" Margin="5"
+                            Background="#BBDEFB" Foreground="Black"
+                            FontWeight="Bold" Padding="10"
+                            Click="BtnActualizar_Click"/>
+
+                    <Button Content="Exportar a PDF"
+                            Width="140" Height="40" Margin="5"
+                            Background="#FFB6B6" Foreground="Black"
+                            FontWeight="Bold" Padding="10"
+                            Click="ExportarPDF_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="10"
+                                                    Padding="{TemplateBinding Padding}">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
