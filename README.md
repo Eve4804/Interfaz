@@ -1,4 +1,4 @@
-# Sistema de Gestión de Ventas - Interfaz
+# Sistema ERP de una paquetería
 
 Proyecto WPF con .NET Framework 4.7.2
 
